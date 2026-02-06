@@ -1,0 +1,44 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Gambling
+{
+    public  class CardItem : MonoBehaviour
+    {
+        public int index;//索引
+        public RewardData rewardData;
+        public enum CardType
+        {
+            水果,
+            赌博,
+            王,
+            彩蛋
+        }
+        public CardType cardType;
+        public void Init(int index, RewardData data)
+        {
+            this.index = index;
+            this.rewardData = data;
+            cardType = data.runtimeCardType;
+            // 更新 UI 表现
+            UpdateUI();
+        }
+
+        protected virtual void UpdateUI()
+        {
+            //GetComponentInChildren<Text>().text = myData.RewardName;
+            transform.GetChild(1).GetComponent<Image>().sprite = rewardData.runtimeRewardIcon;
+        }
+
+        
+
+        public int OnPlayerLand()
+        {
+            return rewardData.runtimeGoldValue.Value;
+        }
+        
+    }
+
+}

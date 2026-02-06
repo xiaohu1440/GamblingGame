@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a3a80a86f5db142bd3a7d4d7e318ae, type: 3}
+  m_Name: "\u897F\u74DC"
+  m_EditorClassIdentifier: 
+  RewardName: "\u897F\u74DC"
+  RewardIcon: {fileID: 21300000, guid: 2cddd4a1f099a2f4d9788ba17b08e8ed, type: 3}
+  GoldValue: 20
+  ChanceWeight: 10
+  CardType: 0
+  isMini: 0
+  runtimeRewardName: 
+  runtimeRewardIcon: {fileID: 0}
+  runtimeGoldValue: 0
+  runtimeChanceWeight: 0
+  runtimeCardType: 0
+  runTimeisMini: 0
