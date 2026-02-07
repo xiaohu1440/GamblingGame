@@ -23,6 +23,8 @@ namespace Gambling
 		[SerializeField]private int minRotations = 3;
 		[SerializeField]private int maxRotations = 8;
 		[SerializeField] private RewardList currentPool;
+		[Header("积分弹出UI管理")]
+		[SerializeField]private ScorePopupManager scorePopupManager;
 		public Dictionary<string, float> cardNameWeights = new Dictionary<string, float>();
 		public Dictionary<string, string> cardNameScores = new Dictionary<string, string>();
 		public BindableProperty<int> Score = new BindableProperty<int>(0);
@@ -30,12 +32,23 @@ namespace Gambling
 		public BindableProperty<float> totalWeight = new BindableProperty<float>(0);
 		private List<RectTransform> gridRects = new List<RectTransform>();
 		private List<CardItem> cardItems = new List<CardItem>();
+		private Dictionary<string, Button> categoryButtons = new Dictionary<string, Button>();
 		private RectTransform selectBoxRect;
 		private bool isSpinning = false;
 		private int currentIndex = 0; // 当前SelectBox所在的索引
 
 		void Start()
 		{
+			// 检查积分弹出管理器
+			if (scorePopupManager == null)
+			{
+				scorePopupManager = FindObjectOfType<ScorePopupManager>();
+				if (scorePopupManager == null)
+				{
+					Debug.LogWarning("未找到ScorePopupManager！请在场景中添加该组件。");
+				}
+			}
+			InitializeCategoryButtons();
 			Init();
 			GenerateGrid();
 			SelectBox.Show();
@@ -56,6 +69,21 @@ namespace Gambling
 			BindButtonEvents();
 			TextUpdate();
 
+
+		}
+
+		private void InitializeCategoryButtons()
+		{
+			// 建立按钮映射关系
+			categoryButtons["apple"] = Apple.GetComponent<Button>();
+			categoryButtons["king"] = King.GetComponent<Button>();
+			categoryButtons["smallking"] = SmallKing.GetComponent<Button>();
+			categoryButtons["doublestar"] = DoubleStar.GetComponent<Button>();
+			categoryButtons["sevenseven"] = SevenSeven.GetComponent<Button>();
+			categoryButtons["watermelon"] = Watermelon.GetComponent<Button>();
+			categoryButtons["orange"] = Orange.GetComponent<Button>();
+			categoryButtons["bell"] = Bell.GetComponent<Button>();
+			categoryButtons["blueberry"] = Blueberry.GetComponent<Button>();
 
 		}
 
@@ -380,8 +408,46 @@ namespace Gambling
 			Score.Value += finalScore;
     
 			Debug.Log($"停在 '{landedRewardName}' 卡片（类别：{category}），基础分值：{baseScore}，按钮点击次数：{clickCount}，最终得分：{finalScore}");
+			// 如果有积分获得且按钮点击次数大于0，显示积分弹出动画
+			if (finalScore > 0 && clickCount.Value > 0)
+			{
+				ShowSingleScorePopup(category, finalScore);
+			}
+			//TODO:ui弹出彩蛋功能关联
 		}
-		
+		/// <summary>
+		/// 显示单个积分弹出动画
+		/// </summary>
+		/// <param name="category">按钮类别</param>
+		/// <param name="score">获得的积分</param>
+		private void ShowSingleScorePopup(string category, int score)
+		{
+			if (scorePopupManager == null) return;
+
+			Vector3 buttonPosition = GetButtonPosition(category);
+			if (buttonPosition != Vector3.zero)
+			{
+				scorePopupManager.ShowScorePopup(score, buttonPosition);
+				Debug.Log($"从 {category} 按钮处弹出积分UI，显示 +{score} 分");
+			}
+		}
+		/// <summary>
+		/// 获取按钮的世界坐标位置
+		/// </summary>
+		/// <param name="category">按钮类别</param>
+		/// <returns>按钮位置，如果找不到返回Vector3.zero</returns>
+		private Vector3 GetButtonPosition(string category)
+		{
+			if (!categoryButtons.ContainsKey(category) || categoryButtons[category] == null)
+			{
+				Debug.LogWarning($"未找到类别 '{category}' 对应的按钮！");
+				return Vector3.zero;
+			}
+
+			return categoryButtons[category].transform.position;
+		}
+
+
 		private void OnValidate()
 		{
 			//SideCount = Mathf.Max(2, SideCount);

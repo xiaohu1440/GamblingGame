@@ -13,14 +13,11 @@ MonoBehaviour:
   m_Name: "\u84DD\u8393_M"
   m_EditorClassIdentifier: 
   RewardName: "\u84DD\u8393_M"
-  RewardIcon: {fileID: 0}
+  RewardIcon: {fileID: 21300000, guid: 6957703440f55a741856049626a2e058, type: 3}
   GoldValue: 3
   ChanceWeight: 15
   CardType: 0
   isMini: 1
-  runtimeRewardName: 
-  runtimeRewardIcon: {fileID: 0}
-  runtimeGoldValue: 0
-  runtimeChanceWeight: 0
+  runtimeRewardIcon: {fileID: 21300000, guid: 6957703440f55a741856049626a2e058, type: 3}
   runtimeCardType: 0
-  runTimeisMini: 0
+  runTimeisMini: 1
