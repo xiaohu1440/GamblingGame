@@ -30,7 +30,14 @@ namespace QFramework.Example
 			{
 				if (score >= Global.levelScore.Value)
 				{
-					NextLevelBtn.GetComponent<Button>().interactable = true;
+					if (!GamblingGround.isEasterEggExecuting)
+					{
+						NextLevelBtn.GetComponent<Button>().interactable = true;
+					}
+					else
+					{
+						
+					}
 				}
 
 

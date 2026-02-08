@@ -19,23 +19,30 @@ namespace Gambling
 		[SerializeField]private GameObject GridItemPrefab;
 		[SerializeField]private Transform GridContainer;
 		[Header("转盘动画配置")]
-		[SerializeField]private float moveSpeed = 0.05f; // 移动速度（每个格子的移动时间）
+		[SerializeField]public float moveSpeed = 0.05f; // 移动速度（每个格子的移动时间）
 		[SerializeField]private int minRotations = 3;
 		[SerializeField]private int maxRotations = 8;
 		[SerializeField] private RewardList currentPool;
 		[Header("积分弹出UI管理")]
 		[SerializeField]private ScorePopupManager scorePopupManager;
+		[Header("彩蛋系统")]
+		[SerializeField] private EasterEggManager easterEggManager;
+		// 临时框选框列表，用于管理彩蛋效果产生的框选框
+		private List<GameObject> temporarySelectBoxes = new List<GameObject>();
+
 		public Dictionary<string, float> cardNameWeights = new Dictionary<string, float>();
 		public Dictionary<string, string> cardNameScores = new Dictionary<string, string>();
 		public BindableProperty<int> Score = new BindableProperty<int>(0);
-		private Dictionary<string,BindableProperty<int>> buttonClickCount=new Dictionary<string,BindableProperty<int>>();
+		public Dictionary<string,BindableProperty<int>> buttonClickCount=new Dictionary<string,BindableProperty<int>>();
 		public BindableProperty<float> totalWeight = new BindableProperty<float>(0);
-		private List<RectTransform> gridRects = new List<RectTransform>();
-		private List<CardItem> cardItems = new List<CardItem>();
+		public List<RectTransform> gridRects = new List<RectTransform>();
+		public List<CardItem> cardItems = new List<CardItem>();
 		private Dictionary<string, Button> categoryButtons = new Dictionary<string, Button>();
 		private RectTransform selectBoxRect;
 		private bool isSpinning = false;
 		private int currentIndex = 0; // 当前SelectBox所在的索引
+		public bool isEasterEggExecuting = false;
+
 
 		void Start()
 		{
@@ -60,7 +67,7 @@ namespace Gambling
 				selectBoxRect.anchoredPosition = gridRects[0].anchoredPosition;
 				currentIndex = 0;
 			}
-
+			//StartButton.GetComponent<Button>().onClick.AddListener(OnStartButtonClick());
 			StartButton.OnPointerClickEvent(OnStartButtonClick);
 			// 初始化按钮计数
 			InitializeButtonCounts();
@@ -68,6 +75,15 @@ namespace Gambling
 			// 绑定按钮点击事件
 			BindButtonEvents();
 			TextUpdate();
+			if (easterEggManager == null)
+			{
+				easterEggManager = GetComponent<EasterEggManager>();
+				if (easterEggManager == null)
+				{
+					easterEggManager = gameObject.AddComponent<EasterEggManager>();
+				}
+			}
+
 
 
 		}
@@ -196,7 +212,7 @@ namespace Gambling
 				Blueberry.GetComponent<Button>().onClick.AddListener(() => OnRewardNameButtonClick("blueberry"));
 
 		}
-		private string GetRewardNameCategory(string rewardName)
+		public string GetRewardNameCategory(string rewardName)
 		{
 			// 检查 RewardName 包含哪个关键词
 			if (rewardName.Contains("苹果")) return "apple";
@@ -209,13 +225,15 @@ namespace Gambling
 			if (rewardName.Contains("铃铛")) return "bell";
 			if (rewardName.Contains("蓝莓")) return "blueberry";
 
+
     
 			return ""; // 如果都不包含，返回空字符串
 		}
 
 		private void OnRewardNameButtonClick(string rewardName)
 		{
-			if (isSpinning) return; // 转动期间禁止点击
+			if (isSpinning||isEasterEggExecuting) return; // 转动期间禁止点击
+			ClearTemporarySelectBoxes();
     
 			buttonClickCount[rewardName].Value++;
 			Global.chips.Value -= 1;
@@ -228,13 +246,14 @@ namespace Gambling
 
 		private void OnStartButtonClick(PointerEventData obj)
 		{
-			if (!StartButton.GetComponent<Button>().interactable) return;
+			if (!StartButton.GetComponent<Button>().interactable||isEasterEggExecuting) return;
+			ClearTemporarySelectBoxes();
 			StartSpin();
 			Global.lotteryTicket.Value -= 2;
 		}
 		public void StartSpin()
 		{
-			if (isSpinning || gridRects.Count == 0)
+			if (isEasterEggExecuting||isSpinning || gridRects.Count == 0)
 			{
 				Debug.LogWarning("正在转动或没有格子可抽取！");
 				return;
@@ -327,10 +346,31 @@ namespace Gambling
 						UIKit.ClosePanel<UIGamePanel>();
 						UIKit.OpenPanel<UIGameOverPanel>();
 					}
-					
-					StartButton.GetComponent<Button>().interactable = true;
-					ResetGambling();
-					ResetButtonCounts();
+					bool easterEggTriggered = false;
+        
+					// ✅ 只在这里处理彩蛋逻辑（唯一的彩蛋触发点）
+					if (easterEggManager != null)
+					{
+						// 在彩蛋触发前保存当前按钮计数
+						Dictionary<string, int> savedButtonCounts = SaveCurrentButtonCounts();
+						easterEggTriggered = easterEggManager.TryTriggerEasterEgg(this, cardItems[finalTargetIndex], cardItems, savedButtonCounts);
+            
+						if (easterEggTriggered)
+						{
+							// 彩蛋触发时禁用所有按钮
+							SetEasterEggExecuting(true);
+							Debug.Log("🥚 彩蛋被触发，所有按钮已禁用");
+						}
+					}
+
+					// ✅ 只有在没有触发彩蛋时才立即恢复按钮状态
+					if (!easterEggTriggered)
+					{
+						ResetButtonCounts();
+						StartButton.GetComponent<Button>().interactable = true;
+						ResetGambling();
+						Debug.Log("🎯 转盘结束，按钮状态已恢复");
+					}
 					if (Score.Value >= Global.levelScore.Value && Global.lotteryTicket.Value <= 0)
 					{
 						StartButton.GetComponent<Button>().interactable = false;
@@ -345,6 +385,76 @@ namespace Gambling
 				Debug.Log($"抽奖完成！最终停在索引：{finalTargetIndex}");
 			});
 		}
+
+		public void SetEasterEggExecuting(bool executing)
+		{
+			isEasterEggExecuting = executing;
+        
+			if (executing)
+			{
+				// 彩蛋开始执行：禁用所有按钮
+				DisableAllButtons();
+				Debug.Log("🥚 彩蛋效果开始执行，所有按钮已禁用");
+			}
+			else
+			{
+				// 彩蛋执行完成：重新启用按钮
+				EnableAllButtons();
+				StartButton.GetComponent<Button>().interactable = true;
+				ResetGambling();
+				Debug.Log("🥚 彩蛋效果执行完成，所有按钮已重新启用");
+			}
+		}
+		// ✅ 禁用所有按钮的方法
+		private void DisableAllButtons()
+		{
+			// 禁用Start按钮
+			if (StartButton != null)
+			{
+				StartButton.GetComponent<Button>().interactable = false;
+			}
+        
+			// 禁用所有押注按钮
+			foreach (var kvp in categoryButtons)
+			{
+				if (kvp.Value != null)
+				{
+					kvp.Value.interactable = false;
+				}
+			}
+
+			if (NextLevelBtn != null)
+			{
+				NextLevelBtn.GetComponent<Button>().interactable = false;
+			}
+		}
+    
+		// ✅ 启用所有按钮的方法
+		private void EnableAllButtons()
+		{
+			// 启用Start按钮
+			if (StartButton != null)
+			{
+				StartButton.GetComponent<Button>().interactable = true;
+			}
+        
+			// 启用所有押注按钮
+			foreach (var kvp in categoryButtons)
+			{
+				if (kvp.Value != null)
+				{
+					kvp.Value.interactable = true;
+				}
+			}
+			if (NextLevelBtn != null)
+			{
+				bool shouldEnable = Score.Value >= Global.levelScore.Value;
+				NextLevelBtn.GetComponent<Button>().interactable = shouldEnable;
+
+			}
+		}
+
+
 
 		/// <summary>
 		/// 重新激活下注按钮
@@ -388,39 +498,51 @@ namespace Gambling
 		{
 			var card = cardItems[selectedIndex];
 			string landedRewardName = card.rewardData.runtimeRewardName.Value;
-    
-			// 根据 RewardName 确定所属类别
-			string category = GetRewardNameCategory(landedRewardName);
-    
-			if (string.IsNullOrEmpty(category))
+			// 检查是否触发彩蛋效果
+
+			if (!IsCurrentlyEasterEggTriggering(card))
 			{
-				Debug.LogWarning($"未找到 RewardName '{landedRewardName}' 对应的按钮类别");
-				return;
+				// 根据 RewardName 确定所属类别
+				string category = GetRewardNameCategory(landedRewardName);
+    
+				if (string.IsNullOrEmpty(category))
+				{
+					Debug.LogWarning($"未找到 RewardName '{landedRewardName}' 对应的按钮类别");
+					return;
+				}
+    
+				// 获取该类别按钮的点击次数
+				BindableProperty<int> clickCount = buttonClickCount[category];
+    
+				// 计算得分：按钮点击次数 × 卡片分值
+				int baseScore = card.OnPlayerLand();
+				int finalScore = baseScore * clickCount.Value;
+    
+				Score.Value += finalScore;
+    
+				Debug.Log($"停在 '{landedRewardName}' 卡片（类别：{category}），基础分值：{baseScore}，按钮点击次数：{clickCount}，最终得分：{finalScore}");
+				// 如果有积分获得且按钮点击次数大于0，显示积分弹出动画
+				if (finalScore > 0 && clickCount.Value > 0)
+				{
+					ShowSingleScorePopup(category, finalScore);
+				}
+				//TODO:ui弹出彩蛋功能关联
 			}
     
-			// 获取该类别按钮的点击次数
-			BindableProperty<int> clickCount = buttonClickCount[category];
-    
-			// 计算得分：按钮点击次数 × 卡片分值
-			int baseScore = card.OnPlayerLand();
-			int finalScore = baseScore * clickCount.Value;
-    
-			Score.Value += finalScore;
-    
-			Debug.Log($"停在 '{landedRewardName}' 卡片（类别：{category}），基础分值：{baseScore}，按钮点击次数：{clickCount}，最终得分：{finalScore}");
-			// 如果有积分获得且按钮点击次数大于0，显示积分弹出动画
-			if (finalScore > 0 && clickCount.Value > 0)
-			{
-				ShowSingleScorePopup(category, finalScore);
-			}
-			//TODO:ui弹出彩蛋功能关联
+
 		}
+
+		private bool IsCurrentlyEasterEggTriggering(CardItem card)
+		{
+			return card.rewardData.runtimeCardType == CardItem.CardType.彩蛋;
+		}
+
 		/// <summary>
 		/// 显示单个积分弹出动画
 		/// </summary>
 		/// <param name="category">按钮类别</param>
 		/// <param name="score">获得的积分</param>
-		private void ShowSingleScorePopup(string category, int score)
+		public void ShowSingleScorePopup(string category, int score)
 		{
 			if (scorePopupManager == null) return;
 
@@ -697,6 +819,69 @@ namespace Gambling
 			}
 
 		}
+		// 添加临时框选框到管理列表
+		public void AddTemporarySelectBox(GameObject selectBox)
+		{
+			if (!temporarySelectBoxes.Contains(selectBox))
+			{
+				temporarySelectBoxes.Add(selectBox);
+			}
+		}
+		// 设置当前框选框
+		public void SetCurrentSelectBox(GameObject newSelectBox, int newIndex)
+		{
+			// 隐藏原来的框选框
+			SelectBox.Hide();
+        
+			// 设置新的框选框为当前框选框
+			SelectBox = newSelectBox;
+			currentIndex = newIndex;
+			selectBoxRect = newSelectBox.GetComponent<RectTransform>();
+        
+			Debug.Log($"彩蛋效果完成，当前框选框切换到索引: {newIndex}");
+		}
+		// 清理所有临时框选框
+		public void ClearTemporarySelectBoxes()
+		{
+			foreach (var tempBox in temporarySelectBoxes)
+			{
+				if (tempBox != null && tempBox != SelectBox)
+				{
+					DestroyImmediate(tempBox);
+				}
+			}
+			temporarySelectBoxes.Clear();
+			Debug.Log("所有临时框选框已清理");
+		}
+		/// <summary>
+		/// 获取指定类别按钮的点击次数（供彩蛋系统使用）
+		/// </summary>
+		/// <param name="category">按钮类别</param>
+		/// <returns>点击次数</returns>
+		public int GetButtonClickCount(string category)
+		{
+			if (buttonClickCount.ContainsKey(category))
+			{
+				return buttonClickCount[category].Value;
+			}
+			return 0;
+		}
+		private Dictionary<string, int> SaveCurrentButtonCounts()
+		{
+			Dictionary<string, int> savedCounts = new Dictionary<string, int>();
+			foreach (var kvp in buttonClickCount)
+			{
+				savedCounts[kvp.Key] = kvp.Value.Value;
+			}
+			Debug.Log("已保存当前按钮计数用于彩蛋效果");
+			return savedCounts;
+		}
+
+		
+
+
+
+
 		
 	}
 }

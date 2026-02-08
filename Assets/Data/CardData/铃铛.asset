@@ -16,11 +16,8 @@ MonoBehaviour:
   RewardIcon: {fileID: 21300000, guid: 6efdd8a474c8f17479d5cfa0d39f79ad, type: 3}
   GoldValue: 20
   ChanceWeight: 10
-  CardType: 1
+  CardType: 0
   isMini: 0
-  runtimeRewardName: 
-  runtimeRewardIcon: {fileID: 0}
-  runtimeGoldValue: 0
-  runtimeChanceWeight: 0
+  runtimeRewardIcon: {fileID: 21300000, guid: 6efdd8a474c8f17479d5cfa0d39f79ad, type: 3}
   runtimeCardType: 0
   runTimeisMini: 0

@@ -14,7 +14,8 @@ namespace Gambling
             水果,
             赌博,
             王,
-            彩蛋
+            彩蛋,
+            其它
         }
         public CardType cardType;
         public void Init(int index, RewardData data)

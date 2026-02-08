@@ -1,4 +1,4 @@
-// Generate Id:6113ed75-52fb-4300-9b6e-05fc1f381340
+// Generate Id:a556f472-8a4a-4e78-9933-17a881baa8c4
 using UnityEngine;
 
 namespace Gambling
@@ -34,6 +34,8 @@ namespace Gambling
 		public UnityEngine.GameObject Panel;
 		
 		public UnityEngine.GameObject CardProbabilityPanel;
+		
+		public UnityEngine.GameObject NextLevelBtn;
 		
 	}
 }

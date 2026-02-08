@@ -2429,6 +2429,7 @@ RectTransform:
   - {fileID: 7452929487672198004}
   - {fileID: 9088793439713105535}
   - {fileID: 4004893725686958343}
+  - {fileID: 4901143554241713505}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4311,6 +4312,9 @@ MonoBehaviour:
   maxRotations: 8
   currentPool: {fileID: 11400000, guid: 575e027440bcabe44a66e2efe7adbba9, type: 2}
   scorePopupManager: {fileID: 0}
+  easterEggManager: {fileID: 7108045941458885034}
+  gridRects: []
+  cardItems: []
   SelectBox: {fileID: 9158529937926259872}
   StartButton: {fileID: 7734471300553821671}
   ScoreBG: {fileID: 2727918748367777892, guid: 1f99e5207621be145a085e682e216627, type: 3}
@@ -4326,6 +4330,7 @@ MonoBehaviour:
   Apple: {fileID: 7267458813158274466}
   Panel: {fileID: 22177770270290710}
   CardProbabilityPanel: {fileID: 1128603230940061160}
+  NextLevelBtn: {fileID: 5834964280708362526}
 --- !u!114 &6402533631368372670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4369,6 +4374,8 @@ MonoBehaviour:
     Object: {fileID: 22177770270290710}
   - MemberName: CardProbabilityPanel
     Object: {fileID: 1128603230940061160}
+  - MemberName: NextLevelBtn
+    Object: {fileID: 5834964280708362526}
 --- !u!114 &3731012194834553641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6102,6 +6109,58 @@ MonoBehaviour:
   CustomComponentName: AppleNum
   CustomComment: 
   mComponentName: UnityEngine.UI.Button
+--- !u!1 &7501493803273661139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4901143554241713505}
+  - component: {fileID: 7108045941458885034}
+  m_Layer: 0
+  m_Name: EasterEggManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4901143554241713505
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7501493803273661139}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7057280407910427707}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7108045941458885034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7501493803273661139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03912f54794d49c191474264c48a29e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  easterEggEffects:
+  - {fileID: 11400000, guid: 0e6f583e32a0f8a448b5e40938aaa7e9, type: 2}
+  - {fileID: 11400000, guid: 65d328f6e1f2c4e499f1b841cf50ff79, type: 2}
+  useRandomSelection: 1
 --- !u!1 &7696255028594966211
 GameObject:
   m_ObjectHideFlags: 0
