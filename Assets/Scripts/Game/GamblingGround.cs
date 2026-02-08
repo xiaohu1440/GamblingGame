@@ -67,8 +67,8 @@ namespace Gambling
 				selectBoxRect.anchoredPosition = gridRects[0].anchoredPosition;
 				currentIndex = 0;
 			}
-			//StartButton.GetComponent<Button>().onClick.AddListener(OnStartButtonClick());
-			StartButton.OnPointerClickEvent(OnStartButtonClick);
+			StartButton.GetComponent<Button>().onClick.AddListener(OnStartButtonClick);
+			//StartButton.OnPointerClickEvent(OnStartButtonClick);
 			// 初始化按钮计数
 			InitializeButtonCounts();
     
@@ -244,8 +244,9 @@ namespace Gambling
 
 
 
-		private void OnStartButtonClick(PointerEventData obj)
+		private void OnStartButtonClick()
 		{
+			NextLevelBtn.GetComponent<Button>().interactable = false;
 			if (!StartButton.GetComponent<Button>().interactable||isEasterEggExecuting) return;
 			ClearTemporarySelectBoxes();
 			StartSpin();
@@ -315,6 +316,7 @@ namespace Gambling
 			Sequence moveSequence = DOTween.Sequence();
 			int tempCurrentIndex = currentIndex;
 			
+			
 			// 为每一步创建移动动画
 			for (int step = 0; step < totalSteps; step++)
 			{
@@ -380,6 +382,10 @@ namespace Gambling
 							button.interactable = false;
 						}
 					}
+					else
+					{
+						
+					}
 				}
 				
 				Debug.Log($"抽奖完成！最终停在索引：{finalTargetIndex}");
@@ -406,7 +412,7 @@ namespace Gambling
 			}
 		}
 		// ✅ 禁用所有按钮的方法
-		private void DisableAllButtons()
+		public void DisableAllButtons()
 		{
 			// 禁用Start按钮
 			if (StartButton != null)
@@ -430,7 +436,7 @@ namespace Gambling
 		}
     
 		// ✅ 启用所有按钮的方法
-		private void EnableAllButtons()
+		public void EnableAllButtons()
 		{
 			// 启用Start按钮
 			if (StartButton != null)
@@ -519,7 +525,10 @@ namespace Gambling
 				int finalScore = baseScore * clickCount.Value;
     
 				Score.Value += finalScore;
-    
+				if (Score.Value >= Global.levelScore.Value)
+				{
+					NextLevelBtn.GetComponent<Button>().interactable = true;
+				}
 				Debug.Log($"停在 '{landedRewardName}' 卡片（类别：{category}），基础分值：{baseScore}，按钮点击次数：{clickCount}，最终得分：{finalScore}");
 				// 如果有积分获得且按钮点击次数大于0，显示积分弹出动画
 				if (finalScore > 0 && clickCount.Value > 0)

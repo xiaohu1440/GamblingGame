@@ -42,7 +42,8 @@ namespace QFramework.Example
 
 
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
-			NextLevelBtn.OnPointerClickEvent(NextLevelEvent);
+			//NextLevelBtn.OnPointerClickEvent(NextLevelEvent);
+			NextLevelBtn.onClick.AddListener(NextLevelEvent);
 			Global.chips.RegisterWithInitValue(chips =>
 			{
 				Chips.text = "筹码:" + chips;
@@ -129,7 +130,7 @@ namespace QFramework.Example
 			CardProbabilityPanel.Show();
 		}
 
-		private void NextLevelEvent(PointerEventData obj)
+		private void NextLevelEvent()
 		{
 			NextLevelBtn.GetComponent<Button>().interactable = false;
 			StartButton.GetComponent<Button>().interactable = true;
