@@ -5,7 +5,7 @@ using QFramework;
 
 namespace QFramework.Example
 {
-	// Generate Id:1080ff33-a9ae-4197-bc92-8b0791707aa6
+	// Generate Id:6e4b083c-afe5-4881-8143-2fc9296e991d
 	public partial class UIGamePanel
 	{
 		public const string Name = "UIGamePanel";
@@ -90,6 +90,10 @@ namespace QFramework.Example
 		public UnityEngine.UI.Text ScoreProbailityText;
 		[SerializeField]
 		public UnityEngine.UI.Image CardProbabilityPanel;
+		[SerializeField]
+		public UnityEngine.UI.Button DoubleBetBtn;
+		[SerializeField]
+		public UnityEngine.UI.Text DoubleNumText;
 		
 		private UIGamePanelData mPrivateData = null;
 		
@@ -135,6 +139,8 @@ namespace QFramework.Example
 			ScoreProbaility = null;
 			ScoreProbailityText = null;
 			CardProbabilityPanel = null;
+			DoubleBetBtn = null;
+			DoubleNumText = null;
 			
 			mData = null;
 		}

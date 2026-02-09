@@ -1,4 +1,4 @@
-// Generate Id:a556f472-8a4a-4e78-9933-17a881baa8c4
+// Generate Id:15e5d2a9-84c7-4529-9fb7-6a778df12e19
 using UnityEngine;
 
 namespace Gambling
@@ -36,6 +36,8 @@ namespace Gambling
 		public UnityEngine.GameObject CardProbabilityPanel;
 		
 		public UnityEngine.GameObject NextLevelBtn;
+		
+		public UnityEngine.GameObject DoubleBetBtn;
 		
 	}
 }

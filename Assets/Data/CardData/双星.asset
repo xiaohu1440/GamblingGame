@@ -14,13 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RewardName: "\u53CC\u661F"
   RewardIcon: {fileID: 21300000, guid: dbbe07f4d67305740a53856159f64ced, type: 3}
-  GoldValue: 30
+  GoldValue: 25
   ChanceWeight: 10
   CardType: 1
   isMini: 0
-  runtimeRewardName: 
-  runtimeRewardIcon: {fileID: 0}
-  runtimeGoldValue: 0
-  runtimeChanceWeight: 0
-  runtimeCardType: 0
+  runtimeRewardIcon: {fileID: 21300000, guid: dbbe07f4d67305740a53856159f64ced, type: 3}
+  runtimeCardType: 1
   runTimeisMini: 0

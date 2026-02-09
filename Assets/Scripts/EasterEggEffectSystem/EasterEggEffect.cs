@@ -12,6 +12,7 @@ namespace Gambling
         [Header("基础配置")]
         [SerializeField] protected float triggerWeight = 1.0f; // 触发权重，用于随机选择
         [SerializeField] protected bool isEnabled = true; // 是否启用该彩蛋效果
+        
 
         public abstract string EasterEggName { get; }
         /// <summary>

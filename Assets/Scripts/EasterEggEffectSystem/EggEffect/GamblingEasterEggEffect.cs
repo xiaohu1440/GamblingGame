@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using QFramework;
+using QFramework.Example;
 
 namespace Gambling
 {
@@ -81,6 +83,12 @@ namespace Gambling
                 
                 // 每个卡片之间稍微间隔一下
                 yield return new WaitForSeconds(0.2f);
+            }
+            gamblingGround.currentDoubleNum.Value = 1;
+            if (gamblingGround.Score.Value < Global.levelScore.Value && Global.lotteryTicket.Value <= 0)
+            {
+                UIKit.ClosePanel<UIGamePanel>();
+                UIKit.OpenPanel<UIGameOverPanel>();
             }
 
             // 3. 设置最后生成的框选框为当前框选框

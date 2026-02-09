@@ -42,8 +42,18 @@ namespace QFramework.Example
 
 
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+			GamblingGround.currentDoubleNum.RegisterWithInitValue(doubleNum =>
+			{
+				DoubleNumText.text = doubleNum.ToString();
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+			GamblingGround.currentDoubleNum.Register(doubleNum =>
+			{
+				if (Global.lotteryTicket.Value > 2)
+				{
+					Global.lotteryTicket.Value -= 1;
+				}
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			//NextLevelBtn.OnPointerClickEvent(NextLevelEvent);
-			NextLevelBtn.onClick.AddListener(NextLevelEvent);
 			Global.chips.RegisterWithInitValue(chips =>
 			{
 				Chips.text = "筹码:" + chips;
@@ -62,9 +72,28 @@ namespace QFramework.Example
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			Global.level.Register(level =>
 			{
+				int ticketReward = 6; // 默认3次及以上给6枚
+				if (Global.currentLevelSpinCount.Value == 0)
+				{
+					ticketReward = 12;
+				}
+				else if (Global.currentLevelSpinCount.Value == 1)
+				{
+					ticketReward = 10;
+				}
+				else if (Global.currentLevelSpinCount.Value == 2)
+				{
+					ticketReward = 8;
+				}
+				Debug.Log("ticketReward: " + ticketReward);
+    
+				Global.lotteryTicket.Value += ticketReward;
 				Global.levelScore.Value += 10;
-				Global.lotteryTicket.Value += 6;
+				Global.currentLevelSpinCount.Value = 0;
+				GamblingGround.EnableAllButtons();
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+			NextLevelBtn.onClick.AddListener(NextLevelEvent);
+			DoubleBetBtn.onClick.AddListener(DoubleBetEvent);
 			Global.levelScore.RegisterWithInitValue(levelScore =>
 			{
 				LevelScore.text = "第" + Global.level.Value + "关:" + levelScore + "分";
@@ -72,6 +101,13 @@ namespace QFramework.Example
 			Global.lotteryTicket.RegisterWithInitValue(lotteryticket =>
 			{
 				TicketText.text = "旋转票数:" + lotteryticket;
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+			Global.lotteryTicket.Register(lotteryticket =>
+			{
+				if (lotteryticket <= 2)
+				{
+					DoubleBetBtn.interactable=false;
+				}
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			GamblingGround.totalWeight.RegisterWithInitValue(totalweight =>
 			{
@@ -89,6 +125,16 @@ namespace QFramework.Example
 
 
 		}
+
+		private void DoubleBetEvent()
+		{
+			if (Global.lotteryTicket.Value > 2)
+			{
+				GamblingGround.currentDoubleNum.Value*=2;
+			}
+
+		}
+
 		private void CheckAndClosePanel()
 		{
 			// 检查CardProbabilityPanel是否激活
@@ -132,8 +178,7 @@ namespace QFramework.Example
 
 		private void NextLevelEvent()
 		{
-			NextLevelBtn.GetComponent<Button>().interactable = false;
-			StartButton.GetComponent<Button>().interactable = true;
+			//NextLevelBtn.GetComponent<Button>().interactable = false;
 			GamblingGround.ResetGambling();
 			Global.level.Value++;
 		}

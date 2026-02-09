@@ -34,6 +34,7 @@ namespace Gambling
 		public Dictionary<string, string> cardNameScores = new Dictionary<string, string>();
 		public BindableProperty<int> Score = new BindableProperty<int>(0);
 		public Dictionary<string,BindableProperty<int>> buttonClickCount=new Dictionary<string,BindableProperty<int>>();
+		public BindableProperty<int> currentDoubleNum = new BindableProperty<int>(1);
 		public BindableProperty<float> totalWeight = new BindableProperty<float>(0);
 		public List<RectTransform> gridRects = new List<RectTransform>();
 		public List<CardItem> cardItems = new List<CardItem>();
@@ -83,6 +84,7 @@ namespace Gambling
 					easterEggManager = gameObject.AddComponent<EasterEggManager>();
 				}
 			}
+			UpdateStartButtonState();
 
 
 
@@ -186,6 +188,7 @@ namespace Gambling
 			buttonClickCount["orange"].Value = 0;
 			buttonClickCount["bell"].Value = 0;
 			buttonClickCount["blueberry"].Value = 0;
+			UpdateStartButtonState();
     
 			Debug.Log("转动结束，所有按钮计数已重置为0");
 		}
@@ -237,6 +240,7 @@ namespace Gambling
     
 			buttonClickCount[rewardName].Value++;
 			Global.chips.Value -= 1;
+			UpdateStartButtonState();
 			Debug.Log("当前筹码:"+Global.chips.Value);
 			Debug.Log($"{rewardName} 按钮被点击，当前计数：{buttonClickCount[rewardName]}");
 		}
@@ -251,6 +255,7 @@ namespace Gambling
 			ClearTemporarySelectBoxes();
 			StartSpin();
 			Global.lotteryTicket.Value -= 2;
+			Global.currentLevelSpinCount.Value++;
 		}
 		public void StartSpin()
 		{
@@ -261,7 +266,7 @@ namespace Gambling
 			}
 			
 			// 禁用Start按钮，防止重复点击
-				StartButton.GetComponent<Button>().interactable = false;
+			DisableAllButtons();
 			// 随机选择一个格子索引
 			int randomIndex = GetWeightedRandomIndex();
 			//int randomIndex = Random.Range(0, gridRects.Count);
@@ -343,11 +348,6 @@ namespace Gambling
 				// 重新启用Start按钮
 				if (StartButton != null)
 				{
-					if (Score.Value < Global.levelScore.Value && Global.lotteryTicket.Value <= 0)
-					{
-						UIKit.ClosePanel<UIGamePanel>();
-						UIKit.OpenPanel<UIGameOverPanel>();
-					}
 					bool easterEggTriggered = false;
         
 					// ✅ 只在这里处理彩蛋逻辑（唯一的彩蛋触发点）
@@ -368,8 +368,12 @@ namespace Gambling
 					// ✅ 只有在没有触发彩蛋时才立即恢复按钮状态
 					if (!easterEggTriggered)
 					{
+						if (Score.Value < Global.levelScore.Value && Global.lotteryTicket.Value <= 0)
+						{
+							UIKit.ClosePanel<UIGamePanel>();
+							UIKit.OpenPanel<UIGameOverPanel>();
+						}
 						ResetButtonCounts();
-						StartButton.GetComponent<Button>().interactable = true;
 						ResetGambling();
 						Debug.Log("🎯 转盘结束，按钮状态已恢复");
 					}
@@ -406,7 +410,6 @@ namespace Gambling
 			{
 				// 彩蛋执行完成：重新启用按钮
 				EnableAllButtons();
-				StartButton.GetComponent<Button>().interactable = true;
 				ResetGambling();
 				Debug.Log("🥚 彩蛋效果执行完成，所有按钮已重新启用");
 			}
@@ -433,6 +436,10 @@ namespace Gambling
 			{
 				NextLevelBtn.GetComponent<Button>().interactable = false;
 			}
+			if (DoubleBetBtn != null)
+			{
+				DoubleBetBtn.GetComponent<Button>().interactable = false;
+			}
 		}
     
 		// ✅ 启用所有按钮的方法
@@ -441,7 +448,7 @@ namespace Gambling
 			// 启用Start按钮
 			if (StartButton != null)
 			{
-				StartButton.GetComponent<Button>().interactable = true;
+				UpdateStartButtonState();
 			}
         
 			// 启用所有押注按钮
@@ -457,6 +464,12 @@ namespace Gambling
 				bool shouldEnable = Score.Value >= Global.levelScore.Value;
 				NextLevelBtn.GetComponent<Button>().interactable = shouldEnable;
 
+			}
+
+			if (DoubleBetBtn != null)
+			{
+				bool shouldEnableDoubleBet=Global.lotteryTicket.Value>2;
+				DoubleBetBtn.GetComponent<Button>().interactable = shouldEnableDoubleBet;
 			}
 		}
 
@@ -522,13 +535,10 @@ namespace Gambling
     
 				// 计算得分：按钮点击次数 × 卡片分值
 				int baseScore = card.OnPlayerLand();
-				int finalScore = baseScore * clickCount.Value;
+				int finalScore = baseScore * clickCount.Value*currentDoubleNum.Value;
     
 				Score.Value += finalScore;
-				if (Score.Value >= Global.levelScore.Value)
-				{
-					NextLevelBtn.GetComponent<Button>().interactable = true;
-				}
+				currentDoubleNum.Value = 1;
 				Debug.Log($"停在 '{landedRewardName}' 卡片（类别：{category}），基础分值：{baseScore}，按钮点击次数：{clickCount}，最终得分：{finalScore}");
 				// 如果有积分获得且按钮点击次数大于0，显示积分弹出动画
 				if (finalScore > 0 && clickCount.Value > 0)
@@ -884,6 +894,35 @@ namespace Gambling
 			}
 			Debug.Log("已保存当前按钮计数用于彩蛋效果");
 			return savedCounts;
+		}
+		/// <summary>
+		/// 检查是否有押注
+		/// </summary>
+		/// <returns>如果有任何押注返回true，否则返回false</returns>
+		private bool HasAnyBet()
+		{
+			foreach (var kvp in buttonClickCount)
+			{
+				if (kvp.Value.Value > 0)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+		/// <summary>
+		/// 更新StartButton的可交互状态
+		/// </summary>
+		public void UpdateStartButtonState()
+		{
+			if (StartButton != null)
+			{
+				Button startBtn = StartButton.GetComponent<Button>();
+				if (startBtn != null)
+				{
+					startBtn.interactable = HasAnyBet();
+				}
+			}
 		}
 
 		

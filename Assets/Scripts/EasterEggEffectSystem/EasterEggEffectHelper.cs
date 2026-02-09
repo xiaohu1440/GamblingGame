@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using QFramework;
+using QFramework.Example;
 
 namespace Gambling
 {
@@ -154,12 +156,11 @@ namespace Gambling
                 }
 
                 // 计算最终得分：基础分值 × 按钮点击次数
-                int finalScore = baseScore * clickCount;
+                int finalScore = baseScore * clickCount*gamblingGround.currentDoubleNum.Value;
                 // 只有在按钮被点击过时才获得分数
                 if (clickCount > 0)
                 {
                     gamblingGround.Score.Value += finalScore;
-                        
                     Debug.Log($"🎉 彩蛋触发卡片: {landedRewardName} (类别: {category})");
                     Debug.Log($"📊 基础分值: {baseScore} × 点击次数: {clickCount} = 最终得分: {finalScore}");
                         
