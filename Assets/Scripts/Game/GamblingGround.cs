@@ -11,6 +11,18 @@ using Random = UnityEngine.Random;
 
 namespace Gambling
 {
+	/// <summary>
+	/// 颜色与分数配置
+	/// </summary>
+	[System.Serializable]
+	public class ColorScoreConfig
+	{
+		public string colorName;        // 颜色名称（用于Inspector显示）
+		public Color color;             // 颜色值
+		public int score;               // 对应积分
+		[Range(0f, 100f)]
+		public float weight = 1f;       // 生成权重（权重越高，出现概率越大）
+	}
 	public partial class GamblingGround : ViewController
 	{
 		[Header("配置模块")]
@@ -36,6 +48,7 @@ namespace Gambling
 		public Dictionary<string,BindableProperty<int>> buttonClickCount=new Dictionary<string,BindableProperty<int>>();
 		public BindableProperty<int> currentDoubleNum = new BindableProperty<int>(1);
 		public BindableProperty<float> totalWeight = new BindableProperty<float>(0);
+		public BindableProperty<float> totalColorWeight = new BindableProperty<float>(0);
 		public List<RectTransform> gridRects = new List<RectTransform>();
 		public List<CardItem> cardItems = new List<CardItem>();
 		private Dictionary<string, Button> categoryButtons = new Dictionary<string, Button>();
@@ -43,6 +56,20 @@ namespace Gambling
 		private bool isSpinning = false;
 		private int currentIndex = 0; // 当前SelectBox所在的索引
 		public bool isEasterEggExecuting = false;
+		[Header("框选卡片颜色配置")]
+		[SerializeField] public ColorScoreConfig[] colorConfigs = new ColorScoreConfig[7]
+		{
+			new ColorScoreConfig { colorName = "白色", color = Color.white, score = 0, weight =50f },
+			new ColorScoreConfig { colorName = "绿色", color = Color.green, score = 5, weight =20f },
+			new ColorScoreConfig { colorName = "蓝色", color = new Color(0.3f, 0.5f, 1f), score = 10, weight = 12f },
+			new ColorScoreConfig { colorName = "黄色", color = Color.yellow, score = 15, weight =8f },
+			new ColorScoreConfig { colorName = "紫色", color = new Color(0.8f, 0.3f, 1f), score = 20, weight = 5f },
+			new ColorScoreConfig { colorName = "橙色", color = new Color(1f, 0.6f, 0f), score = 25, weight =5f },
+			new ColorScoreConfig { colorName = "红色", color = Color.red, score = 30, weight = 1f }
+		};
+
+		private int[] colorScores = new int[7] { 0, 5, 10, 15, 20, 25, 30 };
+		private int finalColorBonusScore = 0; // 最终颜色奖励分数
 
 
 		void Start()
@@ -112,6 +139,11 @@ namespace Gambling
 			Global.lotteryTicket.Value = 10;
 			Global.levelScore.Value = 10;
 			Global.level.Value = 1;
+			for (int i = 0; i < colorConfigs.Length; i++)
+			{
+				totalColorWeight.Value += colorConfigs[i].weight;
+			}
+
 		}
 
 		private void TextUpdate()
@@ -264,7 +296,7 @@ namespace Gambling
 				Debug.LogWarning("正在转动或没有格子可抽取！");
 				return;
 			}
-			
+			finalColorBonusScore = 0;
 			// 禁用Start按钮，防止重复点击
 			DisableAllButtons();
 			// 随机选择一个格子索引
@@ -320,7 +352,8 @@ namespace Gambling
 		{
 			Sequence moveSequence = DOTween.Sequence();
 			int tempCurrentIndex = currentIndex;
-			
+			cardItems[tempCurrentIndex].GetCardBaseImage().color = Color.white;
+			int previousIndex = -1; // 记录上一个格子的索引
 			
 			// 为每一步创建移动动画
 			for (int step = 0; step < totalSteps; step++)
@@ -334,8 +367,37 @@ namespace Gambling
 				// 添加移动到下一个位置的动画
 				moveSequence.Append(selectBoxRect.DOAnchorPos(gridRects[nextIndex].anchoredPosition, stepDuration)
 					.SetEase(Ease.InOutQuad));
+				// ✅ 修改：每次移动时根据权重随机改变当前格子颜色
+				int currentStepIndex = nextIndex; // 捕获当前步骤的索引
+				int prevStepIndex = previousIndex; // 捕获上一个步骤的索引
+        
+				moveSequence.AppendCallback(() =>
+				{
+					// 重置上一个格子的颜色为白色
+					if (prevStepIndex >= 0 && prevStepIndex < cardItems.Count)
+					{
+						Image prevBaseImage = cardItems[prevStepIndex].GetCardBaseImage();
+						if (prevBaseImage != null)
+						{
+							prevBaseImage.color = Color.white;
+						}
+					}
+            
+					// ✅ 使用加权随机改变当前格子的颜色
+					if (currentStepIndex >= 0 && currentStepIndex < cardItems.Count)
+					{
+						Image baseImage = cardItems[currentStepIndex].GetCardBaseImage();
+						if (baseImage != null)
+						{
+							int randomColorIndex = GetWeightedRandomColorIndex();
+							baseImage.color = colorConfigs[randomColorIndex].color;
+						}
+					}
+				});
 				
+				previousIndex = nextIndex;
 				tempCurrentIndex = nextIndex;
+				
 			}
 			
 			// 动画完成回调
@@ -343,6 +405,19 @@ namespace Gambling
 			{
 				currentIndex = finalTargetIndex;
 				isSpinning = false;
+				// ✅ 修改：使用加权随机选择最终颜色并设置奖励分数
+				int finalColorIndex = GetWeightedRandomColorIndex();
+				finalColorBonusScore = colorConfigs[finalColorIndex].score;
+				// 设置最终停留位置的卡片底板颜色（带动画效果）
+				if (finalTargetIndex >= 0 && finalTargetIndex < cardItems.Count)
+				{
+					Image baseImage = cardItems[finalTargetIndex].GetCardBaseImage();
+					if (baseImage != null)
+					{
+						baseImage.DOColor(colorConfigs[finalColorIndex].color, 0.3f).SetEase(Ease.OutQuad);
+						Debug.Log($"最终停在索引 {finalTargetIndex}，颜色：{colorConfigs[finalColorIndex].colorName}，颜色奖励：+{finalColorBonusScore}分");
+					}
+				}
 				OnSpinComplete(finalTargetIndex);
 				
 				// 重新启用Start按钮
@@ -535,11 +610,11 @@ namespace Gambling
     
 				// 计算得分：按钮点击次数 × 卡片分值
 				int baseScore = card.OnPlayerLand();
-				int finalScore = baseScore * clickCount.Value*currentDoubleNum.Value;
+				int finalScore = (baseScore+finalColorBonusScore) * clickCount.Value*currentDoubleNum.Value;
     
 				Score.Value += finalScore;
 				currentDoubleNum.Value = 1;
-				Debug.Log($"停在 '{landedRewardName}' 卡片（类别：{category}），基础分值：{baseScore}，按钮点击次数：{clickCount}，最终得分：{finalScore}");
+				Debug.Log($"停在 '{landedRewardName}' 卡片（类别：{category}），基础分值：{baseScore}，按钮点击次数：{clickCount}，颜色奖励：{finalColorBonusScore}，最终得分：{finalScore}");
 				// 如果有积分获得且按钮点击次数大于0，显示积分弹出动画
 				if (finalScore > 0 && clickCount.Value > 0)
 				{
@@ -923,6 +998,42 @@ namespace Gambling
 					startBtn.interactable = HasAnyBet();
 				}
 			}
+		}
+		/// <summary>
+		/// 根据权重随机选择一个颜色索引
+		/// </summary>
+		/// <returns>选中的颜色索引</returns>
+		private int GetWeightedRandomColorIndex()
+		{
+			totalColorWeight.Value = 0;
+			for (int i = 0; i < colorConfigs.Length; i++)
+			{
+				totalColorWeight.Value += colorConfigs[i].weight;
+			}
+    
+			// 如果总权重为0，则使用等概率随机
+			if (totalColorWeight.Value <= 0f)
+			{
+				Debug.LogWarning("所有颜色权重为0，使用等概率随机选择！");
+				return Random.Range(0, colorConfigs.Length);
+			}
+    
+			// 生成随机数
+			float randomValue = Random.Range(0f, totalColorWeight.Value);
+    
+			// 根据权重选择索引
+			float currentWeight = 0f;
+			for (int i = 0; i < colorConfigs.Length; i++)
+			{
+				currentWeight += colorConfigs[i].weight;
+				if (randomValue <= currentWeight)
+				{
+					return i;
+				}
+			}
+    
+			// 如果出现浮点数精度问题，返回最后一个索引
+			return colorConfigs.Length - 1;
 		}
 
 		

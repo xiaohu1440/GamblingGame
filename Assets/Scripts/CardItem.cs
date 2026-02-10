@@ -39,6 +39,14 @@ namespace Gambling
         {
             return rewardData.runtimeGoldValue.Value;
         }
+        public Image GetCardBaseImage()
+        {
+            if (transform.childCount > 0)
+            {
+                return transform.GetChild(0).GetComponent<Image>();
+            }
+            return null;
+        }
         
     }
 

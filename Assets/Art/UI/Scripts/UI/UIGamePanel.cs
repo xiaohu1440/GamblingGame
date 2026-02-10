@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Gambling;
 using UnityEngine;
 using UnityEngine.UI;
 using QFramework;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 namespace QFramework.Example
 {
@@ -112,9 +114,14 @@ namespace QFramework.Example
 			GamblingGround.totalWeight.RegisterWithInitValue(totalweight =>
 			{
 				GamblingGround.CalculateCardWeights();
-				UpdateProbabilityUI();
+				UpdateCardProbabilityUI();
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+			GamblingGround.totalColorWeight.RegisterWithInitValue(totalcolorweight =>
+			{
+				UpdateColorProbabilityUI();
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			ScoreProbaility.OnPointerClickEvent(ProbailityUIStartEvent);
+			ColorProbaility.OnPointerClickEvent(ProbailityUIStartEvent);
 			mInputRegister = ActionKit.OnUpdate.Register(() =>
 			{
 				if (Input.GetMouseButtonDown(0))
@@ -145,6 +152,11 @@ namespace QFramework.Example
 				{
 					CardProbabilityPanel.Hide();
 				}
+
+				if (!IsPointerOverUIElement(ColorProbabilityPanel))
+				{
+					ColorProbabilityPanel.Hide();
+				}
 			}
 		}
 		private bool IsPointerOverUIElement(Image panel)
@@ -173,7 +185,15 @@ namespace QFramework.Example
 
 		private void ProbailityUIStartEvent(PointerEventData obj)
 		{
-			CardProbabilityPanel.Show();
+			if (obj.pointerPress.name == "ScoreProbaility")
+			{
+				CardProbabilityPanel.Show();
+			}
+
+			if (obj.pointerPress.name == "ColorProbaility")
+			{
+				ColorProbabilityPanel.Show();
+			}
 		}
 
 		private void NextLevelEvent()
@@ -200,7 +220,7 @@ namespace QFramework.Example
 		{
 		}
 
-		private void UpdateProbabilityUI()
+		private void UpdateCardProbabilityUI()
 		{
 			if (CardProbabilityPanel == null) return;
 			// 遍历 CardProbabilityPanel 下的所有子物体
@@ -237,6 +257,30 @@ namespace QFramework.Example
 						Debug.LogWarning($"未找到 {childName} 子物体中的 ScoreText 组件");
 					}
 				}
+			}
+		}
+
+		private void UpdateColorProbabilityUI()
+		{
+			if (ColorProbabilityPanel == null) return;
+			for (int i = 0; i < ColorProbabilityPanel.transform.childCount; i++)
+			{
+				Transform childTransform = ColorProbabilityPanel.transform.GetChild(i);
+				string childName = childTransform.name;
+				var target = GamblingGround.colorConfigs.FirstOrDefault(item => item.colorName == childName);
+				if (target.colorName != null)
+				{
+					Color color = target.color;
+					childTransform.GetComponent<Image>().color = color;
+					float probability = target.weight;
+					Debug.Log("颜色权重"+probability);
+					Text probabilityText = childTransform.GetChild(0).GetComponent<Text>();
+					probabilityText.text = (probability/GamblingGround.totalColorWeight.Value*100).ToString("F2") + "%";
+					int score = target.score;
+					Text scoreText = childTransform.GetChild(1).GetComponent<Text>();
+					scoreText.text = score.ToString();
+				}
+				
 			}
 		}
 	}
