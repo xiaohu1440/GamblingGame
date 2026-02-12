@@ -3143,13 +3143,13 @@ RectTransform:
   - {fileID: 3265554760123789634}
   - {fileID: 8716443427850626633}
   - {fileID: 4264826885956364971}
-  - {fileID: 6674260306900074798}
   - {fileID: 2630125571067939420}
   - {fileID: 7452929487672198004}
   - {fileID: 2345969494002441014}
   - {fileID: 4004893725686958343}
   - {fileID: 4901143554241713505}
   - {fileID: 4757824856451318790}
+  - {fileID: 6674260306900074798}
   - {fileID: 9088793439713105535}
   - {fileID: 945980134676721295}
   m_Father: {fileID: 0}
@@ -8120,7 +8120,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 500}
+  m_SizeDelta: {x: 1600, y: 900}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3831794301317146013
 CanvasRenderer:
@@ -9190,7 +9190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4199130641399742593}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Relic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9212,8 +9212,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -175}
-  m_SizeDelta: {x: 500, y: 350}
+  m_AnchoredPosition: {x: 0, y: -300}
+  m_SizeDelta: {x: 1600, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8518405015224263248
 GameObject:

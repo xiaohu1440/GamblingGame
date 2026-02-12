@@ -23,8 +23,9 @@ namespace Gambling
 		[Range(0f, 100f)]
 		public float weight = 1f;       // 生成权重（权重越高，出现概率越大）
 	}
-	public partial class GamblingGround : ViewController
+	public partial class GamblingGround : ViewController,IController
 	{
+		public IArchitecture GetArchitecture() => Global.Interface;
 		[Header("配置模块")]
 		[SerializeField]private int SideCount = 7;
 		[SerializeField]private float TotalWidth = 800f;
@@ -622,7 +623,7 @@ namespace Gambling
 				}
 				//TODO:ui弹出彩蛋功能关联
 			}
-    
+			TriggerRotationEndRelics(selectedIndex, card);
 
 		}
 
@@ -1035,7 +1036,27 @@ namespace Gambling
 			// 如果出现浮点数精度问题，返回最后一个索引
 			return colorConfigs.Length - 1;
 		}
-
+		private void TriggerRotationEndRelics(int selectedIndex, CardItem card)
+		{
+			// 获取遗物系统
+			var relicSystem = this.GetSystem<IRelicSystem>();
+    
+			// 创建遗物效果上下文
+			RelicEffectContext context = new RelicEffectContext
+			{
+				gamblingGround = this,
+				currentIndex = selectedIndex,
+				currentCard = card,
+				currentDoubleNum = currentDoubleNum.Value,
+				currentRotationNum = Global.currentLevelSpinCount.Value,
+				RelicNum = relicSystem.GetOwnedRelicDatas().Count
+			};
+    
+			// 触发旋转结束类型的遗物效果
+			relicSystem.TriggerRelicEffect(RelicTriggerType.OnRotationEnd, context);
+    
+			Debug.Log($"🎲 触发旋转结束遗物效果，当前索引：{selectedIndex}，卡片：{card.rewardData.runtimeRewardName.Value}");
+		}
 		
 
 

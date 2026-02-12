@@ -14,7 +14,7 @@ namespace Gambling
         public static BindableProperty<int> currentLevelSpinCount = new BindableProperty<int>(0);
         protected override void Init()
         {
-            
+            this.RegisterSystem<IRelicSystem>(new RelicSystem());
         }
     }
 }
