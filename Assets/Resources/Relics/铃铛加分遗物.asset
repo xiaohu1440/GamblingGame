@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "\u94C3\u94DB\u52A0\u5206\u9057\u7269"
   m_EditorClassIdentifier: 
   RelicName: "\u94C3\u94DB\u52A0\u5206"
-  RelicIcon: {fileID: 0}
+  RelicIcon: {fileID: 21300000, guid: 1065c28f5db9eb44ab57d5ac47592ec6, type: 3}
   RelicId: 4
   RelicQuality: 0
   RelicPrice: 2

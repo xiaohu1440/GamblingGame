@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 namespace Gambling
 {
     public  class CardItem : MonoBehaviour

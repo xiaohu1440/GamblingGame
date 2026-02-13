@@ -51,9 +51,13 @@ namespace Gambling
                 
 				// 获取UIRelicItem组件并赋值RelicData
 				UIRelicItem relicItem = relicItemObj.GetComponent<UIRelicItem>();
+				Image relicIcon = relicItemObj.transform.GetChild(0).GetComponent<Image>();
+				Text relicPrice=relicItemObj.transform.GetChild(1).GetComponent<Text>();
 				if (relicItem != null)
 				{
 					relicItem.SetRelicData(shopRelics[i]);
+					relicIcon.sprite = shopRelics[i].RelicIcon;
+					relicPrice.text = "价格:"+shopRelics[i].RelicPrice.ToString();
 				}
 				else
 				{
