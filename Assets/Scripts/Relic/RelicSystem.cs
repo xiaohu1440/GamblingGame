@@ -22,7 +22,7 @@ namespace Gambling
 
         public List<RelicData> DrawRelicsForShop(int currentLevel, int relicNum = 4)
         {
-           var unLockedRelics = allRelicDatas.Where(r => r.unLock).ToList();
+           var unLockedRelics = allRelicDatas.Where(r => r.unLock&&!ownedRelicDatas.Contains(r)).ToList();
            if (unLockedRelics.Count == 0)
            {
                Debug.LogWarning("⚠️ 没有可用的遗物！");
@@ -30,7 +30,8 @@ namespace Gambling
            }
            var qualityWeights = CalculateQualityWeights(currentLevel);
            List<RelicData> drawnRelics = new List<RelicData>();
-           for (int i = 0; i < relicNum; i++)
+           var currentdrawnRelics = Mathf.Min(relicNum, unLockedRelics.Count);
+           for (int i = 0; i < currentdrawnRelics; i++)
            {
                RelicQuality quality = SelectQualityByWeight(qualityWeights);
                RelicData relic = SelectRelicByQuality(unLockedRelics, quality);

@@ -16,9 +16,10 @@ MonoBehaviour:
   RelicIcon: {fileID: 21300000, guid: f03fc11681cd2db4ebb87aaab8e2e9ea, type: 3}
   RelicId: 3
   RelicQuality: 0
-  RelicPrice: 2
+  RelicPrice: 4
   RelicDesc: "\u6BCF\u6B21\u8F6C\u52A8\uFF0C\u84DD\u8393\u56FE\u6848+1\u5206"
   RelicTips: 
   RelicTriggerType: 5
   unLock: 1
   relicEffect: {fileID: 11400000, guid: 972e26b8ba507e046b1270dad0030074, type: 2}
+  isOwned: 0

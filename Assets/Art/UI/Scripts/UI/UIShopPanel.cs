@@ -11,17 +11,34 @@ namespace Gambling
 	public partial class UIShopPanel : UIPanel,IController
 	{
 		public IArchitecture GetArchitecture() => Global.Interface;
+		private int refreshlotteryTicket = 4;
 		[SerializeField] private GameObject relicItemPrefab;
 		private List<GameObject> spawnedRelicItems = new List<GameObject>();
+		private IRelicSystem relicSystem;
 		protected override void OnInit(IUIData uiData = null)
 		{
 			mData = uiData as UIShopPanelData ?? new UIShopPanelData();
 			// please add init code here
+			RefreshBtn.interactable = true;
+			refreshlotteryTicket = 4;
+			RefreshPrice.text="刷新:"+refreshlotteryTicket.ToString();
 			NextLevel.onClick.AddListener(NextLevelEvent);
-			var relicSystem=this.GetSystem<IRelicSystem>();
+			relicSystem=this.GetSystem<IRelicSystem>();
 			var shopRelics = relicSystem.DrawRelicsForShop(Global.level.Value,4);
 			// 生成RelicItem预制体
-			GenerateRelicItems(shopRelics);
+			if (shopRelics != null)
+			{
+				GenerateRelicItems(shopRelics);
+			}
+			Global.lotteryTicket.Register(ticket =>
+			{
+				if ((ticket-refreshlotteryTicket) < 2)
+				{
+					RefreshBtn.interactable = false;
+				}
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+			RefreshBtn.onClick.AddListener(RefreshEvent);
+			
 		}
 		/// <summary>
 		/// 根据shopRelics列表生成RelicItem预制体
@@ -70,6 +87,16 @@ namespace Gambling
             
 			Debug.Log($"✅ 成功生成 {shopRelics.Count} 个RelicItem");
 		}
+
+		private void RefreshShopRelics()
+		{
+			ClearRelicItems();
+			var shopRelics = relicSystem.DrawRelicsForShop(Global.level.Value, 4);
+			if (shopRelics != null)
+			{
+				GenerateRelicItems(shopRelics);
+			}
+		}
         
 		/// <summary>
 		/// 清空已生成的RelicItem
@@ -87,25 +114,18 @@ namespace Gambling
 		}
 		private void NextLevelEvent()
 		{
-			int ticketReward = 6; // 默认3次及以上给6枚
-			if (Global.currentLevelSpinCount.Value == 0)
-			{
-				ticketReward = 12;
-			}
-			else if (Global.currentLevelSpinCount.Value == 1)
-			{
-				ticketReward = 10;
-			}
-			else if (Global.currentLevelSpinCount.Value == 2)
-			{
-				ticketReward = 8;
-			}
-			Debug.Log("ticketReward: " + ticketReward);
 			Global.level.Value++;
-			Global.lotteryTicket.Value += ticketReward;
 			Global.currentLevelSpinCount.Value = 0;
 			Time.timeScale = 1;
 			this.CloseSelf();
+		}
+
+		private void RefreshEvent()
+		{
+			Global.lotteryTicket.Value -= refreshlotteryTicket;
+			RefreshShopRelics();
+			refreshlotteryTicket *= 2;
+			RefreshPrice.text="刷新:"+refreshlotteryTicket.ToString();
 		}
 
 		protected override void OnOpen(IUIData uiData = null)

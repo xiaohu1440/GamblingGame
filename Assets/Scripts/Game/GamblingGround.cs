@@ -456,10 +456,25 @@ namespace Gambling
 					if (Score.Value >= Global.levelScore.Value && Global.lotteryTicket.Value <= 0)
 					{
 						StartButton.GetComponent<Button>().interactable = false;
-						Button[] allButtons = Panel.GetComponentsInChildren<Button>();
-						foreach (Button button in allButtons)
+						// 禁用所有下注按钮
+						foreach (var kvp in categoryButtons)
 						{
-							button.interactable = false;
+							if (kvp.Value != null)
+							{
+								kvp.Value.interactable = false;
+							}
+						}
+    
+						// 禁用加倍按钮
+						if (DoubleBetBtn != null)
+						{
+							DoubleBetBtn.GetComponent<Button>().interactable = false;
+						}
+    
+						// ✅ 确保NextLevelBtn保持可用（因为分数已达标）
+						if (NextLevelBtn != null)
+						{
+							NextLevelBtn.GetComponent<Button>().interactable = true;
 						}
 					}
 					else

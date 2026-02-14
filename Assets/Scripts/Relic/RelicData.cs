@@ -44,6 +44,7 @@ namespace Gambling
         public bool unLock=true;
         [Header("效果配置")]
         public RelicEffect relicEffect;
+
     }
 }
 

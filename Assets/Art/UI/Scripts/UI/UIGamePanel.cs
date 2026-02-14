@@ -183,6 +183,21 @@ namespace QFramework.Example
 		{
 			//NextLevelBtn.GetComponent<Button>().interactable = false;
 			GamblingGround.ResetGambling();
+			int ticketReward = 6; // 默认3次及以上给6枚
+			if (Global.currentLevelSpinCount.Value == 0)
+			{
+				ticketReward = 12;
+			}
+			else if (Global.currentLevelSpinCount.Value == 1)
+			{
+				ticketReward = 10;
+			}
+			else if (Global.currentLevelSpinCount.Value == 2)
+			{
+				ticketReward = 8;
+			}
+			Debug.Log("ticketReward: " + ticketReward);
+			Global.lotteryTicket.Value += ticketReward;
 			Time.timeScale = 0;
 			UIKit.OpenPanel<UIShopPanel>();
 		}
