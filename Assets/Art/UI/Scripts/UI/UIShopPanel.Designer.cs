@@ -5,7 +5,7 @@ using QFramework;
 
 namespace Gambling
 {
-	// Generate Id:9c1fe9a5-a39a-4027-ba41-6aa4dec3af4e
+	// Generate Id:bf2e73ce-595f-422b-9fde-6e3151b2e37b
 	public partial class UIShopPanel
 	{
 		public const string Name = "UIShopPanel";
@@ -17,6 +17,8 @@ namespace Gambling
 		[SerializeField]
 		public UnityEngine.UI.Text RefreshPrice;
 		[SerializeField]
+		public UnityEngine.UI.Text CoinText;
+		[SerializeField]
 		public UnityEngine.UI.Button NextLevel;
 		
 		private UIShopPanelData mPrivateData = null;
@@ -26,6 +28,7 @@ namespace Gambling
 			Relic = null;
 			RefreshBtn = null;
 			RefreshPrice = null;
+			CoinText = null;
 			NextLevel = null;
 			
 			mData = null;

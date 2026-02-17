@@ -76,6 +76,7 @@ namespace QFramework.Example
 			Global.level.Register(level =>
 			{
 				Global.levelScore.Value += 10;
+				Global.chips.Value = 5;
 				GamblingGround.EnableAllButtons();
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			DoubleBetBtn.onClick.AddListener(DoubleBetEvent);

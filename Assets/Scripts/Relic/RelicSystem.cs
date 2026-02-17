@@ -116,7 +116,7 @@ namespace Gambling
 
         public bool BuyRelic(RelicData relicData)
         {
-            if (Global.lotteryTicket.Value >= relicData.RelicPrice)
+            if (Global.lotteryTicket.Value >= (relicData.RelicPrice+2))
             {
                 Global.lotteryTicket.Value -= relicData.RelicPrice;
                 ownedRelicDatas.Add(relicData);

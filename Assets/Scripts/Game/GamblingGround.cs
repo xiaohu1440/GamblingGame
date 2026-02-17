@@ -42,7 +42,13 @@ namespace Gambling
 		[SerializeField] private EasterEggManager easterEggManager;
 		// 临时框选框列表，用于管理彩蛋效果产生的框选框
 		private List<GameObject> temporarySelectBoxes = new List<GameObject>();
-
+		[Header("单图案押注倍率系统")]
+		[SerializeField] private List<BetMultiplierConfig> customMultiplierConfigs = new List<BetMultiplierConfig>
+		{
+			new BetMultiplierConfig(10, 2),
+			new BetMultiplierConfig(20, 4),
+			new BetMultiplierConfig(30, 8)
+		};
 		public Dictionary<string, float> cardNameWeights = new Dictionary<string, float>();
 		public Dictionary<string, string> cardNameScores = new Dictionary<string, string>();
 		public BindableProperty<int> Score = new BindableProperty<int>(0);
@@ -71,6 +77,7 @@ namespace Gambling
 
 		private int[] colorScores = new int[7] { 0, 5, 10, 15, 20, 25, 30 };
 		private int finalColorBonusScore = 0; // 最终颜色奖励分数
+		private BetMultiplierSystem betMultiplierSystem;
 
 
 		void Start()
@@ -84,6 +91,9 @@ namespace Gambling
 					Debug.LogWarning("未找到ScorePopupManager！请在场景中添加该组件。");
 				}
 			}
+			// 初始化倍率系统
+			betMultiplierSystem = new BetMultiplierSystem(customMultiplierConfigs);
+			Debug.Log("押注倍率系统已初始化");
 			InitializeCategoryButtons();
 			Init();
 			GenerateGrid();
@@ -577,7 +587,7 @@ namespace Gambling
 				button.interactable = true;
 			}
 
-			Global.chips.Value = 5;
+			Global.chips.Value += 5;
 		}
 
 		private float CalculateStepDuration(int currentStep, int totalSteps)
@@ -623,10 +633,10 @@ namespace Gambling
     
 				// 获取该类别按钮的点击次数
 				BindableProperty<int> clickCount = buttonClickCount[category];
-    
+				int betMultiplier = betMultiplierSystem.GetMultiplier(clickCount.Value);
 				// 计算得分：按钮点击次数 × 卡片分值
 				int baseScore = card.OnPlayerLand();
-				int finalScore = (baseScore+finalColorBonusScore) * clickCount.Value*currentDoubleNum.Value;
+				int finalScore = (baseScore+finalColorBonusScore) * betMultiplier*clickCount.Value*currentDoubleNum.Value;
     
 				Score.Value += finalScore;
 				currentDoubleNum.Value = 1;
@@ -1072,7 +1082,60 @@ namespace Gambling
     
 			Debug.Log($"🎲 触发旋转结束遗物效果，当前索引：{selectedIndex}，卡片：{card.rewardData.runtimeRewardName.Value}");
 		}
-		
+		/// <summary>
+		/// 获取指定类别的押注倍率
+		/// </summary>
+		/// <param name="category">按钮类别</param>
+		/// <returns>当前倍率</returns>
+		public int GetBetMultiplier(string category)
+		{
+			if (betMultiplierSystem == null || !buttonClickCount.ContainsKey(category))
+			{
+				return 1;
+			}
+    
+			int betCount = buttonClickCount[category].Value;
+			return betMultiplierSystem.GetMultiplier(betCount);
+		}
+
+		/// <summary>
+		/// 获取指定类别的押注进度信息（供UI进度条使用）
+		/// </summary>
+		/// <param name="category">按钮类别</param>
+		/// <returns>进度信息</returns>
+		public BetProgressInfo GetBetProgressInfo(string category)
+		{
+			if (betMultiplierSystem == null || !buttonClickCount.ContainsKey(category))
+			{
+				return new BetProgressInfo
+				{
+					currentBetCount = 0,
+					currentMultiplier = 1,
+					progressPercent = 0f
+				};
+			}
+    
+			int betCount = buttonClickCount[category].Value;
+			return betMultiplierSystem.GetProgressInfo(betCount);
+		}
+
+		/// <summary>
+		/// 获取所有类别的押注进度信息（供UI批量更新使用）
+		/// </summary>
+		/// <returns>所有类别的进度信息字典</returns>
+		public Dictionary<string, BetProgressInfo> GetAllBetProgressInfo()
+		{
+			Dictionary<string, BetProgressInfo> allProgress = new Dictionary<string, BetProgressInfo>();
+    
+			if (betMultiplierSystem == null) return allProgress;
+    
+			foreach (var kvp in buttonClickCount)
+			{
+				allProgress[kvp.Key] = betMultiplierSystem.GetProgressInfo(kvp.Value.Value);
+			}
+    
+			return allProgress;
+		}
 
 
 

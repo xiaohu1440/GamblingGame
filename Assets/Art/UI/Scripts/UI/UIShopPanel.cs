@@ -36,6 +36,11 @@ namespace Gambling
 				{
 					RefreshBtn.interactable = false;
 				}
+				
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+			Global.lotteryTicket.RegisterWithInitValue(ticket =>
+			{
+				CoinText.text = "转动卷" + ticket+ "<color=red>(-2)</color>";
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			RefreshBtn.onClick.AddListener(RefreshEvent);
 			
