@@ -62,7 +62,10 @@ namespace Gambling
 		private RectTransform selectBoxRect;
 		private bool isSpinning = false;
 		private int currentIndex = 0; // 当前SelectBox所在的索引
+		private int totalSpinNum = 0;
+		public int chipsDouble = 1;
 		public bool isEasterEggExecuting = false;
+		
 		[Header("框选卡片颜色配置")]
 		[SerializeField] public ColorScoreConfig[] colorConfigs = new ColorScoreConfig[7]
 		{
@@ -77,7 +80,7 @@ namespace Gambling
 
 		private int[] colorScores = new int[7] { 0, 5, 10, 15, 20, 25, 30 };
 		private int finalColorBonusScore = 0; // 最终颜色奖励分数
-		private BetMultiplierSystem betMultiplierSystem;
+		public BetMultiplierSystem betMultiplierSystem;
 
 
 		void Start()
@@ -299,6 +302,7 @@ namespace Gambling
 			StartSpin();
 			Global.lotteryTicket.Value -= 2;
 			Global.currentLevelSpinCount.Value++;
+			totalSpinNum++;
 		}
 		public void StartSpin()
 		{
@@ -587,7 +591,10 @@ namespace Gambling
 				button.interactable = true;
 			}
 
-			Global.chips.Value += 5;
+			if (Global.lotteryTicket.Value > 0)
+			{
+				Global.chips.Value += 5*chipsDouble;
+			}
 		}
 
 		private float CalculateStepDuration(int currentStep, int totalSteps)
@@ -648,7 +655,7 @@ namespace Gambling
 				}
 				//TODO:ui弹出彩蛋功能关联
 			}
-			TriggerRotationEndRelics(selectedIndex, card);
+			TriggerRotationEndRelics(selectedIndex, card);//触发转动结束类型的遗物效果
 
 		}
 
@@ -1073,7 +1080,7 @@ namespace Gambling
 				currentIndex = selectedIndex,
 				currentCard = card,
 				currentDoubleNum = currentDoubleNum.Value,
-				currentRotationNum = Global.currentLevelSpinCount.Value,
+				currentRotationNum = totalSpinNum,
 				RelicNum = relicSystem.GetOwnedRelicDatas().Count
 			};
     

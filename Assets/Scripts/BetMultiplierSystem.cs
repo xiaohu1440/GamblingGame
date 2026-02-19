@@ -83,6 +83,15 @@ namespace Gambling
             return multiplier;
         }
 
+        public void SetMultiplierRelic(int BetDoubleNum)
+        {
+            for(int i=0;i<multiplierConfigs.Count-1;i++)
+            {
+                multiplierConfigs[i].multiplier += BetDoubleNum;
+                Debug.Log($"倍率阈值增加，当前阈值：{multiplierConfigs[i].multiplier}");
+            }
+        }
+
         /// <summary>
         /// Retrieves the progress information for a specific task or process.
         /// </summary>

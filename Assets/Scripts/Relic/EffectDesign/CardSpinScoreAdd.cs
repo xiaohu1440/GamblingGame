@@ -29,5 +29,10 @@ namespace Gambling
             }
                 
         }
+
+        public override void Reset()
+        {
+            
+        }
     }
 }

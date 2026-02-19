@@ -142,6 +142,14 @@ namespace Gambling
             }
         }
 
+        public void ResetAllRelicEffect()
+        {
+            foreach (var relic in allRelicDatas)
+            {
+                relic.relicEffect?.Reset();
+            }
+        }
+
         public List<RelicData> GetOwnedRelicDatas()
         {
            return ownedRelicDatas;

@@ -4,10 +4,11 @@ using QFramework;
 
 namespace Gambling
 {
-	public partial class GameManager : ViewController
+	public partial class GameManager : ViewController,IController
 	{
 		private RewardList rewardList;
 		private ResLoader mResLoader=null;
+		public IArchitecture GetArchitecture() => Global.Interface;
 
 		private void Awake()
 		{
@@ -19,6 +20,8 @@ namespace Gambling
 			mResLoader = ResLoader.Allocate();
 			rewardList= mResLoader.LoadSync<RewardList>("gamblinglevel_asset", "GamblingLevel");
 			rewardList.ResetAll();
+			var relicSystem=this.GetSystem<IRelicSystem>();
+			relicSystem.ResetAllRelicEffect();
 			
 		}
 
@@ -27,5 +30,7 @@ namespace Gambling
 			mResLoader.Recycle2Cache();
 			mResLoader = null;
 		}
+
+		
 	}
 }

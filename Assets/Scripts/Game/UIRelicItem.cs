@@ -58,8 +58,14 @@ namespace Gambling
             // 这里可以添加购买逻辑
             var relicSystem=this.GetSystem<IRelicSystem>();
             var isBuy=relicSystem.BuyRelic(relicData);
+            RelicEffectContext context = new RelicEffectContext
+            {
+                gamblingGround = FindObjectOfType<GamblingGround>(),
+                RelicNum = relicSystem.GetOwnedRelicDatas().Count
+            };
             if (isBuy)
             {
+                relicSystem.TriggerRelicEffect(RelicTriggerType.Passive, context);
                 gameObject.DestroySelf();
                 Debug.Log($"购买遗物: {relicData.RelicName}");
             }

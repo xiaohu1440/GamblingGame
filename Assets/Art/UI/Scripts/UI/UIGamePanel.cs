@@ -50,10 +50,7 @@ namespace QFramework.Example
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			GamblingGround.currentDoubleNum.Register(doubleNum =>
 			{
-				if (Global.lotteryTicket.Value > 2)
-				{
-					Global.lotteryTicket.Value -= 1;
-				}
+				
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			//NextLevelBtn.OnPointerClickEvent(NextLevelEvent);
 			Global.chips.RegisterWithInitValue(chips =>
@@ -121,7 +118,8 @@ namespace QFramework.Example
 		{
 			if (Global.lotteryTicket.Value > 2)
 			{
-				GamblingGround.currentDoubleNum.Value*=2;
+				Global.chips.Value += 5;
+				Global.lotteryTicket.Value -= 1;
 			}
 
 		}
@@ -273,7 +271,7 @@ namespace QFramework.Example
 					Color color = target.color;
 					childTransform.GetComponent<Image>().color = color;
 					float probability = target.weight;
-					Debug.Log("颜色权重"+probability);
+					//Debug.Log("颜色权重"+probability);
 					Text probabilityText = childTransform.GetChild(0).GetComponent<Text>();
 					probabilityText.text = (probability/GamblingGround.totalColorWeight.Value*100).ToString("F2") + "%";
 					int score = target.score;

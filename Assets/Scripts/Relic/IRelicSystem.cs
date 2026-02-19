@@ -10,5 +10,6 @@ namespace Gambling
         void TriggerRelicEffect(RelicTriggerType triggerType,RelicEffectContext context);
         List<RelicData> GetOwnedRelicDatas();
         void ClearOwnedRelicDatas();
+        void ResetAllRelicEffect();
     }
 }

@@ -21,9 +21,10 @@ namespace Gambling
         public abstract string RelicName { get; }
         public abstract bool CanTrigger(RelicTriggerType triggerType);//检测是否可以触发
         public abstract void ExecuteEffect(RelicEffectContext context);
+        public abstract void Reset();//重置参数
 
 
-        
+
 
     }
 }
