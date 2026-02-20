@@ -35,6 +35,10 @@ namespace Gambling
             if (fillImage != null)
             {
                 fillImage.fillAmount = info.progressPercent;
+                if (fillImage.fillAmount == 1)
+                {
+                    fillImage.fillAmount = 0f;
+                }
             }
         
             // 更新倍率文本

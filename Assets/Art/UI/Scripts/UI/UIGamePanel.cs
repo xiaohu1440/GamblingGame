@@ -118,8 +118,9 @@ namespace QFramework.Example
 		{
 			if (Global.lotteryTicket.Value > 2)
 			{
-				Global.chips.Value += 5;
-				Global.lotteryTicket.Value -= 1;
+				Global.chips.Value += 5+GamblingGround.chipsAddNum;
+				Global.lotteryTicket.Value -= 2;
+				DoubleBetBtn.interactable = false;
 			}
 
 		}

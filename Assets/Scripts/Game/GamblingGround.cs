@@ -65,6 +65,7 @@ namespace Gambling
 		private int totalSpinNum = 0;
 		public int chipsDouble = 1;
 		public bool isEasterEggExecuting = false;
+		public int chipsAddNum = 0;
 		
 		[Header("框选卡片颜色配置")]
 		[SerializeField] public ColorScoreConfig[] colorConfigs = new ColorScoreConfig[7]
@@ -79,7 +80,7 @@ namespace Gambling
 		};
 
 		private int[] colorScores = new int[7] { 0, 5, 10, 15, 20, 25, 30 };
-		private int finalColorBonusScore = 0; // 最终颜色奖励分数
+		public int finalColorBonusScore = 0; // 最终颜色奖励分数
 		public BetMultiplierSystem betMultiplierSystem;
 
 
@@ -465,6 +466,10 @@ namespace Gambling
 						}
 						ResetButtonCounts();
 						ResetGambling();
+						if (Global.lotteryTicket.Value > 2)
+						{
+							DoubleBetBtn.GetComponent<Button>().interactable=true;
+						}
 						Debug.Log("🎯 转盘结束，按钮状态已恢复");
 					}
 					if (Score.Value >= Global.levelScore.Value && Global.lotteryTicket.Value <= 0)
