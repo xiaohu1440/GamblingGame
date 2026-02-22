@@ -8,18 +8,19 @@ using QFramework;
 using UnityEngine.EventSystems;
 using System.Linq;
 
-namespace QFramework.Example
+namespace Gambling
 {
 	public class UIGamePanelData : UIPanelData
 	{
 	}
-	public partial class UIGamePanel : UIPanel
+	public partial class UIGamePanel : UIPanel,IController
 	{
 		private IUnRegister mInputRegister;
 		
 		protected override void OnInit(IUIData uiData = null)
 		{
 			mData = uiData as UIGamePanelData ?? new UIGamePanelData();
+			AwardBackGround.Hide();
 			NextLevelBtn.GetComponent<Button>().interactable = false;
 			CardProbabilityPanel.Hide();
 			// please add init code here
@@ -27,7 +28,8 @@ namespace QFramework.Example
 			{
 				GamblingGround.ScoreText.text = "Score:" + score;
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
-			
+			this.RegisterEvent<BuyRelicSuccessEvent>(OnBuyRelicSuccess)
+				.UnRegisterWhenGameObjectDestroyed(gameObject);
 			GamblingGround.Score.Register(score =>
 			{
 				if (score >= Global.levelScore.Value)
@@ -46,7 +48,11 @@ namespace QFramework.Example
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			GamblingGround.currentDoubleNum.RegisterWithInitValue(doubleNum =>
 			{
-				DoubleNumText.text = doubleNum.ToString();
+				DoubleNumText.text = (doubleNum*GamblingGround.globalDoubleNum.Value).ToString();
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+			GamblingGround.globalDoubleNum.RegisterWithInitValue(globalDoubleNum =>
+			{
+				DoubleNumText.text = (globalDoubleNum*GamblingGround.currentDoubleNum.Value).ToString();
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			GamblingGround.currentDoubleNum.Register(doubleNum =>
 			{
@@ -69,17 +75,23 @@ namespace QFramework.Example
 					}
 				}
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+			AwardBtn.onClick.AddListener(OpenAwardPanel);
 			NextLevelBtn.onClick.AddListener(NextLevelEvent);
 			Global.level.Register(level =>
 			{
 				Global.levelScore.Value += 10;
-				Global.chips.Value = 5;
+				Global.greedlevelScore.Value += 30;
+				Global.chips.Value = this.GamblingGround.chipsGlobalAddNum;
 				GamblingGround.EnableAllButtons();
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			DoubleBetBtn.onClick.AddListener(DoubleBetEvent);
 			Global.levelScore.RegisterWithInitValue(levelScore =>
 			{
-				LevelScore.text = "第" + Global.level.Value + "关:" + levelScore + "分";
+				LevelScore.text = "死线" + Global.level.Value  +":"+ levelScore + "分";
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+			Global.greedlevelScore.RegisterWithInitValue(greedlevelScore =>
+			{
+				GreedLevelScore.text = "贪婪死线" + Global.level.Value +":"+ greedlevelScore + "分";
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			Global.lotteryTicket.RegisterWithInitValue(lotteryticket =>
 			{
@@ -92,10 +104,34 @@ namespace QFramework.Example
 					DoubleBetBtn.interactable=false;
 				}
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+			Global.ticketReward.RegisterWithInitValue(ticketReward =>
+			{
+				LotteyTicket.text = "通关奖励票数:" + ticketReward;
+				AwardTicket.text = "转动卷:+" + ticketReward;
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			GamblingGround.totalWeight.RegisterWithInitValue(totalweight =>
 			{
 				GamblingGround.CalculateCardWeights();
 				UpdateCardProbabilityUI();
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+			Global.currentLevelSpinCount.RegisterWithInitValue(levelspincount =>
+			{
+				if (levelspincount == 0)
+				{
+					Global.ticketReward.Value = 12;
+				}
+				else if (levelspincount == 1)
+				{
+					Global.ticketReward.Value = 10;
+				}
+				else if (levelspincount == 2)
+				{
+					Global.ticketReward.Value = 8;
+				}
+				else
+				{
+					Global.ticketReward.Value = 6;
+				}
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			GamblingGround.totalColorWeight.RegisterWithInitValue(totalcolorweight =>
 			{
@@ -114,11 +150,24 @@ namespace QFramework.Example
 
 		}
 
+		private void OpenAwardPanel()
+		{
+			AwardBackGround.Hide();
+			if (GamblingGround.Score.Value >= Global.greedlevelScore.Value)
+			{
+				UIKit.OpenPanel<UIAward>();
+			}
+			else
+			{
+				UIKit.OpenPanel<UIShopPanel>();
+			}
+		}
+
 		private void DoubleBetEvent()
 		{
 			if (Global.lotteryTicket.Value > 2)
 			{
-				Global.chips.Value += 5+GamblingGround.chipsAddNum;
+				Global.chips.Value += 5+this.GamblingGround.chipsAddNum;
 				Global.lotteryTicket.Value -= 2;
 				DoubleBetBtn.interactable = false;
 			}
@@ -183,23 +232,11 @@ namespace QFramework.Example
 		{
 			//NextLevelBtn.GetComponent<Button>().interactable = false;
 			GamblingGround.ResetGambling();
-			int ticketReward = 6; // 默认3次及以上给6枚
-			if (Global.currentLevelSpinCount.Value == 0)
-			{
-				ticketReward = 12;
-			}
-			else if (Global.currentLevelSpinCount.Value == 1)
-			{
-				ticketReward = 10;
-			}
-			else if (Global.currentLevelSpinCount.Value == 2)
-			{
-				ticketReward = 8;
-			}
-			Debug.Log("ticketReward: " + ticketReward);
-			Global.lotteryTicket.Value += ticketReward;
+			Debug.Log("ticketReward: " + Global.ticketReward.Value);
+			Global.lotteryTicket.Value += Global.ticketReward.Value;
 			Time.timeScale = 0;
-			UIKit.OpenPanel<UIShopPanel>();
+			AwardBackGround.Show();
+			//UIKit.OpenPanel<UIAward>();
 		}
 
 
@@ -282,5 +319,32 @@ namespace QFramework.Example
 				
 			}
 		}
+		private void OnBuyRelicSuccess(BuyRelicSuccessEvent evt)
+		{
+			// 加载 RelicImage 预制体
+			GameObject relicImagePrefab = Resources.Load<GameObject>("Prefab/UI/RelicImage");
+			relicImagePrefab.GetComponent<RelicImage>().relicDesc = evt.RelicData.RelicDesc;
+			if (relicImagePrefab != null && RelicList != null)
+			{
+				// 在 RelicList 下实例化预制体
+				GameObject relicImageObj = Instantiate(relicImagePrefab, RelicList);
+        
+				// 获取 Image 组件并设置图标
+				Image relicImage = relicImageObj.GetComponent<Image>();
+				if (relicImage != null)
+				{
+					relicImage.sprite = evt.RelicIcon;
+				}
+        
+				Debug.Log($"✅ 已在 RelicList 中添加遗物图标: {evt.RelicData.RelicName}");
+			}
+			else
+			{
+				Debug.LogError("❌ 无法加载 RelicImage 预制体或 RelicList 为空");
+			}
+		}
+
+		public IArchitecture GetArchitecture() => Global.Interface;
+
 	}
 }

@@ -4,6 +4,11 @@ using UnityEngine;
 using QFramework;
 namespace Gambling
 {
+    public struct BuyRelicSuccessEvent
+    {
+        public Sprite RelicIcon;
+        public RelicData RelicData;
+    }
     public class RelicSystem:AbstractSystem,IRelicSystem
     {
         private List<RelicData> allRelicDatas = new List<RelicData>();//所有遗物
@@ -12,6 +17,7 @@ namespace Gambling
         {
             LoadRelicsFromResources();
         }
+
 
         private void LoadRelicsFromResources()
         {
@@ -120,6 +126,11 @@ namespace Gambling
             {
                 Global.lotteryTicket.Value -= relicData.RelicPrice;
                 ownedRelicDatas.Add(relicData);
+                this.SendEvent(new BuyRelicSuccessEvent
+                {
+                    RelicIcon = relicData.RelicIcon,
+                    RelicData = relicData
+                });
                 Debug.Log($"✅ 成功购买遗物: {relicData.RelicName}");
                 return true;
             }

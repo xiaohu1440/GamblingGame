@@ -1,0 +1,464 @@
+warning: in the working copy of 'Assets/Art/UI/Art/UIPrefab/UIGamePanel.prefab', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'Assets/Art/UI/Scenes/TestUIPanels/TestUIGamePanel.unity', LF will be replaced by CRLF the next time Git touches it
+diff --git a/Assets/Art/UI/Art/UIPrefab/UIGamePanel.prefab b/Assets/Art/UI/Art/UIPrefab/UIGamePanel.prefab
+index 2fb9a79..3374779 100644
+--- a/Assets/Art/UI/Art/UIPrefab/UIGamePanel.prefab
++++ b/Assets/Art/UI/Art/UIPrefab/UIGamePanel.prefab
+@@ -804,6 +804,83 @@ MonoBehaviour:
+   m_FillOrigin: 0
+   m_UseSpriteMesh: 0
+   m_PixelsPerUnitMultiplier: 1
++--- !u!1 &698383976282459312
++GameObject:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  serializedVersion: 6
++  m_Component:
++  - component: {fileID: 4545725807839605748}
++  - component: {fileID: 3922363391690789704}
++  - component: {fileID: 946012512571309383}
++  m_Layer: 0
++  m_Name: RelicList
++  m_TagString: Untagged
++  m_Icon: {fileID: 0}
++  m_NavMeshLayer: 0
++  m_StaticEditorFlags: 0
++  m_IsActive: 1
++--- !u!224 &4545725807839605748
++RectTransform:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 698383976282459312}
++  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
++  m_LocalPosition: {x: 0, y: 0, z: 0}
++  m_LocalScale: {x: 1, y: 1, z: 1}
++  m_ConstrainProportionsScale: 0
++  m_Children: []
++  m_Father: {fileID: 7057280407910427707}
++  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
++  m_AnchorMin: {x: 0, y: 0.5}
++  m_AnchorMax: {x: 0, y: 0.5}
++  m_AnchoredPosition: {x: 150, y: 50}
++  m_SizeDelta: {x: 300, y: 750}
++  m_Pivot: {x: 0.5, y: 0.5}
++--- !u!114 &3922363391690789704
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 698383976282459312}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
++  m_Name:
++  m_EditorClassIdentifier:
++  m_Padding:
++    m_Left: 0
++    m_Right: 0
++    m_Top: 0
++    m_Bottom: 0
++  m_ChildAlignment: 0
++  m_StartCorner: 0
++  m_StartAxis: 1
++  m_CellSize: {x: 60, y: 60}
++  m_Spacing: {x: 50, y: 10}
++  m_Constraint: 0
++  m_ConstraintCount: 2
++--- !u!114 &946012512571309383
++MonoBehaviour:
++  m_ObjectHideFlags: 0
++  m_CorrespondingSourceObject: {fileID: 0}
++  m_PrefabInstance: {fileID: 0}
++  m_PrefabAsset: {fileID: 0}
++  m_GameObject: {fileID: 698383976282459312}
++  m_Enabled: 1
++  m_EditorHideFlags: 0
++  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
++  m_Name:
++  m_EditorClassIdentifier:
++  MarkType: 0
++  CustomComponentName: RelicList
++  CustomComment:
++  mComponentName: RectTransform
+ --- !u!1 &812039825215256059
+ GameObject:
+   m_ObjectHideFlags: 0
+@@ -3154,6 +3231,7 @@ RectTransform:
+   - {fileID: 4757824856451318790}
+   - {fileID: 9088793439713105535}
+   - {fileID: 945980134676721295}
++  - {fileID: 4545725807839605748}
+   m_Father: {fileID: 0}
+   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+   m_AnchorMin: {x: 0, y: 0}
+@@ -3217,6 +3295,7 @@ MonoBehaviour:
+   DoubleNumText: {fileID: 3373847160566159025}
+   CardProbabilityPanel: {fileID: 5468456831259740270}
+   ColorProbabilityPanel: {fileID: 2175150443919320465}
++  RelicList: {fileID: 4545725807839605748}
+ --- !u!1 &2637141509606756294
+ GameObject:
+   m_ObjectHideFlags: 0
+@@ -5668,7 +5747,10 @@ MonoBehaviour:
+     multiplier: 8
+   gridRects: []
+   cardItems: []
++  chipsDouble: 1
+   isEasterEggExecuting: 0
++  chipsAddNum: 0
++  chipsGlobalAddNum: 5
+   colorConfigs:
+   - colorName: "\u767D\u8272"
+     color: {r: 1, g: 1, b: 1, a: 1}
+@@ -5698,6 +5780,7 @@ MonoBehaviour:
+     color: {r: 1, g: 0, b: 0, a: 1}
+     score: 30
+     weight: 1
++  finalColorBonusScore: 0
+   SelectBox: {fileID: 9158529937926259872}
+   StartButton: {fileID: 7734471300553821671}
+   ScoreBG: {fileID: 2727918748367777892, guid: 1f99e5207621be145a085e682e216627, type: 3}
+diff --git a/Assets/Art/UI/Scenes/TestUIPanels/TestUIGamePanel.unity b/Assets/Art/UI/Scenes/TestUIPanels/TestUIGamePanel.unity
+index 5a15ce6..103e09e 100644
+--- a/Assets/Art/UI/Scenes/TestUIPanels/TestUIGamePanel.unity
++++ b/Assets/Art/UI/Scenes/TestUIPanels/TestUIGamePanel.unity
+@@ -364,10 +364,178 @@ PrefabInstance:
+     serializedVersion: 3
+     m_TransformParent: {fileID: 660369349}
+     m_Modifications:
++    - target: {fileID: 30114548257301146, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMax.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 30114548257301146, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMin.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 30114548257301146, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 30114548257301146, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 30114548257301146, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 30114548257301146, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 740051110471648866, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMax.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 740051110471648866, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMin.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 740051110471648866, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 740051110471648866, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 740051110471648866, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 740051110471648866, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 2286043980169240888, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMax.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 2286043980169240888, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMin.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 2286043980169240888, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 2286043980169240888, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 2286043980169240888, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 2286043980169240888, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.y
++      value: 0
++      objectReference: {fileID: 0}
+     - target: {fileID: 2628261081100489365, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
+       propertyPath: m_Name
+       value: UIGamePanel
+       objectReference: {fileID: 0}
++    - target: {fileID: 2980446137856577518, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMax.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 2980446137856577518, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMin.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 2980446137856577518, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 2980446137856577518, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 2980446137856577518, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 2980446137856577518, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 3767172031207230119, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMax.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 3767172031207230119, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMin.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 3767172031207230119, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 3767172031207230119, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 3767172031207230119, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 3767172031207230119, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 4578710604530306930, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMax.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 4578710604530306930, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMin.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 4578710604530306930, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 4578710604530306930, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 4578710604530306930, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 4578710604530306930, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 4897299358515158720, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMax.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 4897299358515158720, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMin.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 4897299358515158720, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 4897299358515158720, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 4897299358515158720, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 4897299358515158720, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.y
++      value: 0
++      objectReference: {fileID: 0}
+     - target: {fileID: 7057280407910427707, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
+       propertyPath: m_Pivot.x
+       value: 0.5
+@@ -448,6 +616,54 @@ PrefabInstance:
+       propertyPath: m_LocalEulerAnglesHint.z
+       value: 0
+       objectReference: {fileID: 0}
++    - target: {fileID: 8407899940309086951, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMax.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 8407899940309086951, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMin.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 8407899940309086951, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 8407899940309086951, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 8407899940309086951, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 8407899940309086951, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 8866557082148680566, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMax.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 8866557082148680566, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchorMin.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 8866557082148680566, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 8866557082148680566, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_SizeDelta.y
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 8866557082148680566, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.x
++      value: 0
++      objectReference: {fileID: 0}
++    - target: {fileID: 8866557082148680566, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
++      propertyPath: m_AnchoredPosition.y
++      value: 0
++      objectReference: {fileID: 0}
+     m_RemovedComponents: []
+     m_RemovedGameObjects: []
+     m_AddedGameObjects: []
+diff --git a/Assets/Art/UI/Scripts/UI/UIGamePanel.Designer.cs b/Assets/Art/UI/Scripts/UI/UIGamePanel.Designer.cs
+index 75d5b90..cacf55f 100644
+--- a/Assets/Art/UI/Scripts/UI/UIGamePanel.Designer.cs
++++ b/Assets/Art/UI/Scripts/UI/UIGamePanel.Designer.cs
+@@ -3,9 +3,9 @@ using UnityEngine;
+ using UnityEngine.UI;
+ using QFramework;
+
+-namespace QFramework.Example
++namespace Gambling
+ {
+-       // Generate Id:8d32fbff-5f77-4eb6-b551-a39a53cb4d61
++       // Generate Id:1f236e58-346f-4d1a-aa58-b4e3bfe58d5d
+        public partial class UIGamePanel
+        {
+                public const string Name = "UIGamePanel";
+@@ -98,6 +98,8 @@ namespace QFramework.Example
+                public UnityEngine.UI.Image CardProbabilityPanel;
+                [SerializeField]
+                public UnityEngine.UI.Image ColorProbabilityPanel;
++               [SerializeField]
++               public RectTransform RelicList;
+
+                private UIGamePanelData mPrivateData = null;
+
+@@ -147,6 +149,7 @@ namespace QFramework.Example
+                        DoubleNumText = null;
+                        CardProbabilityPanel = null;
+                        ColorProbabilityPanel = null;
++                       RelicList = null;
+
+                        mData = null;
+                }
+diff --git a/Assets/Art/UI/Scripts/UI/UIGamePanel.cs b/Assets/Art/UI/Scripts/UI/UIGamePanel.cs
+index 17e23a2..35492b9 100644
+--- a/Assets/Art/UI/Scripts/UI/UIGamePanel.cs
++++ b/Assets/Art/UI/Scripts/UI/UIGamePanel.cs
+@@ -8,7 +8,7 @@ using QFramework;
+ using UnityEngine.EventSystems;
+ using System.Linq;
+
+-namespace QFramework.Example
++namespace Gambling
+ {
+        public class UIGamePanelData : UIPanelData
+        {
+@@ -73,7 +73,7 @@ namespace QFramework.Example
+                        Global.level.Register(level =>
+                        {
+                                Global.levelScore.Value += 10;
+-                               Global.chips.Value = 5;
++                               Global.chips.Value = this.GamblingGround.chipsGlobalAddNum;
+                                GamblingGround.EnableAllButtons();
+                        }).UnRegisterWhenGameObjectDestroyed(gameObject);
+                        DoubleBetBtn.onClick.AddListener(DoubleBetEvent);
+@@ -118,7 +118,7 @@ namespace QFramework.Example
+                {
+                        if (Global.lotteryTicket.Value > 2)
+                        {
+-                               Global.chips.Value += 5+GamblingGround.chipsAddNum;
++                               Global.chips.Value += 5+this.GamblingGround.chipsAddNum;
+                                Global.lotteryTicket.Value -= 2;
+                                DoubleBetBtn.interactable = false;
+                        }
+diff --git a/Assets/Scripts/Game/GamblingGround.cs b/Assets/Scripts/Game/GamblingGround.cs
+index d049c89..afbe04b 100644
+--- a/Assets/Scripts/Game/GamblingGround.cs
++++ b/Assets/Scripts/Game/GamblingGround.cs
+@@ -9,6 +9,7 @@ using QFramework.Example;
+ using Random = UnityEngine.Random;
+
+
++
+ namespace Gambling
+ {
+        /// <summary>
+@@ -66,6 +67,7 @@ namespace Gambling
+                public int chipsDouble = 1;
+                public bool isEasterEggExecuting = false;
+                public int chipsAddNum = 0;
++    public int chipsGlobalAddNum = 5;
+
+                [Header("框选卡片颜色配置")]
+                [SerializeField] public ColorScoreConfig[] colorConfigs = new ColorScoreConfig[7]
+@@ -150,7 +152,7 @@ namespace Gambling
+                private void Init()
+                {
+                        Score.Value = 0;
+-                       Global.chips.Value = 5;
++                       Global.chips.Value = chipsGlobalAddNum;
+                        Global.lotteryTicket.Value = 10;
+                        Global.levelScore.Value = 10;
+                        Global.level.Value = 1;
+@@ -598,7 +600,7 @@ namespace Gambling
+
+                        if (Global.lotteryTicket.Value > 0)
+                        {
+-                               Global.chips.Value += 5*chipsDouble;
++                               Global.chips.Value += chipsGlobalAddNum*chipsDouble;
+                        }
+                }

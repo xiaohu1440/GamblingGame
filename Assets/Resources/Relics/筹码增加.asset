@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b1184db594e22f48b8550b572194f5f, type: 3}
-  m_Name: "\u62BC\u6CE8\u7B79\u7801\u589E\u52A0"
+  m_Name: "\u7B79\u7801\u589E\u52A0"
   m_EditorClassIdentifier: 
-  RelicName: "\u62BC\u6CE8\u7B79\u7801\u589E\u52A0"
-  RelicIcon: {fileID: 21300000, guid: d7c79f9f2abc0e34e8fe9910de8f384c, type: 3}
-  RelicId: 10
+  RelicName: "\u7B79\u7801\u589E\u52A0"
+  RelicIcon: {fileID: 21300000, guid: 1268cbe13b59bdc40bf2b30fa7e1255a, type: 3}
+  RelicId: 12
   RelicQuality: 0
-  RelicPrice: 6
-  RelicDesc: "\u6BCF\u6B21\u6309\u4E0B\u62BC\u6CE8\u6309\u94AE\u540E\uFF0C\u589E\u52A0\u7684\u7B79\u7801+5"
+  RelicPrice: 8
+  RelicDesc: "\u6BCF\u6B21\u83B7\u5F97\u7684\u7B79\u7801+3"
   RelicTips: 
   RelicTriggerType: 6
   unLock: 1
-  relicEffect: {fileID: 11400000, guid: a19fedd30e0f3744d89da26ac9c947fd, type: 2}
+  relicEffect: {fileID: 11400000, guid: 1bd8881a0f1223646b3f47ba4c0cb8bc, type: 2}

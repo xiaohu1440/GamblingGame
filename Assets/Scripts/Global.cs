@@ -13,6 +13,8 @@ namespace Gambling
         public static BindableProperty<int> levelScore = new BindableProperty<int>(10);
         public static BindableProperty<int> chips = new BindableProperty<int>(5);
         public static BindableProperty<int> currentLevelSpinCount = new BindableProperty<int>(0);
+        public static BindableProperty<int> ticketReward=new BindableProperty<int>(12);
+        public static BindableProperty<int> greedlevelScore=new BindableProperty<int>(30);
         protected override void Init()
         {
             this.RegisterSystem<IRelicSystem>(new RelicSystem());

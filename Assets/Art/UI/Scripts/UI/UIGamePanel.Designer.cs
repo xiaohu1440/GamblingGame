@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using QFramework;
 
-namespace QFramework.Example
+namespace Gambling
 {
-	// Generate Id:8d32fbff-5f77-4eb6-b551-a39a53cb4d61
+	// Generate Id:f7af112e-4333-45f2-a256-a587d22cc9f0
 	public partial class UIGamePanel
 	{
 		public const string Name = "UIGamePanel";
@@ -79,6 +79,8 @@ namespace QFramework.Example
 		[SerializeField]
 		public UnityEngine.UI.Text LevelScore;
 		[SerializeField]
+		public UnityEngine.UI.Text GreedLevelScore;
+		[SerializeField]
 		public UnityEngine.UI.Text Chips;
 		[SerializeField]
 		public UnityEngine.UI.Button NextLevelBtn;
@@ -98,6 +100,16 @@ namespace QFramework.Example
 		public UnityEngine.UI.Image CardProbabilityPanel;
 		[SerializeField]
 		public UnityEngine.UI.Image ColorProbabilityPanel;
+		[SerializeField]
+		public RectTransform RelicList;
+		[SerializeField]
+		public UnityEngine.UI.Text LotteyTicket;
+		[SerializeField]
+		public UnityEngine.UI.Image AwardBackGround;
+		[SerializeField]
+		public UnityEngine.UI.Button AwardBtn;
+		[SerializeField]
+		public UnityEngine.UI.Text AwardTicket;
 		
 		private UIGamePanelData mPrivateData = null;
 		
@@ -137,6 +149,7 @@ namespace QFramework.Example
 			StartButton = null;
 			TicketText = null;
 			LevelScore = null;
+			GreedLevelScore = null;
 			Chips = null;
 			NextLevelBtn = null;
 			NextLevelBtnText = null;
@@ -147,6 +160,11 @@ namespace QFramework.Example
 			DoubleNumText = null;
 			CardProbabilityPanel = null;
 			ColorProbabilityPanel = null;
+			RelicList = null;
+			LotteyTicket = null;
+			AwardBackGround = null;
+			AwardBtn = null;
+			AwardTicket = null;
 			
 			mData = null;
 		}

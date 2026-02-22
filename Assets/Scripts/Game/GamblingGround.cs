@@ -9,6 +9,7 @@ using QFramework.Example;
 using Random = UnityEngine.Random;
 
 
+
 namespace Gambling
 {
 	/// <summary>
@@ -54,6 +55,7 @@ namespace Gambling
 		public BindableProperty<int> Score = new BindableProperty<int>(0);
 		public Dictionary<string,BindableProperty<int>> buttonClickCount=new Dictionary<string,BindableProperty<int>>();
 		public BindableProperty<int> currentDoubleNum = new BindableProperty<int>(1);
+		public BindableProperty<int> globalDoubleNum = new BindableProperty<int>(1);
 		public BindableProperty<float> totalWeight = new BindableProperty<float>(0);
 		public BindableProperty<float> totalColorWeight = new BindableProperty<float>(0);
 		public List<RectTransform> gridRects = new List<RectTransform>();
@@ -66,6 +68,7 @@ namespace Gambling
 		public int chipsDouble = 1;
 		public bool isEasterEggExecuting = false;
 		public int chipsAddNum = 0;
+		public int chipsGlobalAddNum = 5;
 		
 		[Header("框选卡片颜色配置")]
 		[SerializeField] public ColorScoreConfig[] colorConfigs = new ColorScoreConfig[7]
@@ -150,7 +153,7 @@ namespace Gambling
 		private void Init()
 		{
 			Score.Value = 0;
-			Global.chips.Value = 5;
+			Global.chips.Value = chipsGlobalAddNum;
 			Global.lotteryTicket.Value = 10;
 			Global.levelScore.Value = 10;
 			Global.level.Value = 1;
@@ -598,7 +601,7 @@ namespace Gambling
 
 			if (Global.lotteryTicket.Value > 0)
 			{
-				Global.chips.Value += 5*chipsDouble;
+				Global.chips.Value += chipsGlobalAddNum*chipsDouble;
 			}
 		}
 
@@ -648,7 +651,7 @@ namespace Gambling
 				int betMultiplier = betMultiplierSystem.GetMultiplier(clickCount.Value);
 				// 计算得分：按钮点击次数 × 卡片分值
 				int baseScore = card.OnPlayerLand();
-				int finalScore = (baseScore+finalColorBonusScore) * betMultiplier*clickCount.Value*currentDoubleNum.Value;
+				int finalScore = (baseScore+finalColorBonusScore) * betMultiplier*clickCount.Value*currentDoubleNum.Value*globalDoubleNum.Value;
     
 				Score.Value += finalScore;
 				currentDoubleNum.Value = 1;
