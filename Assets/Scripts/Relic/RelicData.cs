@@ -21,6 +21,7 @@ namespace Gambling
         OnRandom,
         OnDeath,
         OnRotationEnd,
+        OnRotationStart,
         Passive
     }
     [CreateAssetMenu(fileName = "NewRelic", menuName = "Gambling/RelicItem")]

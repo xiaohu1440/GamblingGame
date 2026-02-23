@@ -69,6 +69,8 @@ namespace Gambling
 		public bool isEasterEggExecuting = false;
 		public int chipsAddNum = 0;
 		public int chipsGlobalAddNum = 5;
+		public float skipTicktReductionChance = 1;
+		public float relicskipTicktReductionNum = 0.25f;
 		
 		[Header("框选卡片颜色配置")]
 		[SerializeField] public ColorScoreConfig[] colorConfigs = new ColorScoreConfig[7]
@@ -300,11 +302,25 @@ namespace Gambling
 
 		private void OnStartButtonClick()
 		{
+			var relicSystem=this.GetSystem<IRelicSystem>();
+			RelicEffectContext context = new RelicEffectContext
+			{
+				gamblingGround = this
+			};
+			relicSystem.TriggerRelicEffect(RelicTriggerType.OnRotationStart,context);
 			NextLevelBtn.GetComponent<Button>().interactable = false;
 			if (!StartButton.GetComponent<Button>().interactable||isEasterEggExecuting) return;
 			ClearTemporarySelectBoxes();
 			StartSpin();
-			Global.lotteryTicket.Value -= 2;
+			if (skipTicktReductionChance < relicskipTicktReductionNum)
+			{ 
+				
+			}
+			else
+			{
+				Global.lotteryTicket.Value -= 2;
+			}
+			
 			Global.currentLevelSpinCount.Value++;
 			totalSpinNum++;
 		}
@@ -362,6 +378,7 @@ namespace Gambling
 				return gridRects.Count - fromIndex + toIndex;
 			}
 		}
+
 		/// <summary>
 		/// 开始连续移动动画
 		/// </summary>
@@ -373,23 +390,23 @@ namespace Gambling
 			int tempCurrentIndex = currentIndex;
 			cardItems[tempCurrentIndex].GetCardBaseImage().color = Color.white;
 			int previousIndex = -1; // 记录上一个格子的索引
-			
+
 			// 为每一步创建移动动画
 			for (int step = 0; step < totalSteps; step++)
 			{
 				// 计算下一个索引（循环）
 				int nextIndex = (tempCurrentIndex + 1) % gridRects.Count;
-				
+
 				// 根据剩余步数调整移动速度（最后几步减速）
 				float stepDuration = CalculateStepDuration(step, totalSteps);
-				
+
 				// 添加移动到下一个位置的动画
 				moveSequence.Append(selectBoxRect.DOAnchorPos(gridRects[nextIndex].anchoredPosition, stepDuration)
 					.SetEase(Ease.InOutQuad));
 				// ✅ 修改：每次移动时根据权重随机改变当前格子颜色
 				int currentStepIndex = nextIndex; // 捕获当前步骤的索引
 				int prevStepIndex = previousIndex; // 捕获上一个步骤的索引
-        
+
 				moveSequence.AppendCallback(() =>
 				{
 					// 重置上一个格子的颜色为白色
@@ -401,7 +418,7 @@ namespace Gambling
 							prevBaseImage.color = Color.white;
 						}
 					}
-            
+
 					// ✅ 使用加权随机改变当前格子的颜色
 					if (currentStepIndex >= 0 && currentStepIndex < cardItems.Count)
 					{
@@ -413,12 +430,12 @@ namespace Gambling
 						}
 					}
 				});
-				
+
 				previousIndex = nextIndex;
 				tempCurrentIndex = nextIndex;
-				
+
 			}
-			
+
 			// 动画完成回调
 			moveSequence.OnComplete(() =>
 			{
@@ -434,23 +451,26 @@ namespace Gambling
 					if (baseImage != null)
 					{
 						baseImage.DOColor(colorConfigs[finalColorIndex].color, 0.3f).SetEase(Ease.OutQuad);
-						Debug.Log($"最终停在索引 {finalTargetIndex}，颜色：{colorConfigs[finalColorIndex].colorName}，颜色奖励：+{finalColorBonusScore}分");
+						Debug.Log(
+							$"最终停在索引 {finalTargetIndex}，颜色：{colorConfigs[finalColorIndex].colorName}，颜色奖励：+{finalColorBonusScore}分");
 					}
 				}
+
 				OnSpinComplete(finalTargetIndex);
-				
+
 				// 重新启用Start按钮
 				if (StartButton != null)
 				{
 					bool easterEggTriggered = false;
-        
+
 					// ✅ 只在这里处理彩蛋逻辑（唯一的彩蛋触发点）
 					if (easterEggManager != null)
 					{
 						// 在彩蛋触发前保存当前按钮计数
 						Dictionary<string, int> savedButtonCounts = SaveCurrentButtonCounts();
-						easterEggTriggered = easterEggManager.TryTriggerEasterEgg(this, cardItems[finalTargetIndex], cardItems, savedButtonCounts);
-            
+						easterEggTriggered = easterEggManager.TryTriggerEasterEgg(this, cardItems[finalTargetIndex],
+							cardItems, savedButtonCounts);
+
 						if (easterEggTriggered)
 						{
 							// 彩蛋触发时禁用所有按钮
@@ -462,50 +482,73 @@ namespace Gambling
 					// ✅ 只有在没有触发彩蛋时才立即恢复按钮状态
 					if (!easterEggTriggered)
 					{
-						if (Score.Value < Global.levelScore.Value && Global.lotteryTicket.Value <= 0)
+						// 检查游戏是否结束
+						if (Global.lotteryTicket.Value <= 0)
 						{
-							UIKit.ClosePanel<UIGamePanel>();
-							UIKit.OpenPanel<UIGameOverPanel>();
-						}
-						ResetButtonCounts();
-						ResetGambling();
-						if (Global.lotteryTicket.Value > 2)
-						{
-							DoubleBetBtn.GetComponent<Button>().interactable=true;
-						}
-						Debug.Log("🎯 转盘结束，按钮状态已恢复");
-					}
-					if (Score.Value >= Global.levelScore.Value && Global.lotteryTicket.Value <= 0)
-					{
-						StartButton.GetComponent<Button>().interactable = false;
-						// 禁用所有下注按钮
-						foreach (var kvp in categoryButtons)
-						{
-							if (kvp.Value != null)
+							// 转动券用完
+							if (Score.Value < Global.levelScore.Value)
 							{
-								kvp.Value.interactable = false;
+								// 分数未达标，游戏失败
+								UIKit.ClosePanel<UIGamePanel>();
+								UIKit.OpenPanel<UIGameOverPanel>();
+							}
+							else
+							{
+								// ✅ 分数达标，禁用游戏按钮，启用下一关按钮
+								StartButton.GetComponent<Button>().interactable = false;
+            
+								// 禁用所有下注按钮
+								foreach (var kvp in categoryButtons)
+								{
+									if (kvp.Value != null)
+									{
+										kvp.Value.interactable = false;
+									}
+								}
+            
+								// 禁用加倍按钮
+								if (DoubleBetBtn != null)
+								{
+									DoubleBetBtn.GetComponent<Button>().interactable = false;
+								}
+            
+								// 启用下一关按钮
+								if (NextLevelBtn != null)
+								{
+									NextLevelBtn.GetComponent<Button>().interactable = true;
+								}
+            
+								Debug.Log("✅ 分数已达标且转动券用完，下一关按钮已启用");
 							}
 						}
-    
-						// 禁用加倍按钮
-						if (DoubleBetBtn != null)
+						else
 						{
-							DoubleBetBtn.GetComponent<Button>().interactable = false;
+							// ✅ 还有转动券，恢复按钮状态，玩家可以继续游玩
+							ResetButtonCounts();
+							ResetGambling();
+        
+							if (Global.lotteryTicket.Value > 2)
+							{
+								DoubleBetBtn.GetComponent<Button>().interactable = true;
+							}
+        
+							// ✅ 如果分数已达标，启用下一关按钮（玩家可以选择继续玩或进入下一关）
+							if (NextLevelBtn != null && Score.Value >= Global.levelScore.Value)
+							{
+								NextLevelBtn.GetComponent<Button>().interactable = true;
+							}
+        
+							Debug.Log("🎯 转盘结束，按钮状态已恢复，玩家可以继续游玩");
 						}
-    
-						// ✅ 确保NextLevelBtn保持可用（因为分数已达标）
-						if (NextLevelBtn != null)
-						{
-							NextLevelBtn.GetComponent<Button>().interactable = true;
-						}
+
 					}
-					else
-					{
-						
-					}
+
+
+
+
 				}
+
 				
-				Debug.Log($"抽奖完成！最终停在索引：{finalTargetIndex}");
 			});
 		}
 
@@ -521,10 +564,54 @@ namespace Gambling
 			}
 			else
 			{
-				// 彩蛋执行完成：重新启用按钮
-				EnableAllButtons();
-				ResetGambling();
-				Debug.Log("🥚 彩蛋效果执行完成，所有按钮已重新启用");
+				// ✅ 彩蛋执行完成：检查游戏是否结束
+				if (Global.lotteryTicket.Value <= 0)
+				{
+					// 转动券用完
+					if (Score.Value < Global.levelScore.Value)
+					{
+						// 分数未达标，游戏失败
+						UIKit.ClosePanel<UIGamePanel>();
+						UIKit.OpenPanel<UIGameOverPanel>();
+						Debug.Log("🥚 彩蛋结束后转动券用完且分数不够，游戏失败");
+					}
+					else
+					{
+						// ✅ 分数达标，禁用游戏按钮，启用下一关按钮
+						StartButton.GetComponent<Button>().interactable = false;
+                
+						// 禁用所有下注按钮
+						foreach (var kvp in categoryButtons)
+						{
+							if (kvp.Value != null)
+							{
+								kvp.Value.interactable = false;
+							}
+						}
+                
+						// 禁用加倍按钮
+						if (DoubleBetBtn != null)
+						{
+							DoubleBetBtn.GetComponent<Button>().interactable = false;
+						}
+                
+						// 启用下一关按钮
+						if (NextLevelBtn != null)
+						{
+							NextLevelBtn.GetComponent<Button>().interactable = true;
+						}
+                
+						Debug.Log("🥚 彩蛋结束后分数已达标且转动券用完，下一关按钮已启用");
+					}
+				}
+				else
+				{
+					// ✅ 还有转动券，恢复按钮状态，玩家可以继续游玩
+					EnableAllButtons();
+					ResetGambling();
+            
+					Debug.Log("🥚 彩蛋效果执行完成，所有按钮已重新启用");
+				}
 			}
 		}
 		// ✅ 禁用所有按钮的方法
