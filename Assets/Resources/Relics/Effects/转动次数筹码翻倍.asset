@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: "\u8F6C\u52A8\u6B21\u6570\u7B79\u7801\u7FFB\u500D"
   m_EditorClassIdentifier: 
   isEnabled: 1
-  triggerCard: {fileID: 0}
-  spinDoubleNum: 3
+  spinDoubleNum: 5
