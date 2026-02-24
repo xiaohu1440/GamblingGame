@@ -7,9 +7,6 @@ using UnityEngine.UI;
 using DG.Tweening;
 using QFramework.Example;
 using Random = UnityEngine.Random;
-
-
-
 namespace Gambling
 {
 	/// <summary>
@@ -313,19 +310,6 @@ namespace Gambling
 			if (!StartButton.GetComponent<Button>().interactable||isEasterEggExecuting) return;
 			ClearTemporarySelectBoxes();
 			StartSpin();
-			if (skipTicktReductionChance < relicskipTicktReductionNum)
-			{ 
-				
-			}
-			else
-			{
-				if (Global.chips.Value <= 0)
-				{
-					Global.lotteryTicket.Value -= 2;
-				}
-				//TODO:更改筹码转动逻辑
-				
-			}
 			
 			Global.currentLevelSpinCount.Value++;
 			totalSpinNum++;
@@ -728,6 +712,19 @@ namespace Gambling
 		}
 		private void OnSpinComplete(int selectedIndex)
 		{
+			if (skipTicktReductionChance < relicskipTicktReductionNum)
+			{ 
+				
+			}
+			else
+			{
+				if (Global.chips.Value <= 0)
+				{
+					Global.lotteryTicket.Value -= 2;
+				}
+				//TODO:更改筹码转动逻辑
+				
+			}
 			var card = cardItems[selectedIndex];
 			string landedRewardName = card.rewardData.runtimeRewardName.Value;
 			// 检查是否触发彩蛋效果
