@@ -319,8 +319,12 @@ namespace Gambling
 			}
 			else
 			{
+				if (Global.chips.Value <= 0)
+				{
+					Global.lotteryTicket.Value -= 2;
+				}
 				//TODO:更改筹码转动逻辑
-				Global.lotteryTicket.Value -= 2;
+				
 			}
 			
 			Global.currentLevelSpinCount.Value++;
@@ -490,9 +494,13 @@ namespace Gambling
 							// 转动券用完
 							if (Score.Value < Global.levelScore.Value)
 							{
-								// 分数未达标，游戏失败
-								UIKit.ClosePanel<UIGamePanel>();
-								UIKit.OpenPanel<UIGameOverPanel>();
+								if (Global.chips.Value <= 0)
+								{
+									// 分数未达标，游戏失败
+									UIKit.ClosePanel<UIGamePanel>();
+									UIKit.OpenPanel<UIGameOverPanel>();
+								}
+
 							}
 							else
 							{
@@ -567,7 +575,7 @@ namespace Gambling
 			else
 			{
 				// ✅ 彩蛋执行完成：检查游戏是否结束
-				if (Global.lotteryTicket.Value <= 0)
+				if (Global.lotteryTicket.Value <= 0&&Global.chips.Value<=0)
 				{
 					// 转动券用完
 					if (Score.Value < Global.levelScore.Value)
@@ -688,7 +696,7 @@ namespace Gambling
 				button.interactable = true;
 			}
 
-			if (Global.lotteryTicket.Value > 0)
+			if (Global.lotteryTicket.Value > 0&&Global.chips.Value<=0)
 			{
 				Global.chips.Value += chipsGlobalAddNum*chipsDouble;
 			}
