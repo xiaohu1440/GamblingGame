@@ -157,6 +157,7 @@ namespace Gambling
 
                 // 计算最终得分：基础分值 × 按钮点击次数
                 int finalScore = (baseScore+gamblingGround.finalColorBonusScore) * gamblingGround.GetBetMultiplier(category)*clickCount*gamblingGround.currentDoubleNum.Value;
+                gamblingGround.checkFinalScore=finalScore;
                 // 只有在按钮被点击过时才获得分数
                 if (clickCount > 0)
                 {

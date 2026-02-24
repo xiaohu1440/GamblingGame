@@ -169,7 +169,10 @@ namespace Gambling
 			{
 				Global.chips.Value += 5+this.GamblingGround.chipsAddNum;
 				Global.lotteryTicket.Value -= 2;
-				DoubleBetBtn.interactable = false;
+				if (Global.lotteryTicket.Value <= 2)
+				{ 
+					DoubleBetBtn.interactable = false;
+				}
 			}
 
 		}

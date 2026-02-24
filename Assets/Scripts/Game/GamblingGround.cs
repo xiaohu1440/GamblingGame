@@ -71,6 +71,7 @@ namespace Gambling
 		public int chipsGlobalAddNum = 5;
 		public float skipTicktReductionChance = 1;
 		public float relicskipTicktReductionNum = 0.25f;
+		public int checkFinalScore = 0;
 		
 		[Header("框选卡片颜色配置")]
 		[SerializeField] public ColorScoreConfig[] colorConfigs = new ColorScoreConfig[7]
@@ -318,6 +319,7 @@ namespace Gambling
 			}
 			else
 			{
+				//TODO:更改筹码转动逻辑
 				Global.lotteryTicket.Value -= 2;
 			}
 			
@@ -496,7 +498,7 @@ namespace Gambling
 							{
 								// ✅ 分数达标，禁用游戏按钮，启用下一关按钮
 								StartButton.GetComponent<Button>().interactable = false;
-            
+								ResetButtonCounts();
 								// 禁用所有下注按钮
 								foreach (var kvp in categoryButtons)
 								{
@@ -712,7 +714,7 @@ namespace Gambling
 			{
 				// 减速阶段：时间从较短到较长
 				float decelerationProgress = (progress - 0.7f) / 0.3f;
-				float decelerationFactor = 0.5f + decelerationProgress * 3f;
+				float decelerationFactor = 0.5f + decelerationProgress * 8f;
 				return moveSpeed * decelerationFactor;
 			}
 		}
@@ -739,7 +741,7 @@ namespace Gambling
 				// 计算得分：按钮点击次数 × 卡片分值
 				int baseScore = card.OnPlayerLand();
 				int finalScore = (baseScore+finalColorBonusScore) * betMultiplier*clickCount.Value*currentDoubleNum.Value*globalDoubleNum.Value;
-    
+				checkFinalScore=finalScore;
 				Score.Value += finalScore;
 				currentDoubleNum.Value = 1;
 				Debug.Log($"停在 '{landedRewardName}' 卡片（类别：{category}），基础分值：{baseScore}，按钮点击次数：{clickCount}，颜色奖励：{finalColorBonusScore}，最终得分：{finalScore}");
