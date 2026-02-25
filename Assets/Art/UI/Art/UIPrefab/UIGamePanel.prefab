@@ -1499,6 +1499,7 @@ GameObject:
   - component: {fileID: 2411338433294569635}
   - component: {fileID: 8167441429131150240}
   - component: {fileID: 7211957014505935000}
+  - component: {fileID: 2614458112867797534}
   m_Layer: 0
   m_Name: SmallIconProBabilityText
   m_TagString: Untagged
@@ -1567,6 +1568,22 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 0%
+--- !u!114 &2614458112867797534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972832725049344007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: SmallIconProBabilityText
+  CustomComment: 
+  mComponentName: UnityEngine.UI.Text
 --- !u!1 &1033080126742663033
 GameObject:
   m_ObjectHideFlags: 0
@@ -6122,10 +6139,14 @@ MonoBehaviour:
     multiplier: 8
   gridRects: []
   cardItems: []
+  rewardDataArray: []
   chipsDouble: 1
   isEasterEggExecuting: 0
   chipsAddNum: 0
   chipsGlobalAddNum: 5
+  skipTicktReductionChance: 0
+  relicskipTicktReductionNum: 0
+  checkFinalScore: 0
   colorConfigs:
   - colorName: "\u767D\u8272"
     color: {r: 1, g: 1, b: 1, a: 1}
@@ -6173,6 +6194,7 @@ MonoBehaviour:
   CardProbabilityPanel: {fileID: 1128603230940061160}
   NextLevelBtn: {fileID: 5834964280708362526}
   DoubleBetBtn: {fileID: 4658416823097498674}
+  SmallIconProBabilityText: {fileID: 972832725049344007}
 --- !u!114 &6402533631368372670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6220,6 +6242,8 @@ MonoBehaviour:
     Object: {fileID: 5834964280708362526}
   - MemberName: DoubleBetBtn
     Object: {fileID: 4658416823097498674}
+  - MemberName: SmallIconProBabilityText
+    Object: {fileID: 972832725049344007}
 --- !u!114 &3731012194834553641
 MonoBehaviour:
   m_ObjectHideFlags: 0

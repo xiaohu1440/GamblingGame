@@ -20,7 +20,7 @@ MonoBehaviour:
     NameToFullName: []
     BindInfos: []
     ScriptsFolder: Assets/Scripts/Game
-    ClassName: RelicImage
+    ClassName: GamblingGround
     Namespace: Gambling
     MainCode: 
     DesignerCode: 

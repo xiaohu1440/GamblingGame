@@ -26,7 +26,7 @@ namespace Gambling
             UpdateUI();
         }
 
-        protected virtual void UpdateUI()
+        public void UpdateUI()
         {
             //GetComponentInChildren<Text>().text = myData.RewardName;
             transform.GetChild(1).GetComponent<Image>().sprite = rewardData.runtimeRewardIcon;

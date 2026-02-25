@@ -269,31 +269,24 @@ namespace Gambling
 				string childName = childTransform.name;
 
 				// 检查 cardNameWeights 字典中是否包含该子物体名称
-				if (GamblingGround.cardNameWeights.ContainsKey(childName))
+				if  (GamblingGround.cardNameWeights.TryGetValue(childName, out float probability))
 				{
-					// 获取概率值
-					float probability = GamblingGround.cardNameWeights[childName];
-					string scoreUIText=GamblingGround.cardNameScores[childName];
-					// 查找该子物体下的 Text 组件（通常在子物体中）
-					Text probabilityText = childTransform.GetChild(0).GetComponent<Text>();
-					Text scoreText=childTransform.GetChild(1).GetComponent<Text>();
-					if (probabilityText != null)
+					// 使用 TryGetValue 确保分数字典中也存在该键
+					if (GamblingGround.cardNameScores.TryGetValue(childName, out string scoreUIText))
 					{
-						// 显示概率，保留2位小数并添加百分号
-						probabilityText.text = probability.ToString("F2") + "%";
+						Text probabilityText = childTransform.GetChild(0).GetComponent<Text>();
+						Text scoreText = childTransform.GetChild(1).GetComponent<Text>();
+        
+						if (probabilityText != null)
+							probabilityText.text = probability.ToString("F2") + "%";
+            
+						if (scoreText != null)
+							scoreText.text = scoreUIText;
 					}
-					else
+					else 
 					{
-						Debug.LogWarning($"未找到 {childName} 子物体中的 Text 组件");
-					}
-
-					if (scoreText != null)
-					{
-						scoreText.text = scoreUIText;
-					}
-					else
-					{
-						Debug.LogWarning($"未找到 {childName} 子物体中的 ScoreText 组件");
+						// 如果权重有但分数没有，可以设置默认值或隐藏
+						childTransform.GetChild(1).GetComponent<Text>().text = "0"; 
 					}
 				}
 			}

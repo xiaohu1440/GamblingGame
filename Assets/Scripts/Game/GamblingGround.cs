@@ -59,6 +59,7 @@ namespace Gambling
 		public List<CardItem> cardItems = new List<CardItem>();
 		private Dictionary<string, Button> categoryButtons = new Dictionary<string, Button>();
 		private RectTransform selectBoxRect;
+		public RewardData[] rewardDataArray;
 		private bool isSpinning = false;
 		private int currentIndex = 0; // 当前SelectBox所在的索引
 		private int totalSpinNum = 0;
@@ -161,6 +162,7 @@ namespace Gambling
 			{
 				totalColorWeight.Value += colorConfigs[i].weight;
 			}
+			rewardDataArray=Resources.LoadAll<RewardData>("Data/CardData");
 
 		}
 
@@ -1030,9 +1032,16 @@ namespace Gambling
 						cardNameWeights[cardName] = weight;
 					}
 				}
+
+				
 			}
 
 			if (miniCardsWeight > 0f)
+			{
+				cardNameWeights["mini"] = miniCardsWeight;
+				
+			}
+			else
 			{
 				cardNameWeights["mini"] = miniCardsWeight;
 			}
@@ -1051,6 +1060,7 @@ namespace Gambling
 		/// </summary>
 		public void ScoreShow()
 		{
+			cardNameScores["mini"] = "0"; 
 			cardNameScores.Clear();
 			int miniCardScore = 3;
 			foreach (var item in cardItems)
@@ -1072,6 +1082,7 @@ namespace Gambling
 					{
 						cardNameScores[cardName] = score.ToString();
 					}
+					
 				}
 				
 			}
