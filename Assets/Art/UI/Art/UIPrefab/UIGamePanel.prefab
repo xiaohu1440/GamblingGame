@@ -6155,27 +6155,27 @@ MonoBehaviour:
   - colorName: "\u7EFF\u8272"
     color: {r: 0, g: 1, b: 0, a: 1}
     score: 5
-    weight: 20
+    weight: 0
   - colorName: "\u84DD\u8272"
     color: {r: 0.3, g: 0.5, b: 1, a: 1}
     score: 10
-    weight: 12
+    weight: 0
   - colorName: "\u9EC4\u8272"
     color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
     score: 15
-    weight: 8
+    weight: 0
   - colorName: "\u7D2B\u8272"
     color: {r: 0.8, g: 0.3, b: 1, a: 1}
     score: 20
-    weight: 5
+    weight: 0
   - colorName: "\u6A59\u8272"
     color: {r: 1, g: 0.6, b: 0, a: 1}
     score: 25
-    weight: 4
+    weight: 0
   - colorName: "\u7EA2\u8272"
     color: {r: 1, g: 0, b: 0, a: 1}
     score: 30
-    weight: 1
+    weight: 0
   finalColorBonusScore: 0
   SelectBox: {fileID: 9158529937926259872}
   StartButton: {fileID: 7734471300553821671}
@@ -10819,11 +10819,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6257911156396723400, guid: 01fc11a29f4f0004bb23c4a42693aeea, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 102.8571
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6257911156396723400, guid: 01fc11a29f4f0004bb23c4a42693aeea, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 102.8571
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6257911156396723400, guid: 01fc11a29f4f0004bb23c4a42693aeea, type: 3}
       propertyPath: m_LocalPosition.x

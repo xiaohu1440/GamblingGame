@@ -75,12 +75,12 @@ namespace Gambling
 		[SerializeField] public ColorScoreConfig[] colorConfigs = new ColorScoreConfig[7]
 		{
 			new ColorScoreConfig { colorName = "白色", color = Color.white, score = 0, weight =50f },
-			new ColorScoreConfig { colorName = "绿色", color = Color.green, score = 5, weight =20f },
-			new ColorScoreConfig { colorName = "蓝色", color = new Color(0.3f, 0.5f, 1f), score = 10, weight = 12f },
-			new ColorScoreConfig { colorName = "黄色", color = Color.yellow, score = 15, weight =8f },
-			new ColorScoreConfig { colorName = "紫色", color = new Color(0.8f, 0.3f, 1f), score = 20, weight = 5f },
-			new ColorScoreConfig { colorName = "橙色", color = new Color(1f, 0.6f, 0f), score = 25, weight =5f },
-			new ColorScoreConfig { colorName = "红色", color = Color.red, score = 30, weight = 1f }
+			new ColorScoreConfig { colorName = "绿色", color = Color.green, score = 5, weight =0f },
+			new ColorScoreConfig { colorName = "蓝色", color = new Color(0.3f, 0.5f, 1f), score = 10, weight = 0f },
+			new ColorScoreConfig { colorName = "黄色", color = Color.yellow, score = 15, weight =0f },
+			new ColorScoreConfig { colorName = "紫色", color = new Color(0.8f, 0.3f, 1f), score = 20, weight = 0f },
+			new ColorScoreConfig { colorName = "橙色", color = new Color(1f, 0.6f, 0f), score = 25, weight =0f },
+			new ColorScoreConfig { colorName = "红色", color = Color.red, score = 30, weight = 0f }
 		};
 
 		private int[] colorScores = new int[7] { 0, 5, 10, 15, 20, 25, 30 };

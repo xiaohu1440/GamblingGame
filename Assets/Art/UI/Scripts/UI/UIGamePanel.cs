@@ -79,8 +79,15 @@ namespace Gambling
 			NextLevelBtn.onClick.AddListener(NextLevelEvent);
 			Global.level.Register(level =>
 			{
-				Global.levelScore.Value += 10;
-				Global.greedlevelScore.Value += 30;
+				if (level <= 5)
+				{ 
+					Global.levelScore.Value += 30*(level-1);
+				}
+				else
+				{
+					Global.levelScore.Value += 50*level-1;
+				}
+				Global.greedlevelScore.Value += 20*(level-1)*level;
 				Global.chips.Value = this.GamblingGround.chipsGlobalAddNum;
 				GamblingGround.EnableAllButtons();
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
