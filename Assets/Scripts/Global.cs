@@ -18,6 +18,7 @@ namespace Gambling
         protected override void Init()
         {
             this.RegisterSystem<IRelicSystem>(new RelicSystem());
+            this.RegisterSystem<IEnchantmentSystem>(new EnchantmentSystem());
         }
     }
 }

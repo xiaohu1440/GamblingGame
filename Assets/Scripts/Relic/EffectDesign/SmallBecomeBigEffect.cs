@@ -31,12 +31,12 @@ namespace Gambling
                 
                         // 4. 寻找对应的大图案图标
                         // 假设命名逻辑是：小图案名字比大图案多一个 "_M" 结尾
-                        string bigCardName = data.RewardName.Replace("_M", "");
+                        string bigCardName = data.runtimeRewardName.Value.Replace("_M", "");
                 
                         // 从预加载的 rewardDataArray 中寻找同名的大图案资源
                         foreach (var bigData in context.gamblingGround.rewardDataArray)
                         {
-                            if (bigData.RewardName == bigCardName && !bigData.isMini)
+                            if (bigData.runtimeRewardName.Value == bigCardName && !bigData.isMini)
                             {
                                 // 替换运行时图标
                                 data.runtimeRewardIcon = bigData.RewardIcon;

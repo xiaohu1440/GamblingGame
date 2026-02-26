@@ -46,6 +46,15 @@ namespace Gambling
             }
             return null;
         }
+
+        public Image GetBorderImage()
+        {
+            if (transform.childCount > 0)
+            {
+                return transform.GetChild(2).GetComponent<Image>();
+            }
+            return null;
+        }
         
     }
 

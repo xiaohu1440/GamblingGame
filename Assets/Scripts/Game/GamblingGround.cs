@@ -555,7 +555,7 @@ namespace Gambling
 						}
 
 					}
-
+				
 
 
 
@@ -789,10 +789,14 @@ namespace Gambling
 				//TODO:ui弹出彩蛋功能关联
 			}
 			TriggerRotationEndRelics(selectedIndex, card);//触发转动结束类型的遗物效果
-
+			var enchantComp = card.GetComponent<EnchantmentComponent>();
+			if (enchantComp != null)
+			{
+				enchantComp.OnTrigger(EnchantmentTriggerType.OnLand, this);
+			}
 		}
 
-		private bool IsCurrentlyEasterEggTriggering(CardItem card)
+		public bool IsCurrentlyEasterEggTriggering(CardItem card)
 		{
 			return card.rewardData.runtimeCardType == CardItem.CardType.彩蛋;
 		}
