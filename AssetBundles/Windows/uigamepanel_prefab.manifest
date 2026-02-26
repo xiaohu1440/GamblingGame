@@ -1,0 +1,97 @@
+ManifestFileVersion: 0
+CRC: 4148531806
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: cbe8b55774a560a57c55b96302ad8b52
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: b728f02c55be3f7bcf6bc4647728491b
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: cbe8b55774a560a57c55b96302ad8b52
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ae9ae4f59c224a478d917958560b1e6d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: df945f2a7a5c487ea05152cc9d425dae, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0b56b5ce5457cc04d8bfac2e7d18fade, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5a61b43f229c724458b9184a5ef7e014, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 05a15cbc3b3d0d4499a65058dedb0e9b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cb78b48559ea7694d979f9f1f2d7f1b6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cfa78d19396a4999a811891a7b4e33e6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 03912f54794d49c191474264c48a29e8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 411e729afed24c62a04e2b99d9122e78, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6d6bc99857a0a08449ed64e5323eb081, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 546407eb35b3ba1458e129e0bee953b1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0cb25e84e8abea64f902f96a477fcd8f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 61e799b0f38ccc7499fd9f4a441e54a9, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: Gambling.BetMultiplierConfig
+- AssemblyName: Assembly-CSharp
+  ClassName: Gambling.ColorScoreConfig
+- AssemblyName: QFramework.CoreKit
+  ClassName: QFramework.OtherBind
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.RectOffset
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.AnimationTriggers
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Button/ButtonClickedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ColorBlock
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.FontData
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Navigation
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.SpriteState
+Assets:
+- Assets/Art/UI/Art/UIPrefab/UIGamePanel.prefab
+Dependencies:
+- D:/GitProject/GamblingGame/AssetBundles/Windows/gamblinglevel_asset

@@ -1,0 +1,20 @@
+ManifestFileVersion: 0
+CRC: 2837897656
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: uigamepanel_prefab
+      Dependencies:
+        Dependency_0: gamblinglevel_asset
+    Info_1:
+      Name: uigameoverpanel_prefab
+      Dependencies: {}
+    Info_2:
+      Name: gamblinglevel_asset
+      Dependencies: {}
+    Info_3:
+      Name: uishoppanel_prefab
+      Dependencies: {}
+    Info_4:
+      Name: uiaward_prefab
+      Dependencies: {}

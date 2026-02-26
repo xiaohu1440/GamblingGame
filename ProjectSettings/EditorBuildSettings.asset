@@ -8,4 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GamblingMain.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Art/UI/Scenes/TestUIPanels/TestUIAward.unity
+    guid: ea3903c8e1a46c141832603cd9e0fe06
+  - enabled: 1
+    path: Assets/Art/UI/Scenes/TestUIPanels/TestUIGameOverPanel.unity
+    guid: e65cd0653b1fe4641b417180e1d58e39
+  - enabled: 1
+    path: Assets/Art/UI/Scenes/TestUIPanels/TestUIGamePanel.unity
+    guid: 24489c525ab059d42b07d7e111fb5efa
+  - enabled: 1
+    path: Assets/Art/UI/Scenes/TestUIPanels/TestUIShopPanel.unity
+    guid: f5ac909e8f61a784bbe896f0cc7a79fb
   m_configObjects: {}
