@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1109355917
+CRC: 1180360748
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -90,22 +90,25 @@ AssetBundleManifest:
       Name: 77_asset
       Dependencies: {}
     Info_22:
-      Name: scoreboostenchantment_asset
+      Name: enchantment
       Dependencies: {}
     Info_23:
-      Name: fruiteastereggeffect_asset
+      Name: scoreboostenchantment_asset
       Dependencies: {}
     Info_24:
-      Name: gamblingeastereggeffect_asset
+      Name: fruiteastereggeffect_asset
       Dependencies: {}
     Info_25:
-      Name: relicshowpanel_prefab
+      Name: gamblingeastereggeffect_asset
       Dependencies: {}
     Info_26:
+      Name: relicshowpanel_prefab
+      Dependencies: {}
+    Info_27:
       Name: relic_data
       Dependencies:
         Dependency_0: 77_asset
-    Info_27:
+    Info_28:
       Name: effects
       Dependencies:
         Dependency_0: "\u94C3\u94DB_asset"
@@ -114,14 +117,15 @@ AssetBundleManifest:
         Dependency_3: "\u82F9\u679C_asset"
         Dependency_4: "\u84DD\u8393_asset"
         Dependency_5: "\u53CC\u661F_asset"
-        Dependency_6: scoreboostenchantment_asset
-    Info_28:
+        Dependency_6: enchantment
+        Dependency_7: scoreboostenchantment_asset
+    Info_29:
       Name: uiresources
       Dependencies: {}
-    Info_29:
+    Info_30:
       Name: prefab
       Dependencies: {}
-    Info_30:
+    Info_31:
       Name: relics
       Dependencies:
         Dependency_0: relic_data

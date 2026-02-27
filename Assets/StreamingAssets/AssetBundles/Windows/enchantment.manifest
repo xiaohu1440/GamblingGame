@@ -1,0 +1,29 @@
+ManifestFileVersion: 0
+CRC: 906923882
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: dbca74b909d76ab0e2465851c3487e42
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: cc8e6311128f4416fcda22b9b1ab3d69
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: dbca74b909d76ab0e2465851c3487e42
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: ea5610ce27af6484ba8462f12199c488, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7c3de347051f4c54aa910fadfa722779, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- "Assets/Resources/Enchantment/\u84DD\u8272\u9644\u9B54.asset"
+- "Assets/Resources/Enchantment/\u9EC4\u8272\u9644\u9B54.asset"
+Dependencies: []

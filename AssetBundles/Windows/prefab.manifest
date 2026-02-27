@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3617322214
+CRC: 1329550266
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: eed0b8b9d949df98e00c2acdead8e6fb
+    Hash: e3d3480947b5fc02128be1e2d222df2a
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 2cd94c6fe5d70194310a882aea921115
+    Hash: cc571f4eb5f7eef7d31461317d2ea766
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: eed0b8b9d949df98e00c2acdead8e6fb
+    Hash: e3d3480947b5fc02128be1e2d222df2a
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -27,21 +27,25 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 4c5669ca3c21e504ba420eb84db3b382, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cfa78d19396a4999a811891a7b4e33e6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 0b56b5ce5457cc04d8bfac2e7d18fade, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: ee84dde06bad4652a8a3c2a69c273a15, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 4c5669ca3c21e504ba420eb84db3b382, type: 3}
+  Script: {fileID: 11500000, guid: 61e799b0f38ccc7499fd9f4a441e54a9, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: cb78b48559ea7694d979f9f1f2d7f1b6, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: cfa78d19396a4999a811891a7b4e33e6, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 0cb25e84e8abea64f902f96a477fcd8f, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 61e799b0f38ccc7499fd9f4a441e54a9, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -55,6 +59,8 @@ ClassTypes:
 SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.CoreModule
   ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.RectOffset
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.AnimationTriggers
 - AssemblyName: UnityEngine.UI

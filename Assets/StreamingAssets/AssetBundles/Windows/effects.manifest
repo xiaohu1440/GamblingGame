@@ -1,35 +1,23 @@
 ManifestFileVersion: 0
-CRC: 3712048286
+CRC: 1982372466
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: eee1da215af17928d66a4cb3b0b993f1
+    Hash: bee279912a1069d6f8d4fe781547694f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: aee4efae6e5e35fd6581777879755c85
+    Hash: bdd8d4323949d79ff7a32c967acb4200
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: eee1da215af17928d66a4cb3b0b993f1
+    Hash: bee279912a1069d6f8d4fe781547694f
 HashAppended: 0
 ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 11cbf2c4bbe424c4d9101c58eb24fd68, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: de13fd5524364cd58d305b44f02d2c49, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: bb2c87d9270c5734abd27c30255ccbd6, type: 3}
+  Script: {fileID: 11500000, guid: ea5610ce27af6484ba8462f12199c488, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 6552ab3919914d9cafac616dfcffc74c, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: fe94f4e7e1ed467ab277101b94e2c568, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 31c3cdf418ec424fbd44a7fd45b4efc9, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: b776449f6ff74a9883e6f180050f21cd, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 8beced9d90c81f54d8a487fd7024aad1, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 21a3a80a86f5db142bd3a7d4d7e318ae, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: b85f09a043a748f48e45e751613c171b, type: 3}
 - Class: 114
@@ -37,11 +25,31 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 646ff54e0b1806c499917d6ea66916c9, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 8b9f1b837a2e4d82973cce4aa7b56ec6, type: 3}
+  Script: {fileID: 11500000, guid: 25b1aa9dfb6c4092b76bcb5b966a3700, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: de13fd5524364cd58d305b44f02d2c49, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 84b93b61a29e4356a5c59fd552d3d22e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: bb2c87d9270c5734abd27c30255ccbd6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe94f4e7e1ed467ab277101b94e2c568, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 31c3cdf418ec424fbd44a7fd45b4efc9, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 1ba25339d2284e63bbea4782c76db817, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 84b93b61a29e4356a5c59fd552d3d22e, type: 3}
+  Script: {fileID: 11500000, guid: b776449f6ff74a9883e6f180050f21cd, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8beced9d90c81f54d8a487fd7024aad1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 21a3a80a86f5db142bd3a7d4d7e318ae, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8b9f1b837a2e4d82973cce4aa7b56ec6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7c3de347051f4c54aa910fadfa722779, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a3f0da721add45cf95a4132b29ce6505, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
@@ -51,6 +59,7 @@ Assets:
 - "Assets/Resources/Relics/Effects/\u5927\u4E09\u5143\u6982\u7387\u589E\u52A0.asset"
 - "Assets/Resources/Relics/Effects/\u897F\u74DC\u8F6C\u52A8\u52A0\u5206.asset"
 - "Assets/Resources/Relics/Effects/\u8DF3\u8FC7\u8F6C\u52A8\u5377\u6D88\u8017.asset"
+- "Assets/Resources/Relics/Effects/\u84DD\u8272\u9644\u9B54_\u9876\u7AEF\u6C34\u679C.asset"
 - "Assets/Resources/Relics/Effects/\u5355\u56FE\u6848\u4E0B\u56DE\u5408\u5168\u5C40\u500D\u7387\u7FFB\u500D.asset"
 - "Assets/Resources/Relics/Effects/\u7B79\u7801\u589E\u52A0.asset"
 - "Assets/Resources/Relics/Effects/\u672A\u5F97\u5206\u4FDD\u5E95\u5206\u6570.asset"
@@ -67,8 +76,10 @@ Assets:
 - "Assets/Resources/Relics/Effects/\u6A58\u5B50\u7EFF\u8272\u9644\u9B54.asset"
 - "Assets/Resources/Relics/Effects/\u84DD\u8393\u8F6C\u52A8\u52A0\u5206.asset"
 - "Assets/Resources/Relics/Effects/\u94C3\u94DB\u8F6C\u52A8\u52A0\u5206.asset"
+- "Assets/Resources/Relics/Effects/\u9EC4\u8272\u9644\u9B54_\u589E\u52A0\u7B79\u7801.asset"
 - "Assets/Resources/Relics/Effects/\u738B\u6982\u7387\u589E\u52A0.asset"
 Dependencies:
+- D:/GitProject/GamblingGame/AssetBundles/Windows/enchantment
 - D:/GitProject/GamblingGame/AssetBundles/Windows/scoreboostenchantment_asset
 - "D:/GitProject/GamblingGame/AssetBundles/Windows/\u53CC\u661F_asset"
 - "D:/GitProject/GamblingGame/AssetBundles/Windows/\u6A58\u5B50_asset"
