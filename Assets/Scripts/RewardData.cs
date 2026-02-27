@@ -31,5 +31,7 @@ public class RewardData : ScriptableObject
         runtimeChanceWeight.Value = ChanceWeight;
         runtimeCardType = CardType;
         runTimeisMini=isMini;
+        Debug.Log(runtimeRewardName+" "+runtimeChanceWeight);
+
     }
 }

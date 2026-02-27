@@ -57,7 +57,14 @@ namespace Gambling
                 //gamblingGround.ResetButtonCounts();
                 if (shouldResetAtEnd)
                 {
-                    gamblingGround.ResetButtonCounts();
+                    if (gamblingGround.checkFinalScore > 0)
+                    {
+                        gamblingGround.ResetButtonCounts();
+                    }
+                    else
+                    {
+                        gamblingGround.UpdateStartButtonState();
+                    }
                     gamblingGround.SetEasterEggExecuting(false);
                 }
                 

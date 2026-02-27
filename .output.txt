@@ -1,464 +1,301 @@
-warning: in the working copy of 'Assets/Art/UI/Art/UIPrefab/UIGamePanel.prefab', LF will be replaced by CRLF the next time Git touches it
-warning: in the working copy of 'Assets/Art/UI/Scenes/TestUIPanels/TestUIGamePanel.unity', LF will be replaced by CRLF the next time Git touches it
-diff --git a/Assets/Art/UI/Art/UIPrefab/UIGamePanel.prefab b/Assets/Art/UI/Art/UIPrefab/UIGamePanel.prefab
-index 2fb9a79..3374779 100644
---- a/Assets/Art/UI/Art/UIPrefab/UIGamePanel.prefab
-+++ b/Assets/Art/UI/Art/UIPrefab/UIGamePanel.prefab
-@@ -804,6 +804,83 @@ MonoBehaviour:
-   m_FillOrigin: 0
-   m_UseSpriteMesh: 0
-   m_PixelsPerUnitMultiplier: 1
-+--- !u!1 &698383976282459312
-+GameObject:
-+  m_ObjectHideFlags: 0
-+  m_CorrespondingSourceObject: {fileID: 0}
-+  m_PrefabInstance: {fileID: 0}
-+  m_PrefabAsset: {fileID: 0}
-+  serializedVersion: 6
-+  m_Component:
-+  - component: {fileID: 4545725807839605748}
-+  - component: {fileID: 3922363391690789704}
-+  - component: {fileID: 946012512571309383}
-+  m_Layer: 0
-+  m_Name: RelicList
-+  m_TagString: Untagged
-+  m_Icon: {fileID: 0}
-+  m_NavMeshLayer: 0
-+  m_StaticEditorFlags: 0
-+  m_IsActive: 1
-+--- !u!224 &4545725807839605748
-+RectTransform:
-+  m_ObjectHideFlags: 0
-+  m_CorrespondingSourceObject: {fileID: 0}
-+  m_PrefabInstance: {fileID: 0}
-+  m_PrefabAsset: {fileID: 0}
-+  m_GameObject: {fileID: 698383976282459312}
-+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-+  m_LocalPosition: {x: 0, y: 0, z: 0}
-+  m_LocalScale: {x: 1, y: 1, z: 1}
-+  m_ConstrainProportionsScale: 0
-+  m_Children: []
-+  m_Father: {fileID: 7057280407910427707}
-+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-+  m_AnchorMin: {x: 0, y: 0.5}
-+  m_AnchorMax: {x: 0, y: 0.5}
-+  m_AnchoredPosition: {x: 150, y: 50}
-+  m_SizeDelta: {x: 300, y: 750}
-+  m_Pivot: {x: 0.5, y: 0.5}
-+--- !u!114 &3922363391690789704
-+MonoBehaviour:
-+  m_ObjectHideFlags: 0
-+  m_CorrespondingSourceObject: {fileID: 0}
-+  m_PrefabInstance: {fileID: 0}
-+  m_PrefabAsset: {fileID: 0}
-+  m_GameObject: {fileID: 698383976282459312}
-+  m_Enabled: 1
-+  m_EditorHideFlags: 0
-+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
-+  m_Name:
-+  m_EditorClassIdentifier:
-+  m_Padding:
-+    m_Left: 0
-+    m_Right: 0
-+    m_Top: 0
-+    m_Bottom: 0
-+  m_ChildAlignment: 0
-+  m_StartCorner: 0
-+  m_StartAxis: 1
-+  m_CellSize: {x: 60, y: 60}
-+  m_Spacing: {x: 50, y: 10}
-+  m_Constraint: 0
-+  m_ConstraintCount: 2
-+--- !u!114 &946012512571309383
-+MonoBehaviour:
-+  m_ObjectHideFlags: 0
-+  m_CorrespondingSourceObject: {fileID: 0}
-+  m_PrefabInstance: {fileID: 0}
-+  m_PrefabAsset: {fileID: 0}
-+  m_GameObject: {fileID: 698383976282459312}
-+  m_Enabled: 1
-+  m_EditorHideFlags: 0
-+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
-+  m_Name:
-+  m_EditorClassIdentifier:
-+  MarkType: 0
-+  CustomComponentName: RelicList
-+  CustomComment:
-+  mComponentName: RectTransform
- --- !u!1 &812039825215256059
- GameObject:
-   m_ObjectHideFlags: 0
-@@ -3154,6 +3231,7 @@ RectTransform:
-   - {fileID: 4757824856451318790}
-   - {fileID: 9088793439713105535}
-   - {fileID: 945980134676721295}
-+  - {fileID: 4545725807839605748}
-   m_Father: {fileID: 0}
-   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-   m_AnchorMin: {x: 0, y: 0}
-@@ -3217,6 +3295,7 @@ MonoBehaviour:
-   DoubleNumText: {fileID: 3373847160566159025}
-   CardProbabilityPanel: {fileID: 5468456831259740270}
-   ColorProbabilityPanel: {fileID: 2175150443919320465}
-+  RelicList: {fileID: 4545725807839605748}
- --- !u!1 &2637141509606756294
- GameObject:
-   m_ObjectHideFlags: 0
-@@ -5668,7 +5747,10 @@ MonoBehaviour:
-     multiplier: 8
-   gridRects: []
-   cardItems: []
-+  chipsDouble: 1
-   isEasterEggExecuting: 0
-+  chipsAddNum: 0
-+  chipsGlobalAddNum: 5
-   colorConfigs:
-   - colorName: "\u767D\u8272"
-     color: {r: 1, g: 1, b: 1, a: 1}
-@@ -5698,6 +5780,7 @@ MonoBehaviour:
-     color: {r: 1, g: 0, b: 0, a: 1}
-     score: 30
-     weight: 1
-+  finalColorBonusScore: 0
-   SelectBox: {fileID: 9158529937926259872}
-   StartButton: {fileID: 7734471300553821671}
-   ScoreBG: {fileID: 2727918748367777892, guid: 1f99e5207621be145a085e682e216627, type: 3}
-diff --git a/Assets/Art/UI/Scenes/TestUIPanels/TestUIGamePanel.unity b/Assets/Art/UI/Scenes/TestUIPanels/TestUIGamePanel.unity
-index 5a15ce6..103e09e 100644
---- a/Assets/Art/UI/Scenes/TestUIPanels/TestUIGamePanel.unity
-+++ b/Assets/Art/UI/Scenes/TestUIPanels/TestUIGamePanel.unity
-@@ -364,10 +364,178 @@ PrefabInstance:
-     serializedVersion: 3
-     m_TransformParent: {fileID: 660369349}
-     m_Modifications:
-+    - target: {fileID: 30114548257301146, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMax.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 30114548257301146, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMin.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 30114548257301146, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 30114548257301146, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 30114548257301146, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 30114548257301146, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 740051110471648866, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMax.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 740051110471648866, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMin.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 740051110471648866, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 740051110471648866, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 740051110471648866, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 740051110471648866, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 2286043980169240888, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMax.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 2286043980169240888, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMin.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 2286043980169240888, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 2286043980169240888, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 2286043980169240888, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 2286043980169240888, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.y
-+      value: 0
-+      objectReference: {fileID: 0}
-     - target: {fileID: 2628261081100489365, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-       propertyPath: m_Name
-       value: UIGamePanel
-       objectReference: {fileID: 0}
-+    - target: {fileID: 2980446137856577518, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMax.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 2980446137856577518, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMin.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 2980446137856577518, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 2980446137856577518, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 2980446137856577518, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 2980446137856577518, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 3767172031207230119, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMax.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 3767172031207230119, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMin.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 3767172031207230119, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 3767172031207230119, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 3767172031207230119, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 3767172031207230119, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 4578710604530306930, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMax.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 4578710604530306930, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMin.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 4578710604530306930, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 4578710604530306930, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 4578710604530306930, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 4578710604530306930, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 4897299358515158720, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMax.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 4897299358515158720, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMin.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 4897299358515158720, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 4897299358515158720, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 4897299358515158720, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 4897299358515158720, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.y
-+      value: 0
-+      objectReference: {fileID: 0}
-     - target: {fileID: 7057280407910427707, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-       propertyPath: m_Pivot.x
-       value: 0.5
-@@ -448,6 +616,54 @@ PrefabInstance:
-       propertyPath: m_LocalEulerAnglesHint.z
-       value: 0
-       objectReference: {fileID: 0}
-+    - target: {fileID: 8407899940309086951, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMax.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 8407899940309086951, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMin.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 8407899940309086951, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 8407899940309086951, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 8407899940309086951, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 8407899940309086951, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 8866557082148680566, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMax.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 8866557082148680566, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchorMin.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 8866557082148680566, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 8866557082148680566, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_SizeDelta.y
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 8866557082148680566, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.x
-+      value: 0
-+      objectReference: {fileID: 0}
-+    - target: {fileID: 8866557082148680566, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
-+      propertyPath: m_AnchoredPosition.y
-+      value: 0
-+      objectReference: {fileID: 0}
-     m_RemovedComponents: []
-     m_RemovedGameObjects: []
-     m_AddedGameObjects: []
-diff --git a/Assets/Art/UI/Scripts/UI/UIGamePanel.Designer.cs b/Assets/Art/UI/Scripts/UI/UIGamePanel.Designer.cs
-index 75d5b90..cacf55f 100644
---- a/Assets/Art/UI/Scripts/UI/UIGamePanel.Designer.cs
-+++ b/Assets/Art/UI/Scripts/UI/UIGamePanel.Designer.cs
-@@ -3,9 +3,9 @@ using UnityEngine;
- using UnityEngine.UI;
- using QFramework;
 
--namespace QFramework.Example
-+namespace Gambling
- {
--       // Generate Id:8d32fbff-5f77-4eb6-b551-a39a53cb4d61
-+       // Generate Id:1f236e58-346f-4d1a-aa58-b4e3bfe58d5d
-        public partial class UIGamePanel
-        {
-                public const string Name = "UIGamePanel";
-@@ -98,6 +98,8 @@ namespace QFramework.Example
-                public UnityEngine.UI.Image CardProbabilityPanel;
-                [SerializeField]
-                public UnityEngine.UI.Image ColorProbabilityPanel;
-+               [SerializeField]
-+               public RectTransform RelicList;
-
-                private UIGamePanelData mPrivateData = null;
-
-@@ -147,6 +149,7 @@ namespace QFramework.Example
-                        DoubleNumText = null;
-                        CardProbabilityPanel = null;
-                        ColorProbabilityPanel = null;
-+                       RelicList = null;
-
-                        mData = null;
-                }
-diff --git a/Assets/Art/UI/Scripts/UI/UIGamePanel.cs b/Assets/Art/UI/Scripts/UI/UIGamePanel.cs
-index 17e23a2..35492b9 100644
---- a/Assets/Art/UI/Scripts/UI/UIGamePanel.cs
-+++ b/Assets/Art/UI/Scripts/UI/UIGamePanel.cs
-@@ -8,7 +8,7 @@ using QFramework;
- using UnityEngine.EventSystems;
- using System.Linq;
-
--namespace QFramework.Example
-+namespace Gambling
- {
-        public class UIGamePanelData : UIPanelData
-        {
-@@ -73,7 +73,7 @@ namespace QFramework.Example
-                        Global.level.Register(level =>
-                        {
-                                Global.levelScore.Value += 10;
--                               Global.chips.Value = 5;
-+                               Global.chips.Value = this.GamblingGround.chipsGlobalAddNum;
-                                GamblingGround.EnableAllButtons();
-                        }).UnRegisterWhenGameObjectDestroyed(gameObject);
-                        DoubleBetBtn.onClick.AddListener(DoubleBetEvent);
-@@ -118,7 +118,7 @@ namespace QFramework.Example
-                {
-                        if (Global.lotteryTicket.Value > 2)
-                        {
--                               Global.chips.Value += 5+GamblingGround.chipsAddNum;
-+                               Global.chips.Value += 5+this.GamblingGround.chipsAddNum;
-                                Global.lotteryTicket.Value -= 2;
-                                DoubleBetBtn.interactable = false;
-                        }
-diff --git a/Assets/Scripts/Game/GamblingGround.cs b/Assets/Scripts/Game/GamblingGround.cs
-index d049c89..afbe04b 100644
---- a/Assets/Scripts/Game/GamblingGround.cs
-+++ b/Assets/Scripts/Game/GamblingGround.cs
-@@ -9,6 +9,7 @@ using QFramework.Example;
- using Random = UnityEngine.Random;
-
-
-+
- namespace Gambling
- {
-        /// <summary>
-@@ -66,6 +67,7 @@ namespace Gambling
-                public int chipsDouble = 1;
-                public bool isEasterEggExecuting = false;
-                public int chipsAddNum = 0;
-+    public int chipsGlobalAddNum = 5;
-
-                [Header("框选卡片颜色配置")]
-                [SerializeField] public ColorScoreConfig[] colorConfigs = new ColorScoreConfig[7]
-@@ -150,7 +152,7 @@ namespace Gambling
-                private void Init()
-                {
-                        Score.Value = 0;
--                       Global.chips.Value = 5;
-+                       Global.chips.Value = chipsGlobalAddNum;
-                        Global.lotteryTicket.Value = 10;
-                        Global.levelScore.Value = 10;
-                        Global.level.Value = 1;
-@@ -598,7 +600,7 @@ namespace Gambling
-
-                        if (Global.lotteryTicket.Value > 0)
-                        {
--                               Global.chips.Value += 5*chipsDouble;
-+                               Global.chips.Value += chipsGlobalAddNum*chipsDouble;
-                        }
-                }
+    目录: D:\GitProject\GamblingGame\Assets\Resources
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        2026-02-07      8:32                Data
+d-----        2026-02-08      7:57                EasterEggData
+d-----        2026-02-26     19:03                Enchantment
+d-----        2026-02-26      4:58                MDList
+d-----        2026-02-07      8:32                Prefab
+d-----        2026-02-26     19:09                Relics
+-a----        2026-02-07      8:32            180 Data.meta
+-a----        2026-02-26     22:52            185 EasterEggData.meta
+-a----        2026-02-26     22:52            183 Enchantment.meta
+-a----        2026-02-26      4:57             83 MDList.meta
+-a----        2026-02-07      8:32            180 Prefab.meta
+-a----        2026-02-13      3:25            172 Relics.meta
+    目录: D:\GitProject\GamblingGame\Assets\Resources\Data
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        2026-02-26     20:11                CardData
+-a----        2026-02-26     22:51            180 CardData.meta
+-a----        2026-02-07      8:32           2180 GamblingLevel.asset
+-a----        2026-02-07      8:32            216 GamblingLevel.asset.meta
+    目录: D:\GitProject\GamblingGame\Assets\Resources\Data\CardData
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        2026-02-10      3:03            680 77.asset
+-a----        2026-02-26     22:44            197 77.asset.meta
+-a----        2026-02-08      0:33            683 77_M.asset
+-a----        2026-02-26     22:44            199 77_M.asset.meta
+-a----        2026-02-10      3:03            704 双星.asset
+-a----        2026-02-26     22:44            209 双星.asset.meta
+-a----        2026-02-08      0:33            707 双星_M.asset
+-a----        2026-02-26     22:44            211 双星_M.asset.meta
+-a----        2026-02-07      8:32            743 大王.asset
+-a----        2026-02-26     22:44            209 大王.asset.meta
+-a----        2026-02-08      0:33            703 小王.asset
+-a----        2026-02-26     22:44            209 小王.asset.meta
+-a----        2026-02-25      0:49            703 彩蛋.asset
+-a----        2026-02-26     22:44            209 彩蛋.asset.meta
+-a----        2026-02-26     20:11            704 橘子.asset
+-a----        2026-02-26     22:44            209 橘子.asset.meta
+-a----        2026-02-08      0:33            707 橘子_M.asset
+-a----        2026-02-26     22:44            211 橘子_M.asset.meta
+-a----        2026-02-23     16:00            703 苹果.asset
+-a----        2026-02-26     22:44            209 苹果.asset.meta
+-a----        2026-02-08      0:33            707 苹果_M.asset
+-a----        2026-02-26     22:44            211 苹果_M.asset.meta
+-a----        2026-02-10      2:43            704 蓝莓.asset
+-a----        2026-02-26     22:44            209 蓝莓.asset.meta
+-a----        2026-02-08      0:33            707 蓝莓_M.asset
+-a----        2026-02-26     22:44            211 蓝莓_M.asset.meta
+-a----        2026-02-08      9:26            704 西瓜.asset
+-a----        2026-02-26     22:44            209 西瓜.asset.meta
+-a----        2026-02-08      0:33            705 西瓜_M.asset
+-a----        2026-02-26     22:44            211 西瓜_M.asset.meta
+-a----        2026-02-10      2:43            704 铃铛.asset
+-a----        2026-02-26     22:44            209 铃铛.asset.meta
+-a----        2026-02-08      0:33            707 铃铛_M.asset
+-a----        2026-02-26     22:44            211 铃铛_M.asset.meta
+    目录: D:\GitProject\GamblingGame\Assets\Resources\EasterEggData
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        2026-02-08      7:57            501 FruitEasterEggEffect.asset
+-a----        2026-02-26     22:52            215 FruitEasterEggEffect.asset.me
+                                                  ta
+-a----        2026-02-08      7:57            515 GamblingEasterEggEffect.asset
+-a----        2026-02-26     22:52            218 GamblingEasterEggEffect.asset
+                                                  .meta
+    目录: D:\GitProject\GamblingGame\Assets\Resources\Enchantment
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        2026-02-26     19:03            600 ScoreBoostEnchantment.asset
+-a----        2026-02-26     22:52            216 ScoreBoostEnchantment.asset.m
+                                                  eta
+    目录: D:\GitProject\GamblingGame\Assets\Resources\MDList
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        2026-02-26      4:57           7095 buff附魔设计1.md
+-a----        2026-02-26      4:57             83 buff附魔设计1.md.meta
+-a----        2026-02-26      4:58           4741 buff附魔设计2.md
+-a----        2026-02-26      4:58             83 buff附魔设计2.md.meta
+-a----        2026-02-25      0:54          22881 Gambling解耦重构.md
+-a----        2026-02-25      0:54             83 Gambling解耦重构.md.meta
+-a----        2026-02-12      4:16          19020 初版遗物系统设计.md
+-a----        2026-02-12      4:16             83 初版遗物系统设计.md.meta
+-a----        2026-02-18      1:13          14291 单图案押注UI显示相关代码.md
+-a----        2026-02-18      1:13             83 单图案押注UI显示相关代码.md.meta
+-a----        2026-02-12      4:16          18682 遗物架构设计.md
+-a----        2026-02-12      4:15             83 遗物架构设计.md.meta
+-a----        2026-02-11      1:23           7764 重构建议.md
+-a----        2026-02-11      1:22             83 重构建议.md.meta
+    目录: D:\GitProject\GamblingGame\Assets\Resources\Prefab
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        2026-02-26     19:18                UI
+-a----        2026-02-07      8:32            180 UI.meta
+    目录: D:\GitProject\GamblingGame\Assets\Resources\Prefab\UI
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        2026-02-14      4:20          11583 DescriptionPanel.prefab
+-a----        2026-02-13      3:57            154 DescriptionPanel.prefab.meta
+-a----        2026-02-26     19:12           4571 EnchantmentDescriptionShowPan
+                                                  el.prefab
+-a----        2026-02-26     19:12            154 EnchantmentDescriptionShowPan
+                                                  el.prefab.meta
+-a----        2026-02-26     19:18           9540 GridItem.prefab
+-a----        2026-02-07      8:32            161 GridItem.prefab.meta
+-a----        2026-02-18      1:51           8364 ProgressBar.prefab
+-a----        2026-02-18      1:49            154 ProgressBar.prefab.meta
+-a----        2026-02-22     21:13           2784 RelicImage.prefab
+-a----        2026-02-22     20:10            154 RelicImage.prefab.meta
+-a----        2026-02-14      3:48           8722 RelicItem.prefab
+-a----        2026-02-13      3:57            154 RelicItem.prefab.meta
+-a----        2026-02-22     21:30           4554 RelicShowPanel.prefab
+-a----        2026-02-26     22:52            175 RelicShowPanel.prefab.meta
+-a----        2026-02-07      8:32           5758 ScoreBG.prefab
+-a----        2026-02-07      8:32            161 ScoreBG.prefab.meta
+-a----        2026-02-08      0:29           3128 ScorePopue.prefab
+-a----        2026-02-08      0:08            154 ScorePopue.prefab.meta
+-a----        2026-02-07      8:32           2965 SelectBox.prefab
+-a----        2026-02-07      8:32            161 SelectBox.prefab.meta
+    目录: D:\GitProject\GamblingGame\Assets\Resources\Relics
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        2026-02-26     19:06                Effects
+d-----        2026-02-26     19:07                UIResources
+-a----        2026-02-15      3:17            787 77加分遗物.asset
+-a----        2026-02-15      2:33            189 77加分遗物.asset.meta
+-a----        2026-02-13      3:26            172 Effects.meta
+-a----        2026-02-14      3:41            172 UIResources.meta
+-a----        2026-02-25     11:03            818 全图案分值增加.asset
+-a----        2026-02-25     11:02            189 全图案分值增加.asset.meta
+-a----        2026-02-21      1:55            947 单图案下回合全局倍率翻倍.asset
+-a----        2026-02-21      1:53            189 单图案下回合全局倍率翻倍.asset.meta
+-a----        2026-02-20      8:19            906 单图案押注倍率更改.asset
+-a----        2026-02-20      8:17            189 单图案押注倍率更改.asset.meta
+-a----        2026-02-15      3:17            817 双星加分遗物.asset
+-a----        2026-02-15      2:33            189 双星加分遗物.asset.meta
+-a----        2026-02-23     15:38            910 大三元概率增加.asset
+-a----        2026-02-23     15:26            189 大三元概率增加.asset.meta
+-a----        2026-02-23     15:38            920 小三元概率增加.asset
+-a----        2026-02-23     15:25            189 小三元概率增加.asset.meta
+-a----        2026-02-25     11:21            845 小图案视为大图案.asset
+-a----        2026-02-25     11:20            189 小图案视为大图案.asset.meta
+-a----        2026-02-23     15:28            806 彩蛋概率增加.asset
+-a----        2026-02-23     15:27            189 彩蛋概率增加.asset.meta
+-a----        2026-02-22     23:24            847 押注筹码增加.asset
+-a----        2026-02-21      1:18            189 押注筹码增加.asset.meta
+-a----        2026-02-24     11:42            864 未得分保底分数.asset
+-a----        2026-02-24     11:42            189 未得分保底分数.asset.meta
+-a----        2026-02-15      3:17            829 橘子加分遗物.asset
+-a----        2026-02-13      3:31            189 橘子加分遗物.asset.meta
+-a----        2026-02-26     19:09            888 橘子绿色附魔.asset
+-a----        2026-02-26     19:08            189 橘子绿色附魔.asset.meta
+-a----        2026-02-23     15:29            812 王概率增加.asset
+-a----        2026-02-23     15:28            189 王概率增加.asset.meta
+-a----        2026-02-24     11:31            919 筹码保留获取分数.asset
+-a----        2026-02-24     11:28            189 筹码保留获取分数.asset.meta
+-a----        2026-02-21     19:15            775 筹码增加.asset
+-a----        2026-02-21     19:12            189 筹码增加.asset.meta
+-a----        2026-02-15      3:17            817 苹果加分遗物.asset
+-a----        2026-02-13      3:27            189 苹果加分遗物.asset.meta
+-a----        2026-02-23     15:25            793 苹果概率.asset
+-a----        2026-02-23     15:24            189 苹果概率.asset.meta
+-a----        2026-02-15      3:17            817 蓝莓加分遗物.asset
+-a----        2026-02-13      3:31            189 蓝莓加分遗物.asset.meta
+-a----        2026-02-15      3:17            817 西瓜加分遗物.asset
+-a----        2026-02-15      2:33            189 西瓜加分遗物.asset.meta
+-a----        2026-02-24     22:44            866 跳过转动卷消耗.asset
+-a----        2026-02-23     16:33            189 跳过转动卷消耗.asset.meta
+-a----        2026-02-24     22:43            881 转动次数增加筹码.asset
+-a----        2026-02-20      6:13            189 转动次数增加筹码.asset.meta
+-a----        2026-02-15      3:17            817 铃铛加分遗物.asset
+-a----        2026-02-13      3:31            189 铃铛加分遗物.asset.meta
+    目录: D:\GitProject\GamblingGame\Assets\Resources\Relics\Effects
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        2026-02-15      2:33            533 77转动加分.asset
+-a----        2026-02-15      2:31            189 77转动加分.asset.meta
+-a----        2026-02-20      8:16            443 CardBetsDoubleEffect.asset
+-a----        2026-02-20      8:16            189 CardBetsDoubleEffect.asset.me
+                                                  ta
+-a----        2026-02-25     11:02            461 全图案分值增加.asset
+-a----        2026-02-25     11:02            189 全图案分值增加.asset.meta
+-a----        2026-02-21      1:52            499 单图案下回合全局倍率翻倍.asset
+-a----        2026-02-21      1:52            189 单图案下回合全局倍率翻倍.asset.meta
+-a----        2026-02-15      2:33            543 双星转动加分.asset
+-a----        2026-02-15      2:31            189 双星转动加分.asset.meta
+-a----        2026-02-23     15:38            533 大三元概率增加.asset
+-a----        2026-02-23     15:21            189 大三元概率增加.asset.meta
+-a----        2026-02-23     15:38            545 小三元概率增加.asset
+-a----        2026-02-23     15:20            189 小三元概率增加.asset.meta
+-a----        2026-02-25     11:20            454 小图案视为大图案.asset
+-a----        2026-02-25     11:20            189 小图案视为大图案.asset.meta
+-a----        2026-02-23     15:23            501 彩蛋概率增加.asset
+-a----        2026-02-23     15:22            189 彩蛋概率增加.asset.meta
+-a----        2026-02-21      1:15            472 押注获取筹码增加.asset
+-a----        2026-02-21      1:15            189 押注获取筹码增加.asset.meta
+-a----        2026-02-24     11:42            462 未得分保底分数.asset
+-a----        2026-02-24     11:42            189 未得分保底分数.asset.meta
+-a----        2026-02-26     19:06            578 橘子绿色附魔.asset
+-a----        2026-02-26     19:05            189 橘子绿色附魔.asset.meta
+-a----        2026-02-13      4:59            543 橘子转动加分.asset
+-a----        2026-02-13      3:25            189 橘子转动加分.asset.meta
+-a----        2026-02-23     15:23            514 王概率增加.asset
+-a----        2026-02-23     15:21            189 王概率增加.asset.meta
+-a----        2026-02-24     11:27            469 筹码保留获取分数.asset
+-a----        2026-02-24     11:27            189 筹码保留获取分数.asset.meta
+-a----        2026-02-21     19:12            448 筹码增加.asset
+-a----        2026-02-21     19:12            189 筹码增加.asset.meta
+-a----        2026-02-23     15:22            501 苹果概率增加.asset
+-a----        2026-02-23     15:22            189 苹果概率增加.asset.meta
+-a----        2026-02-13      4:59            543 苹果转动加分.asset
+-a----        2026-02-13      3:26            189 苹果转动加分.asset.meta
+-a----        2026-02-13      4:59            543 蓝莓转动加分.asset
+-a----        2026-02-13      3:25            189 蓝莓转动加分.asset.meta
+-a----        2026-02-15      2:33            543 西瓜转动加分.asset
+-a----        2026-02-15      2:31            189 西瓜转动加分.asset.meta
+-a----        2026-02-23     16:35            469 跳过转动卷消耗.asset
+-a----        2026-02-23     16:32            189 跳过转动卷消耗.asset.meta
+-a----        2026-02-24     22:44            473 转动次数筹码翻倍.asset
+-a----        2026-02-20      6:12            189 转动次数筹码翻倍.asset.meta
+-a----        2026-02-13      4:59            543 铃铛转动加分.asset
+-a----        2026-02-13      3:25            189 铃铛转动加分.asset.meta
+    目录: D:\GitProject\GamblingGame\Assets\Resources\Relics\UIResources
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        2026-02-25     11:01           5069 add-favorite-marked-svgrepo-c
+                                                  om.png
+-a----        2026-02-25     11:01           2621 add-favorite-marked-svgrepo-c
+                                                  om.png.meta
+-a----        2026-02-14      3:37           5421 apple-jam-svgrepo-com.png
+-a----        2026-02-14      3:42           2621 apple-jam-svgrepo-com.png.met
+                                                  a
+-a----        2026-02-14      3:37           6023 bell-plus-svgrepo-com.png
+-a----        2026-02-14      3:42           2621 bell-plus-svgrepo-com.png.met
+                                                  a
+-a----        2026-02-23     15:23           7343 caramelized-apple-fruit-svgre
+                                                  po-com.png
+-a----        2026-02-23     15:23           2621 caramelized-apple-fruit-svgre
+                                                  po-com.png.meta
+-a----        2026-02-20      7:51           8978 coin-send-svgrepo-com.png
+-a----        2026-02-20      8:19           2621 coin-send-svgrepo-com.png.met
+                                                  a
+-a----        2026-02-25     11:20           3786 color-change-svgrepo-com.png
+-a----        2026-02-25     11:20           2621 color-change-svgrepo-com.png.
+                                                  meta
+-a----        2026-02-14      3:36          10605 conserve-jam-svgrepo-com.png
+-a----        2026-02-14      3:42           2621 conserve-jam-svgrepo-com.png.
+                                                  meta
+-a----        2026-02-21      1:51           6034 cube-svgrepo-com.png
+-a----        2026-02-21      1:54           2621 cube-svgrepo-com.png.meta
+-a----        2026-02-23     15:17          11960 fruits-fruit-svgrepo-com.png
+-a----        2026-02-23     15:17           2621 fruits-fruit-svgrepo-com.png.
+                                                  meta
+-a----        2026-02-15      2:28           7769 gambling-coins-machine-with-w
+                                                  inner-result-of-three-seven-s
+                                                  vgrepo-com.png
+-a----        2026-02-15      2:31           2621 gambling-coins-machine-with-w
+                                                  inner-result-of-three-seven-s
+                                                  vgrepo-com.png.meta
+-a----        2026-02-23     15:19          11160 king-crown-svgrepo-com.png
+-a----        2026-02-23     15:20           2621 king-crown-svgrepo-com.png.me
+                                                  ta
+-a----        2026-02-21     19:14          12579 letter-r-svgrepo-com.png
+-a----        2026-02-21     19:15           2621 letter-r-svgrepo-com.png.meta
+-a----        2026-02-21      1:18           6689 magnet-svgrepo-com.png
+-a----        2026-02-21      1:18           2621 magnet-svgrepo-com.png.meta
+-a----        2026-02-14      3:35           2892 orange-juice-juice-svgrepo-co
+                                                  m.png
+-a----        2026-02-14      3:42           2621 orange-juice-juice-svgrepo-co
+                                                  m.png.meta
+-a----        2026-02-26     19:06          14585 orange-svgrepo-com.png
+-a----        2026-02-26     19:07           2621 orange-svgrepo-com.png.meta
+-a----        2026-02-20      6:17           7872 pocket-watch-svgrepo-com.png
+-a----        2026-02-20      8:19           2621 pocket-watch-svgrepo-com.png.
+                                                  meta
+-a----        2026-02-24     11:24          40665 score-svgrepo-com (1).png
+-a----        2026-02-24     11:27           2621 score-svgrepo-com (1).png.met
+                                                  a
+-a----        2026-02-23     16:30           9760 skip-next-svgrepo-com.png
+-a----        2026-02-23     16:33           2621 skip-next-svgrepo-com.png.met
+                                                  a
+-a----        2026-02-23     15:19          13261 slot-machine-casino-svgrepo-c
+                                                  om.png
+-a----        2026-02-23     15:20           2621 slot-machine-casino-svgrepo-c
+                                                  om.png.meta
+-a----        2026-02-15      2:29           4660 star-new-svgrepo-com.png
+-a----        2026-02-15      2:31           2621 star-new-svgrepo-com.png.meta
+-a----        2026-02-23     15:19          18854 suits-casino-svgrepo-com.png
+-a----        2026-02-23     15:20           2621 suits-casino-svgrepo-com.png.
+                                                  meta
+-a----        2026-02-24     11:27           4940 test-result-on-paper-svgrepo-
+                                                  com.png
+-a----        2026-02-24     11:41           2621 test-result-on-paper-svgrepo-
+                                                  com.png.meta
+-a----        2026-02-15      2:28           6479 watermelon-juice-svgrepo-com.
+                                                  png
+-a----        2026-02-15      2:31           2621 watermelon-juice-svgrepo-com.
+                                                  png.meta

@@ -1,0 +1,25 @@
+ManifestFileVersion: 0
+CRC: 3919344737
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 840f951cb6300617ee10ce68d068fe1c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: a8a57d2aa6c4e71706f70c072d2a3c4f
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 840f951cb6300617ee10ce68d068fe1c
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 11500000, guid: 21a3a80a86f5db142bd3a7d4d7e318ae, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8b9f1b837a2e4d82973cce4aa7b56ec6, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- "Assets/Resources/Relics/Effects/77\u8F6C\u52A8\u52A0\u5206.asset"
+Dependencies:
+- D:/GitProject/GamblingGame/AssetBundles/Windows/77_asset

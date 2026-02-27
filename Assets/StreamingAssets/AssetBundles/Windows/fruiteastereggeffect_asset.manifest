@@ -1,0 +1,22 @@
+ManifestFileVersion: 0
+CRC: 588747584
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 9958171b4d76e40d17d169c3780930e9
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: bb1e74f072fc6ffad282eee90675993f
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 9958171b4d76e40d17d169c3780930e9
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 11500000, guid: df945f2a7a5c487ea05152cc9d425dae, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Resources/EasterEggData/FruitEasterEggEffect.asset
+Dependencies: []

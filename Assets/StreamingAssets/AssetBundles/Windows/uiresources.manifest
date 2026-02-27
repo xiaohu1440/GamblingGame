@@ -1,0 +1,44 @@
+ManifestFileVersion: 0
+CRC: 3216677511
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 77d46537412f5de3740caea8b6e74a76
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 2d8df09e698f722ada1caa03d3413830
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 77d46537412f5de3740caea8b6e74a76
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Resources/Relics/UIResources/test-result-on-paper-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/caramelized-apple-fruit-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/orange-juice-juice-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/apple-jam-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/gambling-coins-machine-with-winner-result-of-three-seven-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/cube-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/coin-send-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/score-svgrepo-com (1).png
+- Assets/Resources/Relics/UIResources/star-new-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/fruits-fruit-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/skip-next-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/slot-machine-casino-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/bell-plus-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/magnet-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/orange-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/pocket-watch-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/suits-casino-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/king-crown-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/add-favorite-marked-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/conserve-jam-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/watermelon-juice-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/color-change-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/letter-r-svgrepo-com.png
+Dependencies: []

@@ -21,6 +21,7 @@ public class RewardList : ScriptableObject
                 reward.Reset();
             }
         }
+        Debug.Log("RewardList ResetAll");
     }
 }
 

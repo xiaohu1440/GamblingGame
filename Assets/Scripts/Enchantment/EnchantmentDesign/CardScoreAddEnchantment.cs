@@ -7,7 +7,7 @@ namespace Gambling
     [CreateAssetMenu(fileName = "ScoreBoostEnchantment", menuName = "Gambling/Enchantments/分数提升附魔")]
     public class CardScoreAddEnchantment:EnchantmentEffect
     {
-        public override string EnchantmentName => "转动到后分值增加";
+        public override string EnchantmentName => "绿色附魔";
         public override bool NeedScoreCheck => false;
         [SerializeField] private int scoreAdd = 10;
         public override void Execute(CardItem cardItem, GamblingGround gamblingGround)

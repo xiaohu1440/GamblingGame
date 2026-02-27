@@ -33,7 +33,7 @@ namespace Gambling
         {
             int idx = card.index;
             // 假设棋盘是 4xN 或者通过索引计算
-            return idx == 0 || idx == 3 || idx == 12 || idx == 15; 
+            return idx == 0 || idx == 6 || idx == 12 || idx == 18; 
         }
 
         // 示例：选取所有橘子
@@ -41,5 +41,16 @@ namespace Gambling
         {
             return card.rewardData.runtimeRewardName.Value==name;
         }
+        /// <summary>
+        /// 在给定的索引范围内，筛选出指定类型的卡片
+        /// 例如：传入棋盘上方所有索引 [0, 1, 2, 3, 4] 和 CardType.水果
+        /// </summary>
+        public List<CardItem> GetFilteredCards(GamblingGround ground, List<int> indices, CardItem.CardType cardType)
+        {
+            return ground.cardItems
+                .Where(card => indices.Contains(card.index) && card.cardType == cardType)
+                .ToList();
+        }
+        
     }
 }

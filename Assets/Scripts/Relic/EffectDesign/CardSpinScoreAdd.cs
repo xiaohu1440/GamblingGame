@@ -23,9 +23,13 @@ namespace Gambling
 
         public override void ExecuteEffect(RelicEffectContext context)
         {
-            if (context.currentCard != null)
+            foreach (var card in context.gamblingGround.rewardDataArray)
             {
-                triggerCard.runtimeGoldValue.Value++;
+                if (card.runtimeRewardName.Value == triggerCard.RewardName)
+                {
+                    card.runtimeGoldValue.Value+=scorePerSpin;
+                }
+                    
             }
                 
         }

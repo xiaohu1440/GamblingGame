@@ -1,0 +1,26 @@
+ManifestFileVersion: 0
+CRC: 2930042344
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 43b8c21efb59dc02e50853e08890e188
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 9212df4054110670d2197b4869b8ee37
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 43b8c21efb59dc02e50853e08890e188
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 84b93b61a29e4356a5c59fd552d3d22e, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Resources/Enchantment/ScoreBoostEnchantment.asset
+Dependencies: []

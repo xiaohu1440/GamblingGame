@@ -20,6 +20,5 @@ MonoBehaviour:
   RelicDesc: "\u6BCF\u6B21\u8F6C\u52A8\uFF0C\u897F\u74DC\u56FE\u6848+1\u5206"
   RelicTips: 
   RelicTriggerType: 5
-  unLock: 1
+  unLock: 0
   relicEffect: {fileID: 11400000, guid: 12f1a145dc1bc3640bdfb1f0828bec4b, type: 2}
-  isOwned: 0

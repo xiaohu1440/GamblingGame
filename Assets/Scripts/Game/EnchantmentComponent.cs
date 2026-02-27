@@ -145,6 +145,7 @@ namespace Gambling
 				}
 				descText.text = fullDesc;
 			}
+			LayoutRebuilder.ForceRebuildLayoutImmediate(mActiveTooltip.GetComponent<RectTransform>());
 		}
 
 		public void OnPointerExit(PointerEventData eventData)
@@ -158,6 +159,7 @@ namespace Gambling
 		// 当增加新附魔时，重启边框动画
 		public void AddEffect(EnchantmentEffect effect)
 		{
+			ActiveEffects.RemoveAll(e => e.GetType() == effect.GetType());
 			ActiveEffects.Add(effect);
 			StartBorderLoopAnimation();
 		}

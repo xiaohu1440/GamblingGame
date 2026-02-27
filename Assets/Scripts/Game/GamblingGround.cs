@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using QFramework;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -70,6 +71,7 @@ namespace Gambling
 		public float skipTicktReductionChance = 1;
 		public float relicskipTicktReductionNum = 0.25f;
 		public int checkFinalScore = 0;
+		private ResLoader mResLoader = ResLoader.Allocate(); 
 		
 		[Header("框选卡片颜色配置")]
 		[SerializeField] public ColorScoreConfig[] colorConfigs = new ColorScoreConfig[7]
@@ -155,15 +157,25 @@ namespace Gambling
 		{
 			Score.Value = 0;
 			Global.chips.Value = chipsGlobalAddNum;
+			Global.level.Value = 1;
 			Global.lotteryTicket.Value = 10;
 			Global.levelScore.Value = 10;
-			Global.level.Value = 1;
+			Global.greedlevelScore.Value = 30;
+			Global.currentLevelSpinCount.Value = 0;
+			Global.ticketReward.Value = 12;
+			chipsGlobalAddNum = 5;
+			chipsAddNum = 0;
+			globalDoubleNum.Value = 1;
+			currentDoubleNum.Value = 1;
 			for (int i = 0; i < colorConfigs.Length; i++)
 			{
 				totalColorWeight.Value += colorConfigs[i].weight;
 			}
-			rewardDataArray=Resources.LoadAll<RewardData>("Data/CardData");
-
+			if (currentPool != null && currentPool.Rewards != null)
+			{
+				// Distinct() 会去除重复的 RewardData 实例
+				rewardDataArray = currentPool.Rewards.Distinct().ToArray();
+			}
 		}
 
 		private void TextUpdate()
@@ -537,7 +549,14 @@ namespace Gambling
 						else
 						{
 							// ✅ 还有转动券，恢复按钮状态，玩家可以继续游玩
-							ResetButtonCounts();
+							if (checkFinalScore > 0)
+							{
+								ResetButtonCounts();
+							}
+							else
+							{
+								UpdateStartButtonState();
+							}
 							ResetGambling();
         
 							if (Global.lotteryTicket.Value > 2)
@@ -722,7 +741,7 @@ namespace Gambling
 				float accelerationFactor = 1f - (progress / 0.3f) * 0.5f;
 				return moveSpeed * accelerationFactor;
 			}
-			else if (progress < 0.7f)
+			else if (progress < 0.8f)
 			{
 				// 匀速阶段
 				return moveSpeed * 0.5f;
@@ -731,11 +750,11 @@ namespace Gambling
 			{
 				// 减速阶段：时间从较短到较长
 				float decelerationProgress = (progress - 0.7f) / 0.3f;
-				float decelerationFactor = 0.5f + decelerationProgress * 8f;
+				float decelerationFactor = 0.6f + decelerationProgress * 5f;
 				return moveSpeed * decelerationFactor;
 			}
 		}
-		private void OnSpinComplete(int selectedIndex)
+		public void OnSpinComplete(int selectedIndex)
 		{
 			if (skipTicktReductionChance < relicskipTicktReductionNum)
 			{ 
@@ -806,14 +825,14 @@ namespace Gambling
 		/// </summary>
 		/// <param name="category">按钮类别</param>
 		/// <param name="score">获得的积分</param>
-		public void ShowSingleScorePopup(string category, int score)
+		public void ShowSingleScorePopup(string category, int score,float delay = 0f)
 		{
 			if (scorePopupManager == null) return;
 
 			Vector3 buttonPosition = GetButtonPosition(category);
 			if (buttonPosition != Vector3.zero)
 			{
-				scorePopupManager.ShowScorePopup(score, buttonPosition);
+				scorePopupManager.ShowScorePopup(score, buttonPosition,delay);
 				Debug.Log($"从 {category} 按钮处弹出积分UI，显示 +{score} 分");
 			}
 		}

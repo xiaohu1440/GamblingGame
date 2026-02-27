@@ -1,0 +1,26 @@
+ManifestFileVersion: 0
+CRC: 3717767504
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 5c52789aea6a3bde174b3c813fd81abc
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f7115b4851766082d9a86bf88d6a23a0
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 5c52789aea6a3bde174b3c813fd81abc
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 21a3a80a86f5db142bd3a7d4d7e318ae, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Resources/Data/CardData/77_M.asset
+Dependencies: []

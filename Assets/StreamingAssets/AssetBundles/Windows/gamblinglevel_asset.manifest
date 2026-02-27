@@ -1,28 +1,41 @@
 ManifestFileVersion: 0
-CRC: 807809489
+CRC: 3526174686
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 738c6dc7be6cf5c2dc7c586ef975647d
+    Hash: 5ef73a3948afdceec9d3edb5118d41c7
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 55a00a1ad369bd71353d477c4ef29226
+    Hash: adb09ead70ba0c542efbcbc511634b42
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 738c6dc7be6cf5c2dc7c586ef975647d
+    Hash: 5ef73a3948afdceec9d3edb5118d41c7
 HashAppended: 0
 ClassTypes:
-- Class: 28
-  Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: 5a61b43f229c724458b9184a5ef7e014, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 21a3a80a86f5db142bd3a7d4d7e318ae, type: 3}
 - Class: 115
   Script: {instanceID: 0}
-- Class: 213
-  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Resources/Data/GamblingLevel.asset
-Dependencies: []
+Dependencies:
+- D:/GitProject/GamblingGame/AssetBundles/Windows/77_asset
+- D:/GitProject/GamblingGame/AssetBundles/Windows/77_m_asset
+- "D:/GitProject/GamblingGame/AssetBundles/Windows/\u53CC\u661F_asset"
+- "D:/GitProject/GamblingGame/AssetBundles/Windows/\u53CC\u661F_m_asset"
+- "D:/GitProject/GamblingGame/AssetBundles/Windows/\u5927\u738B_asset"
+- "D:/GitProject/GamblingGame/AssetBundles/Windows/\u5C0F\u738B_asset"
+- "D:/GitProject/GamblingGame/AssetBundles/Windows/\u5F69\u86CB_asset"
+- "D:/GitProject/GamblingGame/AssetBundles/Windows/\u6A58\u5B50_asset"
+- "D:/GitProject/GamblingGame/AssetBundles/Windows/\u6A58\u5B50_m_asset"
+- "D:/GitProject/GamblingGame/AssetBundles/Windows/\u82F9\u679C_asset"
+- "D:/GitProject/GamblingGame/AssetBundles/Windows/\u82F9\u679C_m_asset"
+- "D:/GitProject/GamblingGame/AssetBundles/Windows/\u84DD\u8393_asset"
+- "D:/GitProject/GamblingGame/AssetBundles/Windows/\u84DD\u8393_m_asset"
+- "D:/GitProject/GamblingGame/AssetBundles/Windows/\u897F\u74DC_asset"
+- "D:/GitProject/GamblingGame/AssetBundles/Windows/\u897F\u74DC_m_asset"
+- "D:/GitProject/GamblingGame/AssetBundles/Windows/\u94C3\u94DB_asset"
+- "D:/GitProject/GamblingGame/AssetBundles/Windows/\u94C3\u94DB_m_asset"

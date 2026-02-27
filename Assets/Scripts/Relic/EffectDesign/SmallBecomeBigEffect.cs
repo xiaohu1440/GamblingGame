@@ -39,7 +39,7 @@ namespace Gambling
                             if (bigData.runtimeRewardName.Value == bigCardName && !bigData.isMini)
                             {
                                 // 替换运行时图标
-                                data.runtimeRewardIcon = bigData.RewardIcon;
+                                data.runtimeRewardIcon = bigData.runtimeRewardIcon;
                                 data.runtimeRewardName.Value = bigCardName; 
                                 break;
                             }

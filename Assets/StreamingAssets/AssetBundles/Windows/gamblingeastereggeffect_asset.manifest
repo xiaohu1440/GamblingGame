@@ -1,0 +1,22 @@
+ManifestFileVersion: 0
+CRC: 2112578845
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 12799684d61007f5e180e6c13cf6c035
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: bfe7134d323ec1f54355986522cf5657
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 12799684d61007f5e180e6c13cf6c035
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 11500000, guid: ae9ae4f59c224a478d917958560b1e6d, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Resources/EasterEggData/GamblingEasterEggEffect.asset
+Dependencies: []

@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 4148531806
+CRC: 1127340675
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: cbe8b55774a560a57c55b96302ad8b52
+    Hash: 47b836a171bb146f77d538058872c61d
   TypeTreeHash:
     serializedVersion: 2
-    Hash: b728f02c55be3f7bcf6bc4647728491b
+    Hash: 9742f91238b86a9a725e1bab78f3384d
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: cbe8b55774a560a57c55b96302ad8b52
+    Hash: 47b836a171bb146f77d538058872c61d
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -37,8 +37,6 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 05a15cbc3b3d0d4499a65058dedb0e9b, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: cb78b48559ea7694d979f9f1f2d7f1b6, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: cfa78d19396a4999a811891a7b4e33e6, type: 3}
@@ -54,8 +52,6 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0cb25e84e8abea64f902f96a477fcd8f, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 61e799b0f38ccc7499fd9f4a441e54a9, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -94,4 +90,7 @@ SerializeReferenceClassIdentifiers:
 Assets:
 - Assets/Art/UI/Art/UIPrefab/UIGamePanel.prefab
 Dependencies:
+- D:/GitProject/GamblingGame/AssetBundles/Windows/fruiteastereggeffect_asset
+- D:/GitProject/GamblingGame/AssetBundles/Windows/gamblingeastereggeffect_asset
 - D:/GitProject/GamblingGame/AssetBundles/Windows/gamblinglevel_asset
+- D:/GitProject/GamblingGame/AssetBundles/Windows/prefab
