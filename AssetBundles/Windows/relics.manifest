@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 203390685
+CRC: 1410144375
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4968fc99f5b4ebe4eb0de61b4af4559b
+    Hash: 6425d4b1143677e112622ce8109a1733
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 4de4abcef0a583059cbe85fdd6d4fa8e
+    Hash: f143bea8e055332b941e8b7bad143c29
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 4968fc99f5b4ebe4eb0de61b4af4559b
+    Hash: 6425d4b1143677e112622ce8109a1733
 HashAppended: 0
 ClassTypes:
 - Class: 114
@@ -27,6 +27,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 25b1aa9dfb6c4092b76bcb5b966a3700, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: a3f0da721add45cf95a4132b29ce6505, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: de13fd5524364cd58d305b44f02d2c49, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: bb2c87d9270c5734abd27c30255ccbd6, type: 3}
@@ -43,7 +45,9 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 8b9f1b837a2e4d82973cce4aa7b56ec6, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: a3f0da721add45cf95a4132b29ce6505, type: 3}
+  Script: {fileID: 11500000, guid: bb4adc93159042158baef3fbc9068181, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fde9464a61557bc408bca32bc791631e, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 213
@@ -62,15 +66,19 @@ Assets:
 - "Assets/Resources/Relics/\u6A58\u5B50\u52A0\u5206\u9057\u7269.asset"
 - "Assets/Resources/Relics/\u897F\u74DC\u52A0\u5206\u9057\u7269.asset"
 - "Assets/Resources/Relics/\u84DD\u8272\u9644\u9B54_\u9876\u7AEF\u6C34\u679C.asset"
+- "Assets/Resources/Relics/\u5361\u724C\u5927\u5E08.asset"
 - "Assets/Resources/Relics/\u5355\u56FE\u6848\u62BC\u6CE8\u500D\u7387\u66F4\u6539.asset"
+- "Assets/Resources/Relics/\u6A58\u5B50\u9644\u9B54_\u7D2B.asset"
 - "Assets/Resources/Relics/\u5927\u4E09\u5143\u6982\u7387\u589E\u52A0.asset"
 - "Assets/Resources/Relics/\u7B79\u7801\u4FDD\u7559\u83B7\u53D6\u5206\u6570.asset"
 - "Assets/Resources/Relics/\u7B79\u7801\u589E\u52A0.asset"
 - "Assets/Resources/Relics/\u5F69\u86CB\u6982\u7387\u589E\u52A0.asset"
+- "Assets/Resources/Relics/\u7D2B\u8272\u5DE6\u4FA7\u9644\u9B54.asset"
 - "Assets/Resources/Relics/\u82F9\u679C\u6982\u7387.asset"
 - "Assets/Resources/Relics/\u53CC\u661F\u52A0\u5206\u9057\u7269.asset"
 - "Assets/Resources/Relics/\u84DD\u8393\u52A0\u5206\u9057\u7269.asset"
 - "Assets/Resources/Relics/\u5355\u56FE\u6848\u4E0B\u56DE\u5408\u5168\u5C40\u500D\u7387\u7FFB\u500D.asset"
+- "Assets/Resources/Relics/\u82F9\u679C\u9EC4\u8272\u9644\u9B54.asset"
 - "Assets/Resources/Relics/\u8DF3\u8FC7\u8F6C\u52A8\u5377\u6D88\u8017.asset"
 - "Assets/Resources/Relics/\u9EC4\u8272\u9644\u9B54_\u589E\u52A0\u7B79\u7801.asset"
 - "Assets/Resources/Relics/\u82F9\u679C\u52A0\u5206\u9057\u7269.asset"

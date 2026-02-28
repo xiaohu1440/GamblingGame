@@ -780,8 +780,16 @@ namespace Gambling
 		public void OnSpinComplete(int selectedIndex)
 		{
 			if (skipTicktReductionChance < relicskipTicktReductionNum)
-			{ 
-				
+			{
+				if (Global.chips.Value <= 0)
+				{
+					if (Global.lotteryTicket.Value >= 0)
+					{
+						Global.chips.Value += chipsGlobalAddNum * chipsDouble;
+						Debug.Log($"💰 筹码用完，使用彩票补充筹码：+{chipsGlobalAddNum * chipsDouble}");
+					}
+					EnableAllButtons(); 
+				}
 			}
 			else
 			{

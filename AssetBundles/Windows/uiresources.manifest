@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 4136047359
+CRC: 2459442966
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a95de873191c3bac22026797fbbe1e1c
+    Hash: 1e2394705000c5d22216064b0b35d388
   TypeTreeHash:
     serializedVersion: 2
     Hash: 2d8df09e698f722ada1caa03d3413830
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: a95de873191c3bac22026797fbbe1e1c
+    Hash: 1e2394705000c5d22216064b0b35d388
 HashAppended: 0
 ClassTypes:
 - Class: 28
@@ -20,9 +20,12 @@ SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Resources/Relics/UIResources/coin-svgrepo-com.png
 - Assets/Resources/Relics/UIResources/test-result-on-paper-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/card-hearts-svgrepo-com.png
 - Assets/Resources/Relics/UIResources/caramelized-apple-fruit-svgrepo-com.png
 - Assets/Resources/Relics/UIResources/orange-juice-juice-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/apple-svgrepo-com (1).png
 - Assets/Resources/Relics/UIResources/apple-jam-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/apple-svgrepo-com.png
 - Assets/Resources/Relics/UIResources/gambling-coins-machine-with-winner-result-of-three-seven-svgrepo-com.png
 - Assets/Resources/Relics/UIResources/cube-svgrepo-com.png
 - Assets/Resources/Relics/UIResources/coin-send-svgrepo-com.png
@@ -41,6 +44,8 @@ Assets:
 - Assets/Resources/Relics/UIResources/conserve-jam-svgrepo-com.png
 - Assets/Resources/Relics/UIResources/pocket-watch-svgrepo-com.png
 - Assets/Resources/Relics/UIResources/watermelon-juice-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/orange-svgrepo-com (2).png
 - Assets/Resources/Relics/UIResources/color-change-svgrepo-com.png
 - Assets/Resources/Relics/UIResources/letter-r-svgrepo-com.png
+- Assets/Resources/Relics/UIResources/bomb-svgrepo-com.png
 Dependencies: []
