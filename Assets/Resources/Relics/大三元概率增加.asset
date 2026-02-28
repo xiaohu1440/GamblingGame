@@ -16,7 +16,7 @@ MonoBehaviour:
   RelicIcon: {fileID: 21300000, guid: 74956d2d18ee1d246b3c8fee54010fca, type: 3}
   RelicId: 16
   RelicQuality: 0
-  RelicPrice: 8
+  RelicPrice: 6
   RelicDesc: "\u5927\u4E09\u5143\u56FE\u6848\u51FA\u73B0\u6982\u7387\uFF08+2\uFF09\uFF1B\u3010\u5927\u4E09\u5143:\u897F\u74DC\u3001\u53CC\u661F\u300177\u3011"
   RelicTips: 
   RelicTriggerType: 6

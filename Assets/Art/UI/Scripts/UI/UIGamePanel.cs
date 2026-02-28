@@ -66,7 +66,12 @@ namespace Gambling
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			Global.chips.Register(chips =>
 			{
-				if (Global.chips.Value <= 0)
+				if (chips > 0)
+				{
+					// 筹码增加时，恢复按钮状态
+					GamblingGround.EnableAllButtons();
+				}
+				else if (Global.chips.Value <= 0)
 				{
 					Button[] allButtons = Panel.GetComponentsInChildren<Button>();
 					foreach (Button button in allButtons)
@@ -74,20 +79,23 @@ namespace Gambling
 						button.interactable = false;
 					}
 				}
+				
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			AwardBtn.onClick.AddListener(OpenAwardPanel);
 			NextLevelBtn.onClick.AddListener(NextLevelEvent);
 			Global.level.Register(level =>
 			{
-				if (level <= 5)
+				if (level <= 6)
 				{ 
 					Global.levelScore.Value += 30*(level-1);
+					Global.greedlevelScore.Value += 20*(level-1)*level;
 				}
 				else
 				{
-					Global.levelScore.Value += 50*level-1;
+					Global.levelScore.Value += 30*level-1*level;
+					Global.greedlevelScore.Value += 20*(level-1)*level*level;
 				}
-				Global.greedlevelScore.Value += 20*(level-1)*level;
+				
 				Global.chips.Value = this.GamblingGround.chipsGlobalAddNum;
 				GamblingGround.EnableAllButtons();
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);

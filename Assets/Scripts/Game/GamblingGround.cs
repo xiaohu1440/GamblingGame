@@ -72,6 +72,8 @@ namespace Gambling
 		public float relicskipTicktReductionNum = 0.25f;
 		public int checkFinalScore = 0;
 		private ResLoader mResLoader = ResLoader.Allocate(); 
+		public int enchantmentCounts = 0;
+		public Dictionary<string, int> extraBetPerClick = new Dictionary<string, int>();
 		
 		[Header("框选卡片颜色配置")]
 		[SerializeField] public ColorScoreConfig[] colorConfigs = new ColorScoreConfig[7]
@@ -167,6 +169,7 @@ namespace Gambling
 			chipsAddNum = 0;
 			globalDoubleNum.Value = 1;
 			currentDoubleNum.Value = 1;
+			InitializeExtraBetCounts();
 			for (int i = 0; i < colorConfigs.Length; i++)
 			{
 				totalColorWeight.Value += colorConfigs[i].weight;
@@ -301,8 +304,9 @@ namespace Gambling
 		{
 			if (isSpinning||isEasterEggExecuting) return; // 转动期间禁止点击
 			ClearTemporarySelectBoxes();
-    
-			buttonClickCount[rewardName].Value++;
+			int extra = 0;
+			if (extraBetPerClick.ContainsKey(rewardName)) extra = extraBetPerClick[rewardName];
+			buttonClickCount[rewardName].Value += (1 + extra);
 			Global.chips.Value -= 1;
 			UpdateStartButtonState();
 			Debug.Log("当前筹码:"+Global.chips.Value);
@@ -519,31 +523,50 @@ namespace Gambling
 							}
 							else
 							{
-								// ✅ 分数达标，禁用游戏按钮，启用下一关按钮
-								StartButton.GetComponent<Button>().interactable = false;
-								ResetButtonCounts();
-								// 禁用所有下注按钮
-								foreach (var kvp in categoryButtons)
+								if (Global.chips.Value > 0)
 								{
-									if (kvp.Value != null)
+									// ✅ 修正：分数虽然达标且票用完了，但还有筹码，允许玩家继续押注
+									ResetButtonCounts();
+									ResetGambling();
+        
+									// 票用完了，加倍按钮必须禁用
+									if (DoubleBetBtn != null)
 									{
-										kvp.Value.interactable = false;
+										DoubleBetBtn.GetComponent<Button>().interactable = false;
 									}
+        
+									// 分数达标了，下一关按钮也要保持可用
+									if (NextLevelBtn != null)
+									{
+										NextLevelBtn.GetComponent<Button>().interactable = true;
+									}
+
+									Debug.Log("✅ 分数达标，转动券用完，但持有剩余筹码，允许继续追求高分");
 								}
-            
-								// 禁用加倍按钮
-								if (DoubleBetBtn != null)
+								else
 								{
-									DoubleBetBtn.GetComponent<Button>().interactable = false;
+									// ✅ 只有票和筹码都用完了，才强制锁定押注，引导进入下一关
+									StartButton.GetComponent<Button>().interactable = false;
+									ResetButtonCounts();
+        
+									// 禁用所有下注按钮
+									foreach (var kvp in categoryButtons)
+									{
+										if (kvp.Value != null) kvp.Value.interactable = false;
+									}
+        
+									if (DoubleBetBtn != null)
+									{
+										DoubleBetBtn.GetComponent<Button>().interactable = false;
+									}
+        
+									if (NextLevelBtn != null)
+									{
+										NextLevelBtn.GetComponent<Button>().interactable = true;
+									}
+        
+									Debug.Log("✅ 资源耗尽，分数已达标，请前往下一关");
 								}
-            
-								// 启用下一关按钮
-								if (NextLevelBtn != null)
-								{
-									NextLevelBtn.GetComponent<Button>().interactable = true;
-								}
-            
-								Debug.Log("✅ 分数已达标且转动券用完，下一关按钮已启用");
 							}
 						}
 						else
@@ -741,7 +764,7 @@ namespace Gambling
 				float accelerationFactor = 1f - (progress / 0.3f) * 0.5f;
 				return moveSpeed * accelerationFactor;
 			}
-			else if (progress < 0.8f)
+			else if (progress < 0.85f)
 			{
 				// 匀速阶段
 				return moveSpeed * 0.5f;
@@ -750,7 +773,7 @@ namespace Gambling
 			{
 				// 减速阶段：时间从较短到较长
 				float decelerationProgress = (progress - 0.7f) / 0.3f;
-				float decelerationFactor = 0.6f + decelerationProgress * 5f;
+				float decelerationFactor = 0.5f + decelerationProgress * 5f;
 				return moveSpeed * decelerationFactor;
 			}
 		}
@@ -770,11 +793,13 @@ namespace Gambling
 						Debug.Log($"💰 筹码用完，使用彩票补充筹码：+{chipsGlobalAddNum * chipsDouble}");
 						Global.lotteryTicket.Value -= 2;
 					}
+					EnableAllButtons(); 
 					
 				}
 				//TODO:更改筹码转动逻辑
 				
 			}
+			
 			var card = cardItems[selectedIndex];
 			string landedRewardName = card.rewardData.runtimeRewardName.Value;
 			// 检查是否触发彩蛋效果
@@ -1308,7 +1333,14 @@ namespace Gambling
     
 			return allProgress;
 		}
-
+		private void InitializeExtraBetCounts()
+		{
+			string[] categories = { "apple", "king", "smallking", "doublestar", "sevenseven", "watermelon", "orange", "bell", "blueberry" };
+			foreach (var cat in categories)
+			{
+				extraBetPerClick[cat] = 0;
+			}
+		}
 
 
 

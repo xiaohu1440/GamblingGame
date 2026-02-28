@@ -51,6 +51,15 @@ namespace Gambling
                 .Where(card => indices.Contains(card.index) && card.cardType == cardType)
                 .ToList();
         }
+
+        public List<CardItem> RandomFilteredCards(GamblingGround ground, List<int> indices)
+        {
+            return ground.cardItems
+                .Where(card => indices.Contains(card.index)&& card.cardType != CardItem.CardType.彩蛋)
+                .OrderBy(x => Random.value) // 随机排序
+                .Take(3)                    // 取前三个（如果不足三个则取所有）
+                .ToList();
+        }
         
     }
 }

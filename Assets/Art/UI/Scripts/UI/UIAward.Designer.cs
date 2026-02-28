@@ -5,7 +5,7 @@ using QFramework;
 
 namespace Gambling
 {
-	// Generate Id:abc6f0c1-bb3d-44fe-a4af-6cd5cd3226df
+	// Generate Id:2def2542-e081-4e4c-b8a0-25e3e932855d
 	public partial class UIAward
 	{
 		public const string Name = "UIAward";
@@ -14,6 +14,10 @@ namespace Gambling
 		public UnityEngine.UI.Button AwardBtn;
 		[SerializeField]
 		public UnityEngine.UI.Text AwardDes;
+		[SerializeField]
+		public UnityEngine.UI.Button AwardOrangeBtn;
+		[SerializeField]
+		public UnityEngine.UI.Button AwardAppleBtn;
 		
 		private UIAwardData mPrivateData = null;
 		
@@ -21,6 +25,8 @@ namespace Gambling
 		{
 			AwardBtn = null;
 			AwardDes = null;
+			AwardOrangeBtn = null;
+			AwardAppleBtn = null;
 			
 			mData = null;
 		}

@@ -3,10 +3,10 @@ using QFramework;
 
 namespace Gambling
 {
-    [CreateAssetMenu(fileName = "OrangeScoreAddEnchantment", menuName = "Gambling/Effects/橘子绿附魔")]
+    [CreateAssetMenu(fileName = "OrangeScoreAddEnchantment", menuName = "Gambling/Effects/橘子附魔")]
     public class OrangeScoreAddEnchantment : RelicEffect
     {
-        public override string RelicName => "橘子绿附魔";
+        public override string RelicName => "橘子附魔";
         [SerializeField]private string _filterType = "橘子";
         private bool isTrigger = false;
         public EnchantmentEffect EnchantmentToApply; // 拖入刚才创建的 ScoreBoostEnchantment

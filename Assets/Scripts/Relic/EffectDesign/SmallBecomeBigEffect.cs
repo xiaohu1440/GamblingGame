@@ -41,6 +41,7 @@ namespace Gambling
                                 // 替换运行时图标
                                 data.runtimeRewardIcon = bigData.runtimeRewardIcon;
                                 data.runtimeRewardName.Value = bigCardName; 
+                                data.runtimeGoldValue.Value = bigData.runtimeGoldValue.Value;
                                 break;
                             }
                         }

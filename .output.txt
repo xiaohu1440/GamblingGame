@@ -4,20 +4,20 @@ Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 d-----        2026-02-07      8:32                Data
 d-----        2026-02-08      7:57                EasterEggData
-d-----        2026-02-26     19:03                Enchantment
+d-----        2026-02-28     13:32                Enchantment
 d-----        2026-02-26      4:58                MDList
 d-----        2026-02-07      8:32                Prefab
-d-----        2026-02-26     19:09                Relics
--a----        2026-02-07      8:32            180 Data.meta
+d-----        2026-02-28     13:32                Relics
+-a----        2026-02-26     22:59            176 Data.meta
 -a----        2026-02-26     22:52            185 EasterEggData.meta
 -a----        2026-02-26     22:52            183 Enchantment.meta
 -a----        2026-02-26      4:57             83 MDList.meta
--a----        2026-02-07      8:32            180 Prefab.meta
--a----        2026-02-13      3:25            172 Relics.meta
+-a----        2026-02-26     22:59            178 Prefab.meta
+-a----        2026-02-26     22:59            178 Relics.meta
     目录: D:\GitProject\GamblingGame\Assets\Resources\Data
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
-d-----        2026-02-26     20:11                CardData
+d-----        2026-02-28     14:01                CardData
 -a----        2026-02-26     22:51            180 CardData.meta
 -a----        2026-02-07      8:32           2180 GamblingLevel.asset
 -a----        2026-02-07      8:32            216 GamblingLevel.asset.meta
@@ -28,7 +28,7 @@ Mode                 LastWriteTime         Length Name
 -a----        2026-02-26     22:44            197 77.asset.meta
 -a----        2026-02-08      0:33            683 77_M.asset
 -a----        2026-02-26     22:44            199 77_M.asset.meta
--a----        2026-02-10      3:03            704 双星.asset
+-a----        2026-02-28     14:01            704 双星.asset
 -a----        2026-02-26     22:44            209 双星.asset.meta
 -a----        2026-02-08      0:33            707 双星_M.asset
 -a----        2026-02-26     22:44            211 双星_M.asset.meta
@@ -38,25 +38,25 @@ Mode                 LastWriteTime         Length Name
 -a----        2026-02-26     22:44            209 小王.asset.meta
 -a----        2026-02-25      0:49            703 彩蛋.asset
 -a----        2026-02-26     22:44            209 彩蛋.asset.meta
--a----        2026-02-26     20:11            704 橘子.asset
+-a----        2026-02-27     21:20            704 橘子.asset
 -a----        2026-02-26     22:44            209 橘子.asset.meta
 -a----        2026-02-08      0:33            707 橘子_M.asset
 -a----        2026-02-26     22:44            211 橘子_M.asset.meta
 -a----        2026-02-23     16:00            703 苹果.asset
 -a----        2026-02-26     22:44            209 苹果.asset.meta
--a----        2026-02-08      0:33            707 苹果_M.asset
+-a----        2026-02-26     23:55            707 苹果_M.asset
 -a----        2026-02-26     22:44            211 苹果_M.asset.meta
--a----        2026-02-10      2:43            704 蓝莓.asset
+-a----        2026-02-27     21:58            704 蓝莓.asset
 -a----        2026-02-26     22:44            209 蓝莓.asset.meta
 -a----        2026-02-08      0:33            707 蓝莓_M.asset
 -a----        2026-02-26     22:44            211 蓝莓_M.asset.meta
 -a----        2026-02-08      9:26            704 西瓜.asset
 -a----        2026-02-26     22:44            209 西瓜.asset.meta
--a----        2026-02-08      0:33            705 西瓜_M.asset
+-a----        2026-02-26     23:55            707 西瓜_M.asset
 -a----        2026-02-26     22:44            211 西瓜_M.asset.meta
 -a----        2026-02-10      2:43            704 铃铛.asset
 -a----        2026-02-26     22:44            209 铃铛.asset.meta
--a----        2026-02-08      0:33            707 铃铛_M.asset
+-a----        2026-02-26     23:55            707 铃铛_M.asset
 -a----        2026-02-26     22:44            211 铃铛_M.asset.meta
     目录: D:\GitProject\GamblingGame\Assets\Resources\EasterEggData
 Mode                 LastWriteTime         Length Name
@@ -73,6 +73,12 @@ Mode                 LastWriteTime         Length Name
 -a----        2026-02-26     19:03            600 ScoreBoostEnchantment.asset
 -a----        2026-02-26     22:52            216 ScoreBoostEnchantment.asset.m
                                                   eta
+-a----        2026-02-28     13:32            633 紫色附魔.asset
+-a----        2026-02-28     13:29            189 紫色附魔.asset.meta
+-a----        2026-02-27     20:07            578 蓝色附魔.asset
+-a----        2026-02-27     20:04            189 蓝色附魔.asset.meta
+-a----        2026-02-27     21:55            587 黄色附魔.asset
+-a----        2026-02-27     21:51            189 黄色附魔.asset.meta
     目录: D:\GitProject\GamblingGame\Assets\Resources\MDList
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
@@ -93,14 +99,14 @@ Mode                 LastWriteTime         Length Name
     目录: D:\GitProject\GamblingGame\Assets\Resources\Prefab
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
-d-----        2026-02-26     19:18                UI
+d-----        2026-02-27     22:03                UI
 -a----        2026-02-07      8:32            180 UI.meta
     目录: D:\GitProject\GamblingGame\Assets\Resources\Prefab\UI
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----        2026-02-14      4:20          11583 DescriptionPanel.prefab
 -a----        2026-02-13      3:57            154 DescriptionPanel.prefab.meta
--a----        2026-02-26     19:12           4571 EnchantmentDescriptionShowPan
+-a----        2026-02-27     22:03           5738 EnchantmentDescriptionShowPan
                                                   el.prefab
 -a----        2026-02-26     19:12            154 EnchantmentDescriptionShowPan
                                                   el.prefab.meta
@@ -123,19 +129,19 @@ Mode                 LastWriteTime         Length Name
     目录: D:\GitProject\GamblingGame\Assets\Resources\Relics
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
-d-----        2026-02-26     19:06                Effects
-d-----        2026-02-26     19:07                UIResources
--a----        2026-02-15      3:17            787 77加分遗物.asset
+d-----        2026-02-28     13:32                Effects
+d-----        2026-02-28     13:28                UIResources
+-a----        2026-02-27     20:03            774 77加分遗物.asset
 -a----        2026-02-15      2:33            189 77加分遗物.asset.meta
--a----        2026-02-13      3:26            172 Effects.meta
--a----        2026-02-14      3:41            172 UIResources.meta
+-a----        2026-02-26     22:57            179 Effects.meta
+-a----        2026-02-26     22:58            183 UIResources.meta
 -a----        2026-02-25     11:03            818 全图案分值增加.asset
 -a----        2026-02-25     11:02            189 全图案分值增加.asset.meta
 -a----        2026-02-21      1:55            947 单图案下回合全局倍率翻倍.asset
 -a----        2026-02-21      1:53            189 单图案下回合全局倍率翻倍.asset.meta
 -a----        2026-02-20      8:19            906 单图案押注倍率更改.asset
 -a----        2026-02-20      8:17            189 单图案押注倍率更改.asset.meta
--a----        2026-02-15      3:17            817 双星加分遗物.asset
+-a----        2026-02-27     20:03            804 双星加分遗物.asset
 -a----        2026-02-15      2:33            189 双星加分遗物.asset.meta
 -a----        2026-02-23     15:38            910 大三元概率增加.asset
 -a----        2026-02-23     15:26            189 大三元概率增加.asset.meta
@@ -159,13 +165,17 @@ d-----        2026-02-26     19:07                UIResources
 -a----        2026-02-24     11:28            189 筹码保留获取分数.asset.meta
 -a----        2026-02-21     19:15            775 筹码增加.asset
 -a----        2026-02-21     19:12            189 筹码增加.asset.meta
+-a----        2026-02-28     13:32            945 紫色左侧附魔.asset
+-a----        2026-02-28     13:30            189 紫色左侧附魔.asset.meta
 -a----        2026-02-15      3:17            817 苹果加分遗物.asset
 -a----        2026-02-13      3:27            189 苹果加分遗物.asset.meta
 -a----        2026-02-23     15:25            793 苹果概率.asset
 -a----        2026-02-23     15:24            189 苹果概率.asset.meta
+-a----        2026-02-27     20:07            968 蓝色附魔_顶端水果.asset
+-a----        2026-02-27     20:05            189 蓝色附魔_顶端水果.asset.meta
 -a----        2026-02-15      3:17            817 蓝莓加分遗物.asset
 -a----        2026-02-13      3:31            189 蓝莓加分遗物.asset.meta
--a----        2026-02-15      3:17            817 西瓜加分遗物.asset
+-a----        2026-02-27     20:03            804 西瓜加分遗物.asset
 -a----        2026-02-15      2:33            189 西瓜加分遗物.asset.meta
 -a----        2026-02-24     22:44            866 跳过转动卷消耗.asset
 -a----        2026-02-23     16:33            189 跳过转动卷消耗.asset.meta
@@ -173,11 +183,13 @@ d-----        2026-02-26     19:07                UIResources
 -a----        2026-02-20      6:13            189 转动次数增加筹码.asset.meta
 -a----        2026-02-15      3:17            817 铃铛加分遗物.asset
 -a----        2026-02-13      3:31            189 铃铛加分遗物.asset.meta
+-a----        2026-02-27     21:55            915 黄色附魔_增加筹码.asset
+-a----        2026-02-27     21:53            189 黄色附魔_增加筹码.asset.meta
     目录: D:\GitProject\GamblingGame\Assets\Resources\Relics\Effects
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----        2026-02-15      2:33            533 77转动加分.asset
--a----        2026-02-15      2:31            189 77转动加分.asset.meta
+-a----        2026-02-26     22:56            199 77转动加分.asset.meta
 -a----        2026-02-20      8:16            443 CardBetsDoubleEffect.asset
 -a----        2026-02-20      8:16            189 CardBetsDoubleEffect.asset.me
                                                   ta
@@ -209,10 +221,14 @@ Mode                 LastWriteTime         Length Name
 -a----        2026-02-24     11:27            189 筹码保留获取分数.asset.meta
 -a----        2026-02-21     19:12            448 筹码增加.asset
 -a----        2026-02-21     19:12            189 筹码增加.asset.meta
+-a----        2026-02-28     13:32            595 紫色附魔_左.asset
+-a----        2026-02-28     13:30            189 紫色附魔_左.asset.meta
 -a----        2026-02-23     15:22            501 苹果概率增加.asset
 -a----        2026-02-23     15:22            189 苹果概率增加.asset.meta
 -a----        2026-02-13      4:59            543 苹果转动加分.asset
 -a----        2026-02-13      3:26            189 苹果转动加分.asset.meta
+-a----        2026-02-27     20:07            630 蓝色附魔_顶端水果.asset
+-a----        2026-02-27     20:03            189 蓝色附魔_顶端水果.asset.meta
 -a----        2026-02-13      4:59            543 蓝莓转动加分.asset
 -a----        2026-02-13      3:25            189 蓝莓转动加分.asset.meta
 -a----        2026-02-15      2:33            543 西瓜转动加分.asset
@@ -223,6 +239,8 @@ Mode                 LastWriteTime         Length Name
 -a----        2026-02-20      6:12            189 转动次数筹码翻倍.asset.meta
 -a----        2026-02-13      4:59            543 铃铛转动加分.asset
 -a----        2026-02-13      3:25            189 铃铛转动加分.asset.meta
+-a----        2026-02-27     21:55            545 黄色附魔_增加筹码.asset
+-a----        2026-02-27     21:53            189 黄色附魔_增加筹码.asset.meta
     目录: D:\GitProject\GamblingGame\Assets\Resources\Relics\UIResources
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
@@ -236,6 +254,11 @@ Mode                 LastWriteTime         Length Name
 -a----        2026-02-14      3:37           6023 bell-plus-svgrepo-com.png
 -a----        2026-02-14      3:42           2621 bell-plus-svgrepo-com.png.met
                                                   a
+-a----        2026-02-27     20:00           9260 blue-heart-svgrepo-com.png
+-a----        2026-02-27     20:02           2621 blue-heart-svgrepo-com.png.me
+                                                  ta
+-a----        2026-02-28     13:28          13776 bomb-svgrepo-com.png
+-a----        2026-02-28     13:28           2621 bomb-svgrepo-com.png.meta
 -a----        2026-02-23     15:23           7343 caramelized-apple-fruit-svgre
                                                   po-com.png
 -a----        2026-02-23     15:23           2621 caramelized-apple-fruit-svgre
@@ -243,6 +266,8 @@ Mode                 LastWriteTime         Length Name
 -a----        2026-02-20      7:51           8978 coin-send-svgrepo-com.png
 -a----        2026-02-20      8:19           2621 coin-send-svgrepo-com.png.met
                                                   a
+-a----        2026-02-27     21:54          20705 coin-svgrepo-com.png
+-a----        2026-02-27     21:54           2621 coin-svgrepo-com.png.meta
 -a----        2026-02-25     11:20           3786 color-change-svgrepo-com.png
 -a----        2026-02-25     11:20           2621 color-change-svgrepo-com.png.
                                                   meta
