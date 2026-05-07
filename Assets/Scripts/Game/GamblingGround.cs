@@ -828,9 +828,11 @@ namespace Gambling
 				int betMultiplier = betMultiplierSystem.GetMultiplier(clickCount.Value);
 				// 计算得分：按钮点击次数 × 卡片分值
 				int baseScore = card.OnPlayerLand();
-				int finalScore = (baseScore+finalColorBonusScore) * betMultiplier*clickCount.Value*currentDoubleNum.Value*globalDoubleNum.Value;
+				int baseChipsAward = card.OnPlayerChips();
+				int finalScore = (baseScore+finalColorBonusScore)*betMultiplier*currentDoubleNum.Value*globalDoubleNum.Value;
 				checkFinalScore=finalScore;
 				Score.Value += finalScore;
+				Global.lotteryTicket.Value += baseChipsAward*betMultiplier*clickCount.Value;
 				currentDoubleNum.Value = 1;
 				Debug.Log($"停在 '{landedRewardName}' 卡片（类别：{category}），基础分值：{baseScore}，按钮点击次数：{clickCount}，颜色奖励：{finalColorBonusScore}，最终得分：{finalScore}");
 				// 如果有积分获得且按钮点击次数大于0，显示积分弹出动画
@@ -846,6 +848,7 @@ namespace Gambling
 			{
 				enchantComp.OnTrigger(EnchantmentTriggerType.OnLand, this);
 			}
+			this.SendCommand(new ProcessPachinkoTurnCommand(selectedIndex));
 		}
 
 		public bool IsCurrentlyEasterEggTriggering(CardItem card)

@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21a3a80a86f5db142bd3a7d4d7e318ae, type: 3}
   m_Name: "\u53CC\u661F"
   m_EditorClassIdentifier: 
+  id: 6
   RewardName: "\u53CC\u661F"
   RewardIcon: {fileID: 21300000, guid: dbbe07f4d67305740a53856159f64ced, type: 3}
   GoldValue: 25
   ChanceWeight: 10
   CardType: 1
   isMini: 0
+  RewardTicket: 5
+  runtimeId: 0
   runtimeRewardIcon: {fileID: 21300000, guid: dbbe07f4d67305740a53856159f64ced, type: 3}
   runtimeCardType: 1
   runTimeisMini: 0

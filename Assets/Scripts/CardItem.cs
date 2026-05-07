@@ -38,6 +38,11 @@ namespace Gambling
         {
             return rewardData.runtimeGoldValue.Value;
         }
+
+        public int OnPlayerChips()
+        {
+            return rewardData.runtimeRewardTicket.Value;
+        }
         public Image GetCardBaseImage()
         {
             if (transform.childCount > 0)

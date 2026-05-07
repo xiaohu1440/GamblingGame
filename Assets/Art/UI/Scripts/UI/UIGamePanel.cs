@@ -22,6 +22,7 @@ namespace Gambling
 			mData = uiData as UIGamePanelData ?? new UIGamePanelData();
 			AwardBackGround.Hide();
 			NextLevelBtn.GetComponent<Button>().interactable = false;
+
 			CardProbabilityPanel.Hide();
 			// please add init code here
 			GamblingGround.Score.RegisterWithInitValue(score =>
@@ -30,6 +31,83 @@ namespace Gambling
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			this.RegisterEvent<BuyRelicSuccessEvent>(OnBuyRelicSuccess)
 				.UnRegisterWhenGameObjectDestroyed(gameObject);
+			this.RegisterEvent<UpdatePachinkoUIEvent>(evt =>
+			{
+				// 1. 获取所有格子（第一层子物体）
+				var cells = PachinsoUI.Cast<Transform>().ToArray();
+
+				Debug.Log("image触发了");
+    
+				// 原有逻辑判断：确保 UI 结构完整
+				if (cells.Length >= 9)
+				{
+					// 计算当前行的起始索引 (Row 0 -> index 0, Row 1 -> index 3, Row 2 -> index 6)
+					int startIdx = evt.RowIndex * 3;
+        
+					for (int i = 0; i < 3; i++)
+					{
+						int currentIdx = startIdx + i;
+						if (currentIdx >= cells.Length) continue;
+
+						Transform cell = cells[currentIdx];
+            
+						// --- 原有逻辑：更新 Image ---
+						var img = cell.GetChild(0).GetComponent<Image>();
+						if (img != null)
+						{
+							img.sprite = evt.RowData[i].runtimeRewardIcon;
+						}
+
+						// --- 新增逻辑：更新倍率 UI ---
+						// 定位层级：cell(子物体) -> child(子物体的子物体) -> child(子物体的子物体的子物体) -> Text
+						try 
+						{
+							var multiplierText = cell.GetChild(0).GetChild(0).GetComponent<Text>();
+							if (multiplierText != null)
+							{
+								// 根据图案名称获取所属类别
+								string category = GamblingGround.GetRewardNameCategory(evt.RowData[i].runtimeRewardName.Value);
+								// 获取该类别当前的押注倍率
+								int clickCount = GamblingGround.buttonClickCount[category].Value;
+
+								// 如果倍率 >= 1，则显示 "X倍率"，否则清空
+								multiplierText.text = clickCount >= 1 ? "X" + clickCount : "";
+							}
+						}
+						catch (Exception)
+						{
+							// 防止由于 UI 预制体层级不一致导致的报错
+						}
+					}
+				}
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+
+			this.RegisterEvent<ShowSettlementEffectEvent>(evt =>
+				{
+					ActionKit.Sequence()
+						.Delay(1.0f) // 等待 1 秒
+						.Callback(() => 
+						{
+							foreach (Transform cell in PachinsoUI)
+							{
+								// 清除 Image
+								var img = cell.GetChild(0).GetComponent<Image>();
+								if (img != null) img.sprite = null;
+
+								// 清除 Text
+								var txt = cell.GetChild(0).GetChild(0).GetComponent<Text>();
+								if (txt != null) txt.text = "";
+							}
+							// 这里是 1 秒后执行的逻辑
+							Debug.Log("动效模拟结束");
+							// 如果有后续逻辑（比如弹出积分提示），可以写在这里
+						})
+						.Start(this); // 在当前的 MonoBehaviour 上启动
+					
+					// TODO: 在此处添加动效播放逻辑
+					Debug.Log($"结算总分: {evt.TotalScore}");
+					
+				}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			GamblingGround.Score.Register(score =>
 			{
 				if (score >= Global.levelScore.Value)
@@ -92,16 +170,8 @@ namespace Gambling
 				}
 				else
 				{
-					if (level <= 8)
-					{
-						Global.levelScore.Value += 30*level-1*level;
-						Global.greedlevelScore.Value += 20*(level-1)*level*level;
-					}
-					else
-					{
-						Global.levelScore.Value += 20*level-1*level*level;
-						Global.greedlevelScore.Value += 40*(level-1)*level*level;
-					}
+					Global.levelScore.Value += Global.levelScore.Value*(level-1);
+					Global.greedlevelScore.Value += 2*Global.levelScore.Value*(level-1);
 				}
 				
 				Global.chips.Value = this.GamblingGround.chipsGlobalAddNum;

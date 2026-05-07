@@ -17,6 +17,7 @@ namespace Gambling
         public static BindableProperty<int> greedlevelScore=new BindableProperty<int>(30);
         protected override void Init()
         {
+            this.RegisterSystem<IPachinsoSystem>(new PachinsoSystem());
             this.RegisterSystem<IRelicSystem>(new RelicSystem());
             this.RegisterSystem<IEnchantmentSystem>(new EnchantmentSystem());
         }
