@@ -61,7 +61,7 @@ namespace Gambling
 			//NextLevelBtn.OnPointerClickEvent(NextLevelEvent);
 			Global.chips.RegisterWithInitValue(chips =>
 			{
-				Chips.text = "筹码:" + chips;
+				Chips.text = "Chips:" + chips;
 				
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			Global.chips.Register(chips =>
@@ -110,15 +110,15 @@ namespace Gambling
 			DoubleBetBtn.onClick.AddListener(DoubleBetEvent);
 			Global.levelScore.RegisterWithInitValue(levelScore =>
 			{
-				LevelScore.text = "死线" + Global.level.Value  +":"+ levelScore + "分";
+				LevelScore.text = "DeadLine" + Global.level.Value  +":"+ levelScore + "分";
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			Global.greedlevelScore.RegisterWithInitValue(greedlevelScore =>
 			{
-				GreedLevelScore.text = "贪婪死线" + Global.level.Value +":"+ greedlevelScore + "分";
+				GreedLevelScore.text = "Greed DeadLine" + Global.level.Value +":"+ greedlevelScore + "分";
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			Global.lotteryTicket.RegisterWithInitValue(lotteryticket =>
 			{
-				TicketText.text = "旋转票数:" + lotteryticket;
+				TicketText.text = "Spin votes:" + lotteryticket;
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			Global.lotteryTicket.Register(lotteryticket =>
 			{
@@ -129,7 +129,7 @@ namespace Gambling
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			Global.ticketReward.RegisterWithInitValue(ticketReward =>
 			{
-				LotteyTicket.text = "通关奖励票数:" + ticketReward;
+				LotteyTicket.text = "Pass reward tickets:" + ticketReward;
 				AwardTicket.text = "转动卷:+" + ticketReward;
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			GamblingGround.totalWeight.RegisterWithInitValue(totalweight =>

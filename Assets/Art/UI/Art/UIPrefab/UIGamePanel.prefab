@@ -345,7 +345,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u989C\u8272\u663E\u793A"
+  m_Text: Color Display
 --- !u!114 &44006024416574242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -710,7 +710,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u897F\u74DC"
+  m_Text: Watermelon
 --- !u!114 &6813822818186598953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1077,7 +1077,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7B79\u7801:5"
+  m_Text: Chips:5
 --- !u!114 &3376244417083004804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1756,7 +1756,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6B7B\u7EBF1:10\u5206"
+  m_Text: "DeadLine1:10\u5206"
 --- !u!114 &5999066942583667204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2155,7 +2155,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6A58\u5B50"
+  m_Text: Orange
 --- !u!114 &6255860303794877077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2391,7 +2391,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5C0F\u738B"
+  m_Text: Small King
 --- !u!114 &3977719174192937903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3331,7 +3331,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u94C3\u94DB"
+  m_Text: Bell
 --- !u!114 &1862123068823237073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3586,6 +3586,7 @@ MonoBehaviour:
   DoubleBetBtn: {fileID: 576682122259909546}
   DoubleNumText: {fileID: 3373847160566159025}
   CardProbabilityPanel: {fileID: 5468456831259740270}
+  SmallIconProBabilityText: {fileID: 7211957014505935000}
   ColorProbabilityPanel: {fileID: 2175150443919320465}
   RelicList: {fileID: 4545725807839605748}
   LotteyTicket: {fileID: 4340792128813870686}
@@ -4756,7 +4757,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u53CC\u661F"
+  m_Text: DoubleStar
 --- !u!114 &7838185219158913281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5221,7 +5222,7 @@ MonoBehaviour:
     m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 2
     m_MaxSize: 48
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -5229,7 +5230,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4E0B\u4E00\u5173"
+  m_Text: Next Level
 --- !u!114 &1844675189236773828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5325,7 +5326,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5927\u738B"
+  m_Text: King
 --- !u!114 &6733308091920250460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6339,7 +6340,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8F6C\u52A8"
+  m_Text: Turn
 --- !u!1 &5398725385855306880
 GameObject:
   m_ObjectHideFlags: 0
@@ -6946,7 +6947,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u84DD\u8393"
+  m_Text: Blueberry
 --- !u!114 &8260130081207307639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7041,7 +7042,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8D2D\u4E70\u7B79\u7801"
+  m_Text: Buy Chips
 --- !u!1 &6265187355242327869
 GameObject:
   m_ObjectHideFlags: 0
@@ -7121,7 +7122,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u82F9\u679C"
+  m_Text: Apple
 --- !u!114 &7840481501301884660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7285,10 +7286,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 32
+    m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 2
     m_MaxSize: 48
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -7296,7 +7297,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6982\u7387\u663E\u793A"
+  m_Text: Probability Display
 --- !u!114 &4886372315577450093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7635,10 +7636,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 36
+    m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 2
     m_MaxSize: 48
     m_Alignment: 3
     m_AlignByGeometry: 0
@@ -7646,7 +7647,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8D2A\u5A6A\u6B7B\u7EBF1:30\u5206"
+  m_Text: "Greed DeadLine1:30\u5206"
 --- !u!114 &7983949262276180842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9069,7 +9070,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u65CB\u8F6C\u7968\u6570:10"
+  m_Text: "\rSpin votes:10"
 --- !u!114 &6590868371259614981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9085,7 +9086,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: NextLevelBtn
   CustomComment: 
-  mComponentName: 
+  mComponentName: UnityEngine.UI.Text
 --- !u!1 &7849676433425647441
 GameObject:
   m_ObjectHideFlags: 0
@@ -9153,10 +9154,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 32
+    m_FontSize: 24
     m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -9164,7 +9165,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5F53\u524D\u500D\u7387"
+  m_Text: Current Multiplier
 --- !u!1 &7963141159809113234
 GameObject:
   m_ObjectHideFlags: 0

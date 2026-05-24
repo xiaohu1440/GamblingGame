@@ -368,6 +368,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIGamePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 2765615988220638665, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
+      propertyPath: m_Text
+      value: Current Multiplier
+      objectReference: {fileID: 0}
+    - target: {fileID: 2765615988220638665, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2765615988220638665, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 7057280407910427707, guid: c927f348160e25741a6f1b2b160b85c6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
