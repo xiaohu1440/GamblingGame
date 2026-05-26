@@ -124,6 +124,21 @@ namespace Gambling
 
 
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+			if (CoinAdd != null)
+			{
+				CoinAdd.onClick.AddListener(() => 
+				{
+					if (Global.coins.Value > 0)
+					{
+						Global.coins.Value--; // 消耗硬币
+						Global.chips.Value++; // 增加筹码
+						CoinAdd.GetComponent<AudioSource>().PlayOneShot(CoinAdd.GetComponent<AudioSource>().clip);
+						Debug.Log($"兑换成功：剩余硬币 {Global.coins.Value}，当前筹码 {Global.chips.Value}");
+					}
+				});
+			}
+			
+			
 			GamblingGround.currentDoubleNum.RegisterWithInitValue(doubleNum =>
 			{
 				DoubleNumText.text = (doubleNum*GamblingGround.globalDoubleNum.Value).ToString();
@@ -137,26 +152,31 @@ namespace Gambling
 				
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			//NextLevelBtn.OnPointerClickEvent(NextLevelEvent);
-			Global.chips.RegisterWithInitValue(chips =>
+			Global.coins.RegisterWithInitValue(coins =>
 			{
-				Chips.text = "筹码:" + chips;
+				Chips.text = "硬币:" + coins;
 				
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
-			Global.chips.Register(chips =>
+			Global.chips.RegisterWithInitValue(chips =>
 			{
 				if (chips > 0)
 				{
-					// 筹码增加时，恢复按钮状态
+					// ✅ 筹码大于 0 时，通过 GamblingGround 的逻辑启用押注按钮
 					GamblingGround.EnableAllButtons();
 				}
-				else if (Global.chips.Value <= 0)
+				else
 				{
-					Button[] allButtons = Panel.GetComponentsInChildren<Button>();
-					foreach (Button button in allButtons)
-					{
-						button.interactable = false;
-					}
+					// ✅ 筹码为 0 时，禁用所有押注按钮
+					// 注意：这里不要禁用 CoinAdd 按钮，否则玩家无法再兑换！
+					// 建议调用一个专门禁用押注按钮的方法，或在 EnableAllButtons 中处理
+					GamblingGround.DisableChipsButton();
+        
+					// 确保 NextLevelBtn 和 CoinAdd 这种特殊按钮在特定条件下仍可用
+					// DisableAllButtons 可能会关闭所有，这里需要按需微调
 				}
+    
+				// 如果有显示筹码数值的 Text，也在这里更新
+				// Chips.text = "筹码:" + chips; 
 				
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			AwardBtn.onClick.AddListener(OpenAwardPanel);
@@ -174,7 +194,8 @@ namespace Gambling
 					Global.greedlevelScore.Value += 2*Global.levelScore.Value*(level-1);
 				}
 				
-				Global.chips.Value = this.GamblingGround.chipsGlobalAddNum;
+				//Global.chips.Value = this.GamblingGround.chipsGlobalAddNum;
+				Global.coins.Value = 20; 
 				GamblingGround.EnableAllButtons();
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			DoubleBetBtn.onClick.AddListener(DoubleBetEvent);
@@ -209,7 +230,8 @@ namespace Gambling
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			Global.currentLevelSpinCount.RegisterWithInitValue(levelspincount =>
 			{
-				if (levelspincount == 0)
+				SpinCount.text = "剩余转动次数:" + levelspincount;
+				/*if (levelspincount == 0)
 				{
 					Global.ticketReward.Value = 12;
 				}
@@ -224,12 +246,13 @@ namespace Gambling
 				else
 				{
 					Global.ticketReward.Value = 6;
-				}
+				}*/
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			GamblingGround.totalColorWeight.RegisterWithInitValue(totalcolorweight =>
 			{
 				UpdateColorProbabilityUI();
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+			
 			ScoreProbaility.OnPointerClickEvent(ProbailityUIStartEvent);
 			ColorProbaility.OnPointerClickEvent(ProbailityUIStartEvent);
 			mInputRegister = ActionKit.OnUpdate.Register(() =>

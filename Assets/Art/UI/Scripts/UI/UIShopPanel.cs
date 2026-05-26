@@ -120,7 +120,7 @@ namespace Gambling
 		private void NextLevelEvent()
 		{
 			Global.level.Value++;
-			Global.currentLevelSpinCount.Value = 0;
+			Global.currentLevelSpinCount.Value = 9;
 			Time.timeScale = 1;
 			this.CloseSelf();
 		}

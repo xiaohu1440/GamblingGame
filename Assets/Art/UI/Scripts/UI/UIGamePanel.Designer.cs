@@ -5,7 +5,7 @@ using QFramework;
 
 namespace Gambling
 {
-	// Generate Id:b973a742-9bc4-434f-82c1-219eba555b8a
+	// Generate Id:1c693fc7-6288-4fb0-9dcb-996a09c123cd
 	public partial class UIGamePanel
 	{
 		public const string Name = "UIGamePanel";
@@ -77,6 +77,10 @@ namespace Gambling
 		[SerializeField]
 		public UnityEngine.UI.Text TicketText;
 		[SerializeField]
+		public UnityEngine.UI.Button CoinAdd;
+		[SerializeField]
+		public UnityEngine.UI.Button CoinReduce;
+		[SerializeField]
 		public UnityEngine.UI.Text LevelScore;
 		[SerializeField]
 		public UnityEngine.UI.Text GreedLevelScore;
@@ -114,6 +118,8 @@ namespace Gambling
 		public UnityEngine.UI.Text AwardTicket;
 		[SerializeField]
 		public RectTransform PachinsoUI;
+		[SerializeField]
+		public UnityEngine.UI.Text SpinCount;
 		
 		private UIGamePanelData mPrivateData = null;
 		
@@ -152,6 +158,8 @@ namespace Gambling
 			ScoreText = null;
 			StartButton = null;
 			TicketText = null;
+			CoinAdd = null;
+			CoinReduce = null;
 			LevelScore = null;
 			GreedLevelScore = null;
 			Chips = null;
@@ -171,6 +179,7 @@ namespace Gambling
 			AwardBtn = null;
 			AwardTicket = null;
 			PachinsoUI = null;
+			SpinCount = null;
 			
 			mData = null;
 		}

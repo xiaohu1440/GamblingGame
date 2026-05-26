@@ -158,18 +158,19 @@ namespace Gambling
 		private void Init()
 		{
 			Score.Value = 0;
-			Global.chips.Value = chipsGlobalAddNum;
+			//Global.chips.Value = chipsGlobalAddNum;
 			Global.level.Value = 1;
 			Global.lotteryTicket.Value = 10;
 			Global.levelScore.Value = 10;
 			Global.greedlevelScore.Value = 30;
-			Global.currentLevelSpinCount.Value = 0;
+			Global.currentLevelSpinCount.Value = 9;
 			Global.ticketReward.Value = 12;
 			chipsGlobalAddNum = 5;
 			chipsAddNum = 0;
 			globalDoubleNum.Value = 1;
 			currentDoubleNum.Value = 1;
 			InitializeExtraBetCounts();
+			DisableChipsButton();
 			for (int i = 0; i < colorConfigs.Length; i++)
 			{
 				totalColorWeight.Value += colorConfigs[i].weight;
@@ -178,6 +179,11 @@ namespace Gambling
 			{
 				// Distinct() 会去除重复的 RewardData 实例
 				rewardDataArray = currentPool.Rewards.Distinct().ToArray();
+			}
+
+			if (Global.chips.Value <= 0)
+			{
+				
 			}
 		}
 
@@ -329,7 +335,7 @@ namespace Gambling
 			ClearTemporarySelectBoxes();
 			StartSpin();
 			
-			Global.currentLevelSpinCount.Value++;
+			Global.currentLevelSpinCount.Value--;
 			totalSpinNum++;
 		}
 		public void StartSpin()
@@ -492,108 +498,29 @@ namespace Gambling
 					{
 
 						// 检查游戏是否结束
-						if (Global.lotteryTicket.Value <= 0)
+						if (Global.currentLevelSpinCount.Value <= 0) // 检查是否达到9次
 						{
-							// 转动券用完
-							if (Score.Value < Global.levelScore.Value)
+							if (Score.Value < Global.levelScore.Value) // 检查分数是否达标
 							{
-								if (Global.chips.Value <= 0)
-								{
-									Debug.Log("222");
-									// 分数未达标，游戏失败
-									UIKit.ClosePanel<UIGamePanel>();
-									UIKit.OpenPanel<UIGameOverPanel>();
-									
-								}
-								else
-								{
-									// ✅ 新增：筹码还有剩余，恢复按钮状态让玩家继续游玩
-									ResetButtonCounts();
-									ResetGambling();
-            
-									// 彩票用完，禁用加倍按钮
-									if (DoubleBetBtn != null)
-									{
-										DoubleBetBtn.GetComponent<Button>().interactable = false;
-									}
-            
-									Debug.Log("⚠️ 转动券用完但还有筹码，玩家可以继续游玩");
-								}
-
+								// 分数未达标，直接判定失败
+								Debug.Log("失败：9次转动已用完且分数未达标");
+								UIKit.ClosePanel<UIGamePanel>();
+								UIKit.OpenPanel<UIGameOverPanel>();
 							}
 							else
 							{
-								if (Global.chips.Value > 0)
-								{
-									// ✅ 修正：分数虽然达标且票用完了，但还有筹码，允许玩家继续押注
-									ResetButtonCounts();
-									ResetGambling();
-        
-									// 票用完了，加倍按钮必须禁用
-									if (DoubleBetBtn != null)
-									{
-										DoubleBetBtn.GetComponent<Button>().interactable = false;
-									}
-        
-									// 分数达标了，下一关按钮也要保持可用
-									if (NextLevelBtn != null)
-									{
-										NextLevelBtn.GetComponent<Button>().interactable = true;
-									}
-
-									Debug.Log("✅ 分数达标，转动券用完，但持有剩余筹码，允许继续追求高分");
-								}
-								else
-								{
-									// ✅ 只有票和筹码都用完了，才强制锁定押注，引导进入下一关
-									StartButton.GetComponent<Button>().interactable = false;
-									ResetButtonCounts();
-        
-									// 禁用所有下注按钮
-									foreach (var kvp in categoryButtons)
-									{
-										if (kvp.Value != null) kvp.Value.interactable = false;
-									}
-        
-									if (DoubleBetBtn != null)
-									{
-										DoubleBetBtn.GetComponent<Button>().interactable = false;
-									}
-        
-									if (NextLevelBtn != null)
-									{
-										NextLevelBtn.GetComponent<Button>().interactable = true;
-									}
-        
-									Debug.Log("✅ 资源耗尽，分数已达标，请前往下一关");
-								}
+								// 分数已达标，引导进入下一关
+								DisableAllButtons();
+								if (NextLevelBtn != null) NextLevelBtn.GetComponent<Button>().interactable = true;
+								Debug.Log("完成：9次转动结束，分数达标，请进入下一关");
 							}
 						}
 						else
 						{
-							// ✅ 还有转动券，恢复按钮状态，玩家可以继续游玩
-							if (checkFinalScore > 0)
-							{
-								ResetButtonCounts();
-							}
-							else
-							{
-								UpdateStartButtonState();
-							}
+							// 未到9次，正常重置单次押注并等待下一次旋转
+							ResetButtonCounts();
 							ResetGambling();
-        
-							if (Global.lotteryTicket.Value > 2)
-							{
-								DoubleBetBtn.GetComponent<Button>().interactable = true;
-							}
-        
-							// ✅ 如果分数已达标，启用下一关按钮（玩家可以选择继续玩或进入下一关）
-							if (NextLevelBtn != null && Score.Value >= Global.levelScore.Value)
-							{
-								NextLevelBtn.GetComponent<Button>().interactable = true;
-							}
-        
-							Debug.Log("🎯 转盘结束，按钮状态已恢复，玩家可以继续游玩");
+							UpdateStartButtonState();
 						}
 
 					}
@@ -621,23 +548,13 @@ namespace Gambling
 			else
 			{
 				// ✅ 彩蛋执行完成：检查游戏是否结束
-				if (Global.lotteryTicket.Value <= 0)
+				if (Global.currentLevelSpinCount.Value <= 0)
 				{
 					// 转动券用完
 					if (Score.Value < Global.levelScore.Value)
 					{
-						if (Global.chips.Value <= 0)
-						{
-							Debug.Log("111");
-							// 分数未达标，游戏失败
-							UIKit.ClosePanel<UIGamePanel>();
-							UIKit.OpenPanel<UIGameOverPanel>();
-						}
-						else
-						{
-							EnableAllButtons();
-							ResetGambling();
-						}
+						UIKit.ClosePanel<UIGamePanel>();
+						UIKit.OpenPanel<UIGameOverPanel>();
 					}
 					else
 					{
@@ -679,6 +596,19 @@ namespace Gambling
 			}
 		}
 		// ✅ 禁用所有按钮的方法
+		/// <summary>
+		/// 只禁用押注按钮
+		/// </summary>
+		public void DisableChipsButton()
+		{
+			foreach (var kvp in categoryButtons)
+			{
+				if (kvp.Value != null)
+				{
+					kvp.Value.interactable = false;
+				}
+			}
+		}
 		public void DisableAllButtons()
 		{
 			// 禁用Start按钮
@@ -709,35 +639,38 @@ namespace Gambling
 		// ✅ 启用所有按钮的方法
 		public void EnableAllButtons()
 		{
-			// 启用Start按钮
+			// 1. 只有有押注时才可能开启开始按钮
 			if (StartButton != null)
 			{
 				UpdateStartButtonState();
 			}
-        
-			// 启用所有押注按钮
+    
+			// 2. 检查筹码是否大于 0
+			bool hasChips = Global.chips.Value > 0;
+
+			// 3. 启用/禁用所有押注按钮
 			foreach (var kvp in categoryButtons)
 			{
 				if (kvp.Value != null)
 				{
-					kvp.Value.interactable = true;
+					// 只有筹码大于 0 时，押注按钮才可交互
+					kvp.Value.interactable = hasChips;
 				}
 			}
+
+			// 4. 其他按钮逻辑保持不变
 			if (NextLevelBtn != null)
 			{
 				bool shouldEnable = Score.Value >= Global.levelScore.Value;
 				NextLevelBtn.GetComponent<Button>().interactable = shouldEnable;
-
 			}
 
 			if (DoubleBetBtn != null)
 			{
-				bool shouldEnableDoubleBet=Global.lotteryTicket.Value>2;
+				bool shouldEnableDoubleBet = Global.lotteryTicket.Value > 2;
 				DoubleBetBtn.GetComponent<Button>().interactable = shouldEnableDoubleBet;
 			}
 		}
-
-
 
 		/// <summary>
 		/// 重新激活下注按钮
@@ -785,8 +718,8 @@ namespace Gambling
 				{
 					if (Global.lotteryTicket.Value >= 0)
 					{
-						Global.chips.Value += chipsGlobalAddNum * chipsDouble;
-						Debug.Log($"💰 筹码用完，使用彩票补充筹码：+{chipsGlobalAddNum * chipsDouble}");
+						//Global.chips.Value += chipsGlobalAddNum * chipsDouble;
+						//Debug.Log($"💰 筹码用完，使用彩票补充筹码：+{chipsGlobalAddNum * chipsDouble}");
 					}
 					EnableAllButtons(); 
 				}
@@ -797,9 +730,9 @@ namespace Gambling
 				{
 					if (Global.lotteryTicket.Value >= 2)
 					{
-						Global.chips.Value += chipsGlobalAddNum * chipsDouble;
-						Debug.Log($"💰 筹码用完，使用彩票补充筹码：+{chipsGlobalAddNum * chipsDouble}");
-						Global.lotteryTicket.Value -= 2;
+						//Global.chips.Value += chipsGlobalAddNum * chipsDouble;
+						//Debug.Log($"💰 筹码用完，使用彩票补充筹码：+{chipsGlobalAddNum * chipsDouble}");
+						//Global.lotteryTicket.Value -= 2;
 					}
 					EnableAllButtons(); 
 					
