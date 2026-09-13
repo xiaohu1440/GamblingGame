@@ -1,4 +1,4 @@
-// Generate Id:056e865b-7fe8-48dc-a9e5-7a10659f44f1
+// Generate Id:3afd6f44-1082-4654-93eb-3df05c7f791f
 using UnityEngine;
 
 namespace Gambling
@@ -40,6 +40,10 @@ namespace Gambling
 		public UnityEngine.GameObject DoubleBetBtn;
 		
 		public UnityEngine.GameObject SmallIconProBabilityText;
+		
+		public UnityEngine.GameObject CoinAdd;
+		
+		public UnityEngine.GameObject CoinReduce;
 		
 	}
 }

@@ -14,7 +14,7 @@ namespace Gambling
 
         public override void ExecuteEffect(RelicEffectContext context)
         {
-            if (context.gamblingGround.checkFinalScore <= 0)
+            if (context.gamblingGround.checkFinalScore.Value <= 0)
             {
                 context.gamblingGround.Score.Value+=scoreAdd;
             }

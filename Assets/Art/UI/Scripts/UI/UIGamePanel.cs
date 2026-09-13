@@ -21,13 +21,32 @@ namespace Gambling
 		{
 			mData = uiData as UIGamePanelData ?? new UIGamePanelData();
 			AwardBackGround.Hide();
+			CashBtn.interactable=false;
 			NextLevelBtn.GetComponent<Button>().interactable = false;
 
 			CardProbabilityPanel.Hide();
+			this.RegisterEvent<ShowSettlementEffectEvent>(evt =>
+			{
+				if (evt.TotalScore > 0)
+				{
+					GamblingGround.IsWaitingCashOut = true; // 锁定状态
+					GamblingGround.DisableAllButtons();
+					CashBtn.interactable = true;
+				}
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+			CashBtn.onClick.AddListener(() => 
+			{
+				Global.chips.Value += GamblingGround.Score.Value;
+				GamblingGround.Score.Value = 0;
+
+				GamblingGround.IsWaitingCashOut = false; // 解除锁定
+				CashBtn.interactable = false;
+				GamblingGround.EnableAllButtons(); // 现在可以正常恢复了
+			});
 			// please add init code here
 			GamblingGround.Score.RegisterWithInitValue(score =>
 			{
-				GamblingGround.ScoreText.text = "Score:" + score;
+				GamblingGround.ScoreText.text =  score.ToString();
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			this.RegisterEvent<BuyRelicSuccessEvent>(OnBuyRelicSuccess)
 				.UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -131,7 +150,7 @@ namespace Gambling
 					if (Global.coins.Value > 0)
 					{
 						Global.coins.Value--; // 消耗硬币
-						Global.chips.Value++; // 增加筹码
+						Global.chips.Value+=5; // 增加筹码
 						CoinAdd.GetComponent<AudioSource>().PlayOneShot(CoinAdd.GetComponent<AudioSource>().clip);
 						Debug.Log($"兑换成功：剩余硬币 {Global.coins.Value}，当前筹码 {Global.chips.Value}");
 					}
@@ -157,12 +176,20 @@ namespace Gambling
 				Chips.text = "硬币:" + coins;
 				
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+			GamblingGround.checkFinalScore.Register(checkFinalScore =>
+			{
+				GamblingGround.IsWaitingCashOut = true; // 开启状态锁
+				GamblingGround.DisableAllButtons(); 
+				CashBtn.interactable = true;
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);	
 			Global.chips.RegisterWithInitValue(chips =>
 			{
+				ChipTicketText.text = chips.ToString();
 				if (chips > 0)
 				{
-					// ✅ 筹码大于 0 时，通过 GamblingGround 的逻辑启用押注按钮
 					GamblingGround.EnableAllButtons();
+					// ✅ 筹码大于 0 时，通过 GamblingGround 的逻辑启用押注按钮
+
 				}
 				else
 				{
@@ -209,7 +236,7 @@ namespace Gambling
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			Global.lotteryTicket.RegisterWithInitValue(lotteryticket =>
 			{
-				TicketText.text = "旋转票数:" + lotteryticket;
+				
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			Global.lotteryTicket.Register(lotteryticket =>
 			{

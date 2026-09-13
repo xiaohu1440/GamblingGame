@@ -70,10 +70,11 @@ namespace Gambling
 		public int chipsGlobalAddNum = 5;
 		public float skipTicktReductionChance = 1;
 		public float relicskipTicktReductionNum = 0.25f;
-		public int checkFinalScore = 0;
+		public BindableProperty<int> checkFinalScore = new BindableProperty<int>();
 		private ResLoader mResLoader = ResLoader.Allocate(); 
 		public int enchantmentCounts = 0;
 		public Dictionary<string, int> extraBetPerClick = new Dictionary<string, int>();
+		public bool IsWaitingCashOut = false;
 		
 		[Header("框选卡片颜色配置")]
 		[SerializeField] public ColorScoreConfig[] colorConfigs = new ColorScoreConfig[7]
@@ -519,7 +520,7 @@ namespace Gambling
 						{
 							// 未到9次，正常重置单次押注并等待下一次旋转
 							ResetButtonCounts();
-							ResetGambling();
+							//ResetGambling();
 							UpdateStartButtonState();
 						}
 
@@ -634,11 +635,23 @@ namespace Gambling
 			{
 				DoubleBetBtn.GetComponent<Button>().interactable = false;
 			}
+
+			if (CoinAdd != null)
+			{
+				CoinAdd.GetComponent<Button>().interactable = false;
+			}
+
+			if (CoinReduce != null)
+			{
+				CoinReduce.GetComponent<Button>().interactable = false;
+			}
+			
 		}
     
 		// ✅ 启用所有按钮的方法
 		public void EnableAllButtons()
 		{
+			if (IsWaitingCashOut) return; 
 			// 1. 只有有押注时才可能开启开始按钮
 			if (StartButton != null)
 			{
@@ -669,6 +682,15 @@ namespace Gambling
 			{
 				bool shouldEnableDoubleBet = Global.lotteryTicket.Value > 2;
 				DoubleBetBtn.GetComponent<Button>().interactable = shouldEnableDoubleBet;
+			}
+			if (CoinAdd != null)
+			{
+				CoinAdd.GetComponent<Button>().interactable = true;
+			}
+
+			if (CoinReduce != null)
+			{
+				CoinReduce.GetComponent<Button>().interactable = true;
 			}
 		}
 
@@ -716,25 +738,15 @@ namespace Gambling
 			{
 				if (Global.chips.Value <= 0)
 				{
-					if (Global.lotteryTicket.Value >= 0)
-					{
-						//Global.chips.Value += chipsGlobalAddNum * chipsDouble;
-						//Debug.Log($"💰 筹码用完，使用彩票补充筹码：+{chipsGlobalAddNum * chipsDouble}");
-					}
-					EnableAllButtons(); 
+					//EnableAllButtons(); 
 				}
 			}
 			else
 			{
 				if (Global.chips.Value <= 0)
 				{
-					if (Global.lotteryTicket.Value >= 2)
-					{
-						//Global.chips.Value += chipsGlobalAddNum * chipsDouble;
-						//Debug.Log($"💰 筹码用完，使用彩票补充筹码：+{chipsGlobalAddNum * chipsDouble}");
-						//Global.lotteryTicket.Value -= 2;
-					}
-					EnableAllButtons(); 
+					
+					//EnableAllButtons(); 
 					
 				}
 				//TODO:更改筹码转动逻辑
@@ -763,7 +775,15 @@ namespace Gambling
 				int baseScore = card.OnPlayerLand();
 				int baseChipsAward = card.OnPlayerChips();
 				int finalScore = (baseScore+finalColorBonusScore)*betMultiplier*currentDoubleNum.Value*globalDoubleNum.Value;
-				checkFinalScore=finalScore;
+				checkFinalScore.Value=finalScore;
+				if (checkFinalScore.Value > 0) // checkFinalScore 是本次转动赢得的分数
+				{
+					// 禁用除 CashBtn 以外的所有按钮
+					//DisableAllButtons(); 
+    
+					// 启用 CashBtn (需要通过 UIGamePanel 引用)
+					// 建议在 UIGamePanel 中注册一个事件监听得分
+				}
 				Score.Value += finalScore;
 				Global.lotteryTicket.Value += baseChipsAward*betMultiplier*clickCount.Value;
 				currentDoubleNum.Value = 1;
@@ -782,6 +802,7 @@ namespace Gambling
 				enchantComp.OnTrigger(EnchantmentTriggerType.OnLand, this);
 			}
 			this.SendCommand(new ProcessPachinkoTurnCommand(selectedIndex));
+
 		}
 
 		public bool IsCurrentlyEasterEggTriggering(CardItem card)
