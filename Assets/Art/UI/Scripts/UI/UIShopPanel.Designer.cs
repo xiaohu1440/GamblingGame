@@ -5,7 +5,7 @@ using QFramework;
 
 namespace Gambling
 {
-	// Generate Id:bf2e73ce-595f-422b-9fde-6e3151b2e37b
+	// Generate Id:e53475f7-d1fb-4451-a0ba-544bc8b79e73
 	public partial class UIShopPanel
 	{
 		public const string Name = "UIShopPanel";

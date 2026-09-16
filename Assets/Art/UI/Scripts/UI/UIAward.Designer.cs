@@ -5,7 +5,7 @@ using QFramework;
 
 namespace Gambling
 {
-	// Generate Id:2def2542-e081-4e4c-b8a0-25e3e932855d
+	// Generate Id:8e709900-7ab9-4eab-a448-f64486f74544
 	public partial class UIAward
 	{
 		public const string Name = "UIAward";

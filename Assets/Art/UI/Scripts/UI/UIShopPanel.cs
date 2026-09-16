@@ -21,7 +21,7 @@ namespace Gambling
 			// please add init code here
 			RefreshBtn.interactable = true;
 			refreshlotteryTicket = 4;
-			RefreshPrice.text="刷新:"+refreshlotteryTicket.ToString();
+			RefreshPrice.text="リロール："+refreshlotteryTicket.ToString();
 			NextLevel.onClick.AddListener(NextLevelEvent);
 			relicSystem=this.GetSystem<IRelicSystem>();
 			var shopRelics = relicSystem.DrawRelicsForShop(Global.level.Value,4);
@@ -40,7 +40,7 @@ namespace Gambling
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			Global.lotteryTicket.RegisterWithInitValue(ticket =>
 			{
-				CoinText.text = "转动卷" + ticket+ "<color=red>(-2)</color>";
+				CoinText.text = "スピンチケット" + ticket+ "<color=red>(-2)</color>";
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
 			RefreshBtn.onClick.AddListener(RefreshEvent);
 			
@@ -130,7 +130,7 @@ namespace Gambling
 			Global.lotteryTicket.Value -= refreshlotteryTicket;
 			RefreshShopRelics();
 			refreshlotteryTicket *= 2;
-			RefreshPrice.text="刷新:"+refreshlotteryTicket.ToString();
+			RefreshPrice.text="リロール:"+refreshlotteryTicket.ToString();
 		}
 
 		protected override void OnOpen(IUIData uiData = null)

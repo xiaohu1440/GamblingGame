@@ -17,7 +17,7 @@ MonoBehaviour:
   RelicId: 5
   RelicQuality: 0
   RelicPrice: 2
-  RelicDesc: "\u6BCF\u6B21\u8F6C\u52A8\uFF0C\u897F\u74DC\u56FE\u6848+1\u5206"
+  RelicDesc: "\u30B9\u30D4\u30F3\u3059\u308B\u305F\u3073\u306B\u3001\u30B9\u30A4\u30AB\u306E\u56F3\u67C4\u304C1\u30DD\u30A4\u30F3\u30C8\u5897\u3048\u308B"
   RelicTips: 
   RelicTriggerType: 5
   unLock: 0

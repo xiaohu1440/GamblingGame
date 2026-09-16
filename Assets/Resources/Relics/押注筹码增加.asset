@@ -17,8 +17,8 @@ MonoBehaviour:
   RelicId: 10
   RelicQuality: 0
   RelicPrice: 6
-  RelicDesc: "\u6BCF\u6B21\u6309\u4E0B\u62BC\u6CE8\u6309\u94AE\u540E\uFF0C\u589E\u52A0\u7684\u7B79\u7801+5"
+  RelicDesc: "\u30D9\u30C3\u30C8\u30DC\u30BF\u30F3\u3092\u62BC\u3059\u305F\u3073\u306B\u3001\u5897\u52A0\u3059\u308B\u30C1\u30C3\u30D7\u304C\uFF0B5\u3055\u308C\u308B"
   RelicTips: 
   RelicTriggerType: 6
-  unLock: 1
+  unLock: 0
   relicEffect: {fileID: 11400000, guid: a19fedd30e0f3744d89da26ac9c947fd, type: 2}
