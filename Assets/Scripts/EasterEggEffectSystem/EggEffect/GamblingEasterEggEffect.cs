@@ -85,7 +85,7 @@ namespace Gambling
                 yield return new WaitForSeconds(0.2f);
             }
             gamblingGround.currentDoubleNum.Value = 1;
-            if (gamblingGround.Score.Value < Global.levelScore.Value && 
+            if (gamblingGround.CurrentLevelScore < Global.levelScore.Value && 
                 Global.lotteryTicket.Value <= 0 && 
                 Global.chips.Value <= 0)
             {

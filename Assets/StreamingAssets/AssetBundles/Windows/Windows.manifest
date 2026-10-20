@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 5677196
+CRC: 3377642997
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -123,9 +123,12 @@ AssetBundleManifest:
       Name: uiresources
       Dependencies: {}
     Info_30:
-      Name: prefab
+      Name: data
       Dependencies: {}
     Info_31:
+      Name: prefab
+      Dependencies: {}
+    Info_32:
       Name: relics
       Dependencies:
         Dependency_0: relic_data

@@ -16,6 +16,28 @@ namespace Gambling
 	public partial class UIGamePanel : UIPanel,IController
 	{
 		private IUnRegister mInputRegister;
+		private Text mCurrentScoreText;
+
+		/// <summary>
+		/// 本关得分文本（BackGround/CurrentScoreBG/CurrentScoreText，prefab 里手工摆放）。
+		/// 不放进 Designer 绑定：Designer 是生成文件，手改会被覆盖，所以按路径取一次并缓存。
+		/// </summary>
+		private void UpdateCurrentScoreText()
+		{
+			if (mCurrentScoreText == null)
+			{
+				Transform t = transform.Find("BackGround/CurrentScoreBG/CurrentScoreText");
+				if (t != null)
+				{
+					mCurrentScoreText = t.GetComponent<Text>();
+				}
+			}
+
+			if (mCurrentScoreText != null)
+			{
+				mCurrentScoreText.text = "CurrentScore:" + GamblingGround.CurrentLevelScore;
+			}
+		}
 		
 		protected override void OnInit(IUIData uiData = null)
 		{
@@ -26,13 +48,22 @@ namespace Gambling
 			// please add init code here
 			GamblingGround.Score.RegisterWithInitValue(score =>
 			{
-				GamblingGround.ScoreText.text = "Score:" + score;
+				// Score 现在是跨关累计的总分；本关得分单独显示在 CurrentScore
+				GamblingGround.ScoreText.text = "TotalScore:" + score;
+				UpdateCurrentScoreText();
 			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+
+			// 进关/换关时本关得分归零重算，总分不变，需要单独刷新一次
+			Global.levelStartScore.RegisterWithInitValue(_ => UpdateCurrentScoreText())
+				.UnRegisterWhenGameObjectDestroyed(gameObject);
+			Global.level.RegisterWithInitValue(_ => UpdateCurrentScoreText())
+				.UnRegisterWhenGameObjectDestroyed(gameObject);
 			this.RegisterEvent<BuyRelicSuccessEvent>(OnBuyRelicSuccess)
 				.UnRegisterWhenGameObjectDestroyed(gameObject);
 			GamblingGround.Score.Register(score =>
 			{
-				if (score >= Global.levelScore.Value)
+				// 死亡线只看本关进度（总分保留在 Score 里，跨关累加）
+				if (GamblingGround.CurrentLevelScore >= Global.levelScore.Value)
 				{
 					if (!GamblingGround.isEasterEggExecuting)
 					{
@@ -85,6 +116,8 @@ namespace Gambling
 			NextLevelBtn.onClick.AddListener(NextLevelEvent);
 			Global.level.Register(level =>
 			{
+				// 进入新关卡：把本关基线推到当前总分，历史分数照旧保留，只是不再计入本关进度
+				Global.levelStartScore.Value = GamblingGround.Score.Value;
 				if (level <= 5)
 				{ 
 					Global.levelScore.Value += 40*(level-1);
@@ -176,7 +209,8 @@ namespace Gambling
 		private void OpenAwardPanel()
 		{
 			AwardBackGround.Hide();
-			if (GamblingGround.Score.Value >= Global.greedlevelScore.Value)
+			// 強欲线同样只看本关进度
+			if (GamblingGround.CurrentLevelScore >= Global.greedlevelScore.Value)
 			{
 				UIKit.OpenPanel<UIAward>();
 			}

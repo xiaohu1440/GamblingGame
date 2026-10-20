@@ -1,0 +1,22 @@
+ManifestFileVersion: 0
+CRC: 2039127876
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 57ec7735fc77ced24b1d3fe365287874
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: aecd79d80c8a5a2758b49e132c76f70b
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 57ec7735fc77ced24b1d3fe365287874
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 11500000, guid: 07e957e84e234cf4c965a3e30db49152, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Resources/Data/EasterEggConfig.asset
+Dependencies: []

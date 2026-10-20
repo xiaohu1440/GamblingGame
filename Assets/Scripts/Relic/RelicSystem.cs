@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Gambling.Core;
 using UnityEngine;
 using QFramework;
 namespace Gambling
@@ -57,52 +58,34 @@ namespace Gambling
            
         }
         /// <summary>
-        /// 计算品质权重
+        /// 计算品质权重。数值规则在 Gambling.Core.QualityWeights（可测），这里只做映射。
         /// </summary>
         private Dictionary<RelicQuality, float> CalculateQualityWeights(int level)
         {
-            Dictionary<RelicQuality, float> weights = new Dictionary<RelicQuality, float>();
-            
-            if (level == 1)
+            QualityWeights source = QualityWeights.ForLevel(level);
+
+            return new Dictionary<RelicQuality, float>
             {
-                // 第1关：100%白色
-                weights[RelicQuality.Common] = 100f;
-                weights[RelicQuality.Rare] = 0f;
-                weights[RelicQuality.Epic] = 0f;
-                weights[RelicQuality.Legendary] = 0f;
-            }
-            else
-            {
-                // 每关+5%高品质概率
-                float bonus = (level - 1) * 5f;
-                
-                weights[RelicQuality.Common] = Mathf.Max(60f - bonus, 20f);
-                weights[RelicQuality.Rare] = Mathf.Min(25f + bonus * 0.5f, 40f);
-                weights[RelicQuality.Epic] = Mathf.Min(10f + bonus * 0.3f, 25f);
-                weights[RelicQuality.Legendary] = Mathf.Min(5f + bonus * 0.2f, 15f);
-            }
-            
-            return weights;
+                { RelicQuality.Common, source.Common },
+                { RelicQuality.Rare, source.Rare },
+                { RelicQuality.Epic, source.Epic },
+                { RelicQuality.Legendary, source.Legendary }
+            };
         }
         /// <summary>
-        /// 根据权重选择品质
+        /// 根据权重选择品质。随机数在这里摇，挑选规则交给可测的 WeightedPicker。
         /// </summary>
         private RelicQuality SelectQualityByWeight(Dictionary<RelicQuality, float> weights)
         {
-            float total = weights.Values.Sum();
-            float random = Random.Range(0f, total);
-            float current = 0f;
-            
-            foreach (var kvp in weights)
+            var ordered = new[]
             {
-                current += kvp.Value;
-                if (random <= current)
-                {
-                    return kvp.Key;
-                }
-            }
-            
-            return RelicQuality.Common;
+                weights[RelicQuality.Common],
+                weights[RelicQuality.Rare],
+                weights[RelicQuality.Epic],
+                weights[RelicQuality.Legendary]
+            };
+
+            return (RelicQuality)WeightedPicker.PickIndex(ordered, Random.value);
         }
         /// <summary>
         /// 从指定品质中随机选择遗物

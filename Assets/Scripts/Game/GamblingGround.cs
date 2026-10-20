@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using DG.Tweening;
+using Gambling.Core;
 using QFramework.Example;
 using Random = UnityEngine.Random;
 namespace Gambling
@@ -39,6 +40,15 @@ namespace Gambling
 		[SerializeField]private ScorePopupManager scorePopupManager;
 		[Header("彩蛋系统")]
 		[SerializeField] private EasterEggManager easterEggManager;
+		[Header("彩蛋保底")]
+		[Tooltip("基础保底次数 N 的配置资产；未挂载时回退默认配置（N=4），方便资产晚一步接入")]
+		[SerializeField] private EasterEggConfig easterEggConfig;
+		private EasterEggConfig mFallbackEasterEggConfig;
+		private Transform mEasterEggChargeRoot;
+		private Image mEasterEggChargeFill;
+		private bool mEasterEggChargeResolveFailed;
+		// 缓存轮盘上所有彩蛋卡索引，避免每次保底都新建 List
+		private readonly List<int> mEasterEggCardIndices = new List<int>();
 		// 临时框选框列表，用于管理彩蛋效果产生的框选框
 		private List<GameObject> temporarySelectBoxes = new List<GameObject>();
 		[Header("单图案押注倍率系统")]
@@ -51,6 +61,12 @@ namespace Gambling
 		public Dictionary<string, float> cardNameWeights = new Dictionary<string, float>();
 		public Dictionary<string, string> cardNameScores = new Dictionary<string, string>();
 		public BindableProperty<int> Score = new BindableProperty<int>(0);
+
+		/// <summary>
+		/// 本关已获得的分数。死亡线 / 強欲线都按它判定；
+		/// 历史总分继续留在 <see cref="Score"/> 里累加，不随关卡重置。
+		/// </summary>
+		public int CurrentLevelScore => LevelScoreRule.LevelProgress(Score.Value, Global.levelStartScore.Value);
 		public Dictionary<string,BindableProperty<int>> buttonClickCount=new Dictionary<string,BindableProperty<int>>();
 		public BindableProperty<int> currentDoubleNum = new BindableProperty<int>(1);
 		public BindableProperty<int> globalDoubleNum = new BindableProperty<int>(1);
@@ -134,6 +150,7 @@ namespace Gambling
 					easterEggManager = gameObject.AddComponent<EasterEggManager>();
 				}
 			}
+			BindEasterEggCharge();
 			UpdateStartButtonState();
 
 
@@ -158,6 +175,13 @@ namespace Gambling
 		private void Init()
 		{
 			Score.Value = 0;
+			// 新开局：彩蛋保底恢复默认（0% / D=0 / 开启）；同一关内进出面板不走这里，充能保留
+			EasterEggChargeState easterEggInitial = EasterEggChargeState.Initial;
+			Global.easterEggProgress.Value = easterEggInitial.Progress;
+			Global.easterEggSpinsReduction.Value = easterEggInitial.SpinsReduction;
+			Global.easterEggEnabled.Value = easterEggInitial.Enabled;
+			// 新开局：本关基线归零，之后每进一关由 UIGamePanel 的 Global.level 回调推到当时总分
+			Global.levelStartScore.Value = 0;
 			Global.chips.Value = chipsGlobalAddNum;
 			Global.level.Value = 1;
 			Global.lotteryTicket.Value = 10;
@@ -342,9 +366,26 @@ namespace Gambling
 			finalColorBonusScore = 0;
 			// 禁用Start按钮，防止重复点击
 			DisableAllButtons();
-			// 随机选择一个格子索引
-			int randomIndex = GetWeightedRandomIndex();
-			//int randomIndex = Random.Range(0, gridRects.Count);
+			// 满格后的下一次转动强制落到彩蛋卡（多张时等概率随机选一张）；
+			// 保底关闭 / 轮盘 0 张彩蛋卡时回退权重抽取
+			int randomIndex;
+			if (EasterEggChargeRule.ShouldForceEasterEgg(Global.easterEggEnabled.Value, Global.easterEggProgress.Value))
+			{
+				int forcedEasterEggIndex = ChooseForcedEasterEggIndex();
+				if (forcedEasterEggIndex >= 0)
+				{
+					randomIndex = forcedEasterEggIndex;
+					Debug.Log($"🥚 彩蛋保底已满格，本次强制落到彩蛋卡索引：{randomIndex}");
+				}
+				else
+				{
+					randomIndex = GetWeightedRandomIndex();
+				}
+			}
+			else
+			{
+				randomIndex = GetWeightedRandomIndex();
+			}
 			Debug.Log($"开始抽奖！目标格子索引：{randomIndex}");
 			SpinToPosition(randomIndex);
 		}
@@ -495,7 +536,7 @@ namespace Gambling
 						if (Global.lotteryTicket.Value <= 0)
 						{
 							// 转动券用完
-							if (Score.Value < Global.levelScore.Value)
+							if (CurrentLevelScore < Global.levelScore.Value)
 							{
 								if (Global.chips.Value <= 0)
 								{
@@ -588,7 +629,7 @@ namespace Gambling
 							}
         
 							// ✅ 如果分数已达标，启用下一关按钮（玩家可以选择继续玩或进入下一关）
-							if (NextLevelBtn != null && Score.Value >= Global.levelScore.Value)
+							if (NextLevelBtn != null && CurrentLevelScore >= Global.levelScore.Value)
 							{
 								NextLevelBtn.GetComponent<Button>().interactable = true;
 							}
@@ -624,7 +665,7 @@ namespace Gambling
 				if (Global.lotteryTicket.Value <= 0)
 				{
 					// 转动券用完
-					if (Score.Value < Global.levelScore.Value)
+					if (CurrentLevelScore < Global.levelScore.Value)
 					{
 						if (Global.chips.Value <= 0)
 						{
@@ -725,7 +766,7 @@ namespace Gambling
 			}
 			if (NextLevelBtn != null)
 			{
-				bool shouldEnable = Score.Value >= Global.levelScore.Value;
+				bool shouldEnable = CurrentLevelScore >= Global.levelScore.Value;
 				NextLevelBtn.GetComponent<Button>().interactable = shouldEnable;
 
 			}
@@ -809,6 +850,8 @@ namespace Gambling
 			}
 			
 			var card = cardItems[selectedIndex];
+			// 彩蛋保底充能：普通转动累加，落到彩蛋卡则归 0；彩蛋/转动执行中不重复累加
+			UpdateEasterEggCharge(card);
 			string landedRewardName = card.rewardData.runtimeRewardName.Value;
 			// 检查是否触发彩蛋效果
 
@@ -1048,11 +1091,19 @@ namespace Gambling
 			// 生成随机数
 			float randomValue = UnityEngine.Random.Range(0f, totalWeight.Value);
     
-			// 根据权重选择索引
+			// 根据权重选择索引：显式跳过 0 权重卡（彩蛋卡只能靠保底触发）。
+			// 不能只依赖 randomValue <= currentWeight 的判断——Random.Range 返回 0 时
+			// 会误命中排在前面的 0 权重卡。
 			float currentWeight = 0f;
 			for (int i = 0; i < cardItems.Count; i++)
 			{
-				currentWeight += cardItems[i].rewardData.runtimeChanceWeight.Value;
+				float weight = cardItems[i].rewardData.runtimeChanceWeight.Value;
+				if (weight <= 0f)
+				{
+					continue;
+				}
+
+				currentWeight += weight;
 				if (randomValue <= currentWeight)
 				{
 					return i;
@@ -1349,6 +1400,225 @@ namespace Gambling
 				extraBetPerClick[cat] = 0;
 			}
 		}
+
+		#region 彩蛋保底
+
+		/// <summary>
+		/// 基础保底次数 N：优先读 ScriptableObject（执行策划可调），
+		/// 资产未接入时用默认配置兜底，不在代码里另写一份数值。
+		/// </summary>
+		private int GetEasterEggRequiredSpins()
+		{
+			EasterEggConfig config = easterEggConfig;
+			if (config == null)
+			{
+				if (mFallbackEasterEggConfig == null)
+				{
+					mFallbackEasterEggConfig = ScriptableObject.CreateInstance<EasterEggConfig>();
+					Debug.LogWarning("⚠️ 未挂载 EasterEggConfig，彩蛋保底暂用默认次数；请在 Inspector 挂上策划配置资产");
+				}
+
+				config = mFallbackEasterEggConfig;
+			}
+
+			return config.RequiredSpins;
+		}
+
+		/// <summary>
+		/// 订阅保底规则事件 + 绑定充能 UI。重开面板必须解绑，否则回调会叠加。
+		/// </summary>
+		private void BindEasterEggCharge()
+		{
+			// 遗物只能通过事件改减免次数 / 开关，不能直接写 Global
+			this.RegisterEvent<EasterEggChargeRuleEvent>(OnEasterEggChargeRule)
+				.UnRegisterWhenGameObjectDestroyed(gameObject);
+
+			// 进度 / 开关变化时刷新进度条（BindableProperty 在 Init 里也会回放一次初值）
+			Global.easterEggProgress.RegisterWithInitValue(progress =>
+			{
+				RefreshEasterEggChargeUI(progress, Global.easterEggEnabled.Value);
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+			Global.easterEggEnabled.RegisterWithInitValue(enabled =>
+			{
+				RefreshEasterEggChargeUI(Global.easterEggProgress.Value, enabled);
+			}).UnRegisterWhenGameObjectDestroyed(gameObject);
+		}
+
+		private void OnEasterEggChargeRule(EasterEggChargeRuleEvent rule)
+		{
+			if (rule.SpinsReductionDelta != 0)
+			{
+				int nextReduction = EasterEggChargeRule.ApplySpinsReductionDelta(
+					Global.easterEggSpinsReduction.Value, rule.SpinsReductionDelta);
+				Global.easterEggSpinsReduction.Value = nextReduction;
+				Debug.Log($"🥚 彩蛋保底减免次数 D={nextReduction}（N_eff={EasterEggChargeRule.EffectiveSpins(GetEasterEggRequiredSpins(), nextReduction)}）");
+			}
+
+			Global.easterEggEnabled.Value = rule.Enabled;
+			Debug.Log(rule.Enabled ? "✅ 彩蛋保底已开启" : "⚠️ 彩蛋保底已关闭（进度保留，进度条隐藏）");
+		}
+
+		/// <summary>
+		/// 每次转动结算后更新充能。落到彩蛋卡本身不累加：归 0 并广播 Triggered=true。
+		/// </summary>
+		private void UpdateEasterEggCharge(CardItem landedCard)
+		{
+			// 连点 / 彩蛋执行期间的二次结算不得累加，避免重复计数
+			if (isSpinning || isEasterEggExecuting)
+			{
+				return;
+			}
+
+			// 保底关闭：不累加、不强制落点、不广播触发；已积累的百分比原样保留
+			if (!Global.easterEggEnabled.Value)
+			{
+				return;
+			}
+
+			bool landedOnEasterEgg = landedCard != null && landedCard.rewardData != null
+				&& landedCard.rewardData.runtimeCardType == CardItem.CardType.彩蛋;
+
+			if (landedOnEasterEgg)
+			{
+				PublishEasterEggCharge(EasterEggChargeState.Initial.Progress, true);
+				return;
+			}
+
+			int requiredSpins = GetEasterEggRequiredSpins();
+			int reduction = Global.easterEggSpinsReduction.Value;
+			float nextProgress = EasterEggChargeRule.AddProgress(Global.easterEggProgress.Value, requiredSpins, reduction);
+			PublishEasterEggCharge(nextProgress, false);
+			Debug.Log($"🥚 彩蛋充能 {nextProgress:F2}%（N={requiredSpins}, D={reduction}, N_eff={EasterEggChargeRule.EffectiveSpins(requiredSpins, reduction)}）"
+				+ (EasterEggChargeRule.IsFull(nextProgress) ? "，下次转动必出彩蛋" : string.Empty));
+		}
+
+		/// <summary>写 Global 并广播变化事件；UI / 遗物只读监听，不直接改字段。</summary>
+		private void PublishEasterEggCharge(float progress, bool triggered)
+		{
+			Global.easterEggProgress.Value = progress;
+			Global.Interface.SendEvent(new EasterEggChargeChangedEvent
+			{
+				Progress = progress,
+				Level = Global.level.Value,
+				Triggered = triggered
+			});
+		}
+
+		/// <summary>
+		/// 收集轮盘上所有彩蛋卡索引（保底落点候选）。轮盘允许多张彩蛋卡，
+		/// 0 张时返回空列表，调用方回退权重抽取；不再要求「恰好一张」。
+		/// </summary>
+		private List<int> FindEasterEggCardIndices()
+		{
+			mEasterEggCardIndices.Clear();
+			for (int i = 0; i < cardItems.Count; i++)
+			{
+				CardItem item = cardItems[i];
+				if (item == null || item.rewardData == null)
+				{
+					continue;
+				}
+
+				if (item.rewardData.runtimeCardType == CardItem.CardType.彩蛋)
+				{
+					mEasterEggCardIndices.Add(i);
+				}
+			}
+
+			return mEasterEggCardIndices;
+		}
+
+		/// <summary>
+		/// 满格时确定强制落点：从所有彩蛋卡索引里**等概率随机**选一张。
+		/// 返回 -1 表示轮盘没有彩蛋卡（或保底候选为空），调用方必须回退权重抽取。
+		/// </summary>
+		private int ChooseForcedEasterEggIndex()
+		{
+			List<int> easterEggIndices = FindEasterEggCardIndices();
+			if (easterEggIndices.Count == 0)
+			{
+				Debug.LogWarning("⚠️ 轮盘上没有彩蛋卡，彩蛋保底无法强制落点，本次回退权重抽取");
+				return -1;
+			}
+
+			return EasterEggTargetPicker.Pick(easterEggIndices, UnityEngine.Random.Range(0, easterEggIndices.Count));
+		}
+
+		/// <summary>
+		/// 按约定路径刷新充能条：UIGamePanel 根节点下 "BackGround/EasterEggCharge"，
+		/// 子节点 "ChargeFill"（Image）用 fillAmount 表示 progress/100。
+		/// 美术节点尚未接入时只告警一次并跳过，不影响玩法。
+		/// </summary>
+		private void RefreshEasterEggChargeUI(float progress, bool enabled)
+		{
+			if (mEasterEggChargeRoot == null)
+			{
+				// 节点未接入时只找一次、只告警一次，避免每次转动/开关都刷 Console
+				if (mEasterEggChargeResolveFailed)
+				{
+					return;
+				}
+
+				ResolveEasterEggChargeUI();
+				if (mEasterEggChargeRoot == null)
+				{
+					return;
+				}
+			}
+
+			// 保底关闭时整条隐藏（不是置灰）；进度保留，重新启用时带原百分比显示
+			if (mEasterEggChargeRoot.gameObject.activeSelf != enabled)
+			{
+				mEasterEggChargeRoot.gameObject.SetActive(enabled);
+			}
+
+			if (mEasterEggChargeFill != null)
+			{
+				mEasterEggChargeFill.fillAmount = Mathf.Clamp01(progress / EasterEggChargeRule.MaxProgress);
+			}
+		}
+
+		private void ResolveEasterEggChargeUI()
+		{
+			Transform panelRoot = null;
+			UIGamePanel panel = GetComponentInParent<UIGamePanel>();
+			if (panel != null)
+			{
+				panelRoot = panel.transform;
+			}
+			else if (Panel != null)
+			{
+				// 兜底：UIGamePanel 不在父链上时，用 Designer 绑定的 Panel 的同级根节点
+				panelRoot = Panel.transform.parent;
+			}
+
+			if (panelRoot != null)
+			{
+				mEasterEggChargeRoot = panelRoot.Find("BackGround/EasterEggCharge");
+			}
+
+			if (mEasterEggChargeRoot == null && transform.parent != null)
+			{
+				// 兜底：美术也可能把 Charge 节点直接挂在 GamblingGround 的父节点（BackGround）下
+				mEasterEggChargeRoot = transform.parent.Find("EasterEggCharge");
+			}
+
+			if (mEasterEggChargeRoot == null)
+			{
+				mEasterEggChargeResolveFailed = true;
+				Debug.LogWarning("⚠️ 未找到彩蛋充能条节点 BackGround/EasterEggCharge，UI 绑定跳过（玩法不受影响）");
+				return;
+			}
+
+			Transform fill = mEasterEggChargeRoot.Find("ChargeFill");
+			mEasterEggChargeFill = fill != null ? fill.GetComponent<Image>() : null;
+			if (mEasterEggChargeFill == null)
+			{
+				Debug.LogWarning("⚠️ 彩蛋充能条缺少 ChargeFill(Image) 子节点，进度条不会动");
+			}
+		}
+
+		#endregion
 
 
 
